@@ -3,7 +3,7 @@ const ctx = canvas.getContext('2d');
 canvas.width = 1200;
 canvas.height = 735;
 
-var nailing = true;
+var pinIn = true;
 
 //center text
 var w = canvas.width / 2;
@@ -12,10 +12,18 @@ var splashSc = true;
 var instructionsSc = false;
 var gameSc =false;
 
-var bWidth = 70;
-var bHeight = 100;
-var x=610;
-var y=400;
+
+const inBall = {
+    bWidth: 70,
+    bHeight: 100,
+    x: 610,
+    y: 400
+};
+
+const pinPop = {
+    x: 800,
+    y: 20
+};
 
 const keys = []; // keyboard operations
 
@@ -28,10 +36,13 @@ const balGame = new Image();
 balGame.src = "images/balGame.png";
 
 //Nail
-const nailImg = new Image();
-nailImg.src = "images/nail.png";
+const pinImg = new Image();
+pinImg.src = "images/pin.png";
 
 var air = new Audio("sounds/air.mp3");
+var pop = new Audio("sounds/pop1.mp3");
+var def = new Audio("sounds/deflated.mp3");
+var duck = new Audio("sounds/duck.mp3");
 
 window.addEventListener("keydown", function(e){
     keys[e.keyCode] = true;
@@ -43,9 +54,10 @@ window.addEventListener("keyup", function(e){
     air.currentTime = 0;
 });
 
+
 function animate() {
-    draw();    
-    window.requestAnimationFrame(animate);
+    draw();
+    mId = requestAnimationFrame(animate);
 }
 
     let timerID;
@@ -53,9 +65,8 @@ function animate() {
 
     let pressHoldEvent = new CustomEvent("pressHold");
 
-    let pressHoldDuration = 1000;
-
-    // Listening for the mouse and touch events    
+    let pressHoldDuration = 2000;
+ 
     addEventListener("mousedown", pressingDown, false);
     addEventListener("mouseup", notPressingDown, false);
     addEventListener("mouseleave", notPressingDown, false);
@@ -64,7 +75,7 @@ function animate() {
     addEventListener("touchend", notPressingDown, false);
 
     // Listening for our custom pressHold event
-    addEventListener("pressHold", doSomething, false);
+    //addEventListener("pressHold", doSomething, false);
 
     function pressingDown(e) {
       // Start the timer
@@ -72,7 +83,7 @@ function animate() {
 
       e.preventDefault();
 
-      console.log("Pressing!");
+      //console.log("Pressing!");
     }
 
     function notPressingDown(e) {
@@ -81,7 +92,7 @@ function animate() {
       counter = 0;
       air.pause();
       air.currentTime = 0;
-      console.log("Not pressing!");
+      //console.log("Not pressing!");
     }
 
     function timer() {
@@ -89,12 +100,13 @@ function animate() {
 
       if (counter < pressHoldDuration) {
         timerID = requestAnimationFrame(timer);
-        bWidth += 0.2;
-        bHeight += 0.2;
+        inBall.bWidth += 0.2;
+        inBall.bHeight += 0.2;
         air.play();
         counter++;
-
-      } else {
+      }
+    }
+      /*} else {
         console.log("Press threshold reached!");
         dispatchEvent(pressHoldEvent);
       }
@@ -102,15 +114,19 @@ function animate() {
 
     function doSomething(e) {
       console.log("pressHold event fired!");
-    }
+    }*/
 
 
 animate();
 
 function drawBalloon() {
+
+    duck.play();
+    duck.volume = 0.4;
+    
     ctx.beginPath();
     ctx.fillStyle = "lightblue";
-    ctx.ellipse(x, y, bWidth, bHeight, 0, 0, (Math.PI*2), false);
+    ctx.ellipse(inBall.x, inBall.y, inBall.bWidth, inBall.bHeight, 0, 0, (Math.PI*2), false);
     ctx.fill();
     ctx.stroke();
 }
@@ -124,6 +140,16 @@ function closeSplash() {
 function closeInstructions() {
     instructionsSc = false;
     gameSc = true;
+    pinIn = true;
+}
+
+function closeGame() {
+    pinIn = true;
+    inBall.bWidth = 70;
+    inBall.bHeight = 100;
+    splashSc = false;
+    gameSc = false;
+    instructionsSc = true;
 }
 
 function splash() {
@@ -145,6 +171,7 @@ function splash() {
     if (keys[13]) {
         splashSc = false;
         instructionsSc = true;
+        console.log("BaaBaa!");
     }
     window.addEventListener("click", closeSplash);
 }
@@ -169,12 +196,15 @@ function instructions() {
     ctx.fillStyle = "red";
     ctx.font='200 50px Comic Sans MS';
     ctx.fillText("Spacebar or Left Mouse Button to Play!", w, 600);
+
+    //window.addEventListener("mousedown", closeInstructions);
+    window.addEventListener("click", closeInstructions);
+
     if (keys[32]) {
         splashSc = false;
         instructionsSc = false;
         gameSc = true;
     }
-    window.addEventListener("click", closeInstructions);
 }
 
 function draw() {
@@ -191,30 +221,54 @@ function draw() {
     if (gameSc) {
         ctx.drawImage(balGame, 0, 0, canvas.width, canvas.height);
         if (keys[32]) {
-            bWidth += 0.2;
-            bHeight += 0.2;
+            inBall.bWidth += 0.2;
+            inBall.bHeight += 0.2;
             air.play();
         }
-            if (nailing) {
-                ctx.drawImage(nailImg, 540, 40, 150, 240);
+       
+        if (inBall.bWidth > (pinPop.y+285)) {
+            air.pause();
+            duck.pause();
+            duck.currentTime = 0;
+            pop.play();
+            def.play();         
+            ctx.fillStyle = "white";
+            ctx.globalAlpha = 0.9; 
+            ctx.fillRect(120, 40, 950, 600);
+            ctx.globalAlpha = 1.0; 
+            ctx.fillStyle = "red";
+            ctx.textAlign = "center"; 
+            ctx.font = "140px Comic Sans MS";
+            ctx.fillText("Well Done!", w, 200);
+            ctx.font = "90px Comic Sans MS";
+            ctx.fillStyle = "blue";
+            ctx.fillText("You have burst", w, 350);
+            ctx.fillText("the balloon!", w, 450);
+            ctx.font = "60px Comic Sans MS";
+            ctx.fillStyle = "red";
+            ctx.fillText("Enter Key to play again!", w, 600);
+            pinIn = false;
+            console.log("Bang!");
+            //window.addEventListener("mousedown", closeGame);
+            window.addEventListener("click", closeGame);
 
-                } else {
+            if (keys[13]) {
+                pinIn = true;
+                splashSc = true;
+                instructionsSc = false;
+                gameSc = false; 
+                inBall.bWidth = 70;
+                inBall.bHeight = 100;       
+            }        
 
-                ctx.fillStyle = "white";
-                ctx.globalAlpha = 0.9; 
-                ctx.fillRect(120, 40, 950, 600);
-                ctx.globalAlpha = 1.0; 
-                ctx.fillStyle = "red";
-                ctx.textAlign = "center"; 
-                ctx.font = "140px Comic Sans MS";
-                ctx.fillText("Well Done!", w, 200);
-                ctx.font = "80px Comic Sans MS";
-                ctx.fillStyle = "blue";
-                ctx.fillText("You have burst", w, 400);
-                ctx.fillText("the balloon!", w, 500);
-                }
+        } else {
+              ctx.drawImage(pinImg, pinPop.x, pinPop.y, 128, 128);
+              console.log("Balloon");
+        }
 
-        if (nailing) {
+       
+
+        if (pinIn) {
         drawBalloon();
         }
         }
