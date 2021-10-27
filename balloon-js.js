@@ -49,7 +49,7 @@ window.addEventListener("keydown", function(e){
 });
 
 window.addEventListener("keyup", function(e){
-    delete keys[e.keyCode];  
+    delete keys[e.keyCode];
     air.pause();
     air.currentTime = 0;
 });
@@ -66,7 +66,7 @@ function animate() {
     let pressHoldEvent = new CustomEvent("pressHold");
 
     let pressHoldDuration = 2000;
- 
+
     addEventListener("mousedown", pressingDown, false);
     addEventListener("mouseup", notPressingDown, false);
     addEventListener("mouseleave", notPressingDown, false);
@@ -123,7 +123,7 @@ function drawBalloon() {
 
     duck.play();
     duck.volume = 0.4;
-    
+
     ctx.beginPath();
     ctx.fillStyle = "lightblue";
     ctx.ellipse(inBall.x, inBall.y, inBall.bWidth, inBall.bHeight, 0, 0, (Math.PI*2), false);
@@ -135,12 +135,16 @@ function drawBalloon() {
 function closeSplash() {
     splashSc = false;
     instructionsSc = true;
+
+    window.removeEventListener("click", closeSplash);
 }
 
 function closeInstructions() {
     instructionsSc = false;
     gameSc = true;
     pinIn = true;
+
+    window.removeEventListener("click", closeInstructions);
 }
 
 function closeGame() {
@@ -155,10 +159,10 @@ function closeGame() {
 function splash() {
     ctx.drawImage(bnSplash, 0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "white";
-    ctx.globalAlpha = 0.6;  
+    ctx.globalAlpha = 0.6;
     ctx.fillRect(95, 380, 1010, 300);
     ctx.globalAlpha = 1.0;
-    ctx.textAlign = "center"; 
+    ctx.textAlign = "center";
     ctx.font = "45px Comic Sans MS";
     ctx.fillStyle = "blue";
     ctx.fillText("Click the left mouse button", w, 450);
@@ -179,7 +183,7 @@ function splash() {
 function instructions() {
     ctx.drawImage(balGame, 0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "white";
-    ctx.globalAlpha = 0.8;  
+    ctx.globalAlpha = 0.8;
     ctx.fillRect(100, 50, 1000, 600);
     ctx.globalAlpha = 1.0;
     ctx.textAlign = "center";
@@ -197,7 +201,6 @@ function instructions() {
     ctx.font='200 50px Comic Sans MS';
     ctx.fillText("Spacebar or Left Mouse Button to Play!", w, 600);
 
-    //window.addEventListener("mousedown", closeInstructions);
     window.addEventListener("click", closeInstructions);
 
     if (keys[32]) {
@@ -211,7 +214,7 @@ function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     if (splashSc) {
-        splash(); 
+        splash();
         }
 
     if (instructionsSc) {
@@ -225,19 +228,19 @@ function draw() {
             inBall.bHeight += 0.2;
             air.play();
         }
-       
+
         if (inBall.bWidth > (pinPop.y+285)) {
             air.pause();
             duck.pause();
             duck.currentTime = 0;
             pop.play();
-            def.play();         
+            def.play();
             ctx.fillStyle = "white";
-            ctx.globalAlpha = 0.9; 
+            ctx.globalAlpha = 0.9;
             ctx.fillRect(120, 40, 950, 600);
-            ctx.globalAlpha = 1.0; 
+            ctx.globalAlpha = 1.0;
             ctx.fillStyle = "red";
-            ctx.textAlign = "center"; 
+            ctx.textAlign = "center";
             ctx.font = "140px Comic Sans MS";
             ctx.fillText("Well Done!", w, 200);
             ctx.font = "90px Comic Sans MS";
@@ -249,30 +252,26 @@ function draw() {
             ctx.fillText("Enter Key to play again!", w, 600);
             pinIn = false;
             console.log("Bang!");
-            //window.addEventListener("mousedown", closeGame);
-            window.addEventListener("click", closeGame);
+            closeGame();
 
             if (keys[13]) {
                 pinIn = true;
                 splashSc = true;
                 instructionsSc = false;
-                gameSc = false; 
+                gameSc = false;
                 inBall.bWidth = 70;
-                inBall.bHeight = 100;       
-            }        
+                inBall.bHeight = 100;
+            }
 
         } else {
               ctx.drawImage(pinImg, pinPop.x, pinPop.y, 128, 128);
               console.log("Balloon");
         }
 
-       
+
 
         if (pinIn) {
         drawBalloon();
         }
         }
 }
-
-
-
