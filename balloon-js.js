@@ -10,7 +10,7 @@ var w = canvas.width / 2;
 
 var splashSc = true;
 var instructionsSc = false;
-var gameSc =false;
+var gameSc = false;
 
 const inBall = {
     bWidth: 70,
@@ -48,7 +48,7 @@ window.addEventListener("keydown", function(e){
 });
 
 window.addEventListener("keyup", function(e){
-    delete keys[e.keyCode];  
+    delete keys[e.keyCode];
     air.pause();
     air.currentTime = 0;
 });
@@ -102,8 +102,9 @@ function drawBalloon() {
 
     duck.play();
     duck.volume = 0.4;
-    
+    ctx.lineWidth = 2;
     ctx.beginPath();
+    ctx.setLineDash([8, 4]);
     ctx.fillStyle = 'red';
     ctx.shadowColor = 'black';
     ctx.shadowBlur = 15;
@@ -117,12 +118,14 @@ function drawBalloon() {
 function closeSplash() {
     splashSc = false;
     instructionsSc = true;
+    window.removeEventListener("click", closeSplash);
 }
 
 function closeInstructions() {
     instructionsSc = false;
     gameSc = true;
     pinIn = true;
+    window.removeEventListener("click", closeInstructions);
 }
 
 function closeGame() {
@@ -178,7 +181,6 @@ function instructions() {
     ctx.font='200 50px Comic Sans MS';
     ctx.fillText("Spacebar or Left Mouse Button to Play!", w, 600);
 
-    //window.addEventListener("mousedown", closeInstructions);
     window.addEventListener("click", closeInstructions);
 
     if (keys[32]) {
@@ -192,7 +194,7 @@ function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     if (splashSc) {
-        splash(); 
+        splash();
         }
 
     if (instructionsSc) {
@@ -230,17 +232,19 @@ function draw() {
             ctx.fillText("Enter Key to play again!", w, 600);
             pinIn = false;
             console.log("Bang!");
-            //window.addEventListener("mousedown", closeGame);
             window.addEventListener("click", closeGame);
+            closeGame();
 
             if (keys[13]) {
                 pinIn = true;
                 splashSc = true;
                 instructionsSc = false;
-                gameSc = false; 
+                gameSc = false;
+                gameSc = false;
                 inBall.bWidth = 70;
                 inBall.bHeight = 100;       
-            }        
+            }    
+
 
         } else {
               ctx.shadowColor = 'black';
