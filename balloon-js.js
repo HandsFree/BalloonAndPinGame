@@ -53,16 +53,13 @@ window.addEventListener("keyup", function(e){
     air.currentTime = 0;
 });
 
-
 function animate() {
     draw();
     mId = requestAnimationFrame(animate);
 }
 
     let timerID;
-    let counter = 0;
-
-    let pressHoldEvent = new CustomEvent("pressHold");
+    let counter = 0;  
 
     let pressHoldDuration = 3000;
  
@@ -135,6 +132,7 @@ function closeGame() {
     splashSc = false;
     gameSc = false;
     instructionsSc = true;
+    window.removeEventListener("click", closeGame);
 }
 
 function splash() {
@@ -180,7 +178,6 @@ function instructions() {
     ctx.fillStyle = "red";
     ctx.font='200 50px Comic Sans MS';
     ctx.fillText("Spacebar or Left Mouse Button to Play!", w, 600);
-
     window.addEventListener("click", closeInstructions);
 
     if (keys[32]) {
@@ -217,7 +214,7 @@ function draw() {
             def.play();         
             ctx.fillStyle = "white";
             ctx.globalAlpha = 0.9; 
-            ctx.fillRect(120, 40, 950, 600);
+            ctx.fillRect(120, 40, 950, 650);
             ctx.globalAlpha = 1.0; 
             ctx.fillStyle = "red";
             ctx.textAlign = "center"; 
@@ -225,15 +222,20 @@ function draw() {
             ctx.fillText("Well Done!", w, 200);
             ctx.font = "90px Comic Sans MS";
             ctx.fillStyle = "blue";
-            ctx.fillText("You have burst", w, 350);
-            ctx.fillText("the balloon!", w, 450);
+            ctx.fillText("You have burst", w, 330);
+            ctx.fillText("the balloon!", w, 430);
             ctx.font = "60px Comic Sans MS";
             ctx.fillStyle = "red";
-            ctx.fillText("Enter Key to play again!", w, 600);
+            ctx.fillText("Click the right mouse button", w, 530);
+            ctx.fillText("OR", w, 600);
+            ctx.fillText("Enter Key to play again!", w, 660);
             pinIn = false;
             console.log("Bang!");
-            //window.addEventListener("click", closeGame);
-            closeGame();
+            window.addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+                console.log("Miaw");
+                closeGame();
+            });
 
             if (keys[13]) {
                 pinIn = true;
@@ -243,8 +245,7 @@ function draw() {
                 gameSc = false;
                 inBall.bWidth = 70;
                 inBall.bHeight = 100;       
-            }    
-
+            }
 
         } else {
               ctx.shadowColor = 'black';
