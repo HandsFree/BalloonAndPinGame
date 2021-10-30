@@ -232,7 +232,7 @@ function draw() {
             ctx.fillText("Enter Key to play again!", w, 600);
             pinIn = false;
             console.log("Bang!");
-            window.addEventListener("click", closeGame);
+            //window.addEventListener("click", closeGame);
             closeGame();
 
             if (keys[13]) {
