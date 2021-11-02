@@ -24,6 +24,15 @@ const pinPop = {
     y: 20
 };
 
+const st = {
+    x: 501
+};
+
+const shine = {
+    x: 580,
+    y: 350
+};
+
 const keys = []; // keyboard operations
 
 //start splash screen
@@ -33,6 +42,10 @@ bnSplash.src = "images/bnSplashScn.png";
 //Game background
 const balGame = new Image();
 balGame.src = "images/balGame.png";
+
+//Tie
+const tie = new Image();
+tie.src = "images/tie.png";
 
 //Nail
 const pinImg = new Image();
@@ -88,6 +101,9 @@ function animate() {
         timerID = requestAnimationFrame(timer);
         inBall.bWidth += 0.2;
         inBall.bHeight += 0.2;
+        st.x += 0.2;
+        shine.x -= 0.1;
+        shine.y -= 0.1;
         air.play();
         counter++;
       }
@@ -99,18 +115,33 @@ function drawBalloon() {
 
     duck.play();
     duck.volume = 0.4;
-    ctx.lineWidth = 2;
+
+    // Balloon
     ctx.beginPath();
-    ctx.setLineDash([8, 4]);
-    ctx.fillStyle = 'red';
-    ctx.shadowColor = 'black';
+    ctx.strokeStyle = "purple";
+    ctx.lineWidth = 1;
+    ctx.fillStyle = 'purple';
+    ctx.shadowColor = 'purple';
     ctx.shadowBlur = 15;
-    ctx.ellipse(inBall.x, inBall.y, inBall.bWidth, inBall.bHeight, 0, 0, (Math.PI*2), false);
+    ctx.ellipse(inBall.x, inBall.y, inBall.bWidth, inBall.bHeight, 0, 0, (Math.PI*2), false);   
     ctx.fill();
     ctx.stroke();
     ctx.shadowColor = "transparent";
-}
 
+    // Shine
+    ctx.beginPath();
+    ctx.lineWidth = 2;
+    ctx.fillStyle = 'white';
+    ctx.shadowColor = 'white';
+    ctx.shadowBlur = 10;
+    ctx.ellipse(shine.x, shine.y, 10, 10, Math.PI / 20, 0, 2 * Math.PI);
+    ctx.fill();
+    ctx.stroke();
+    ctx.shadowColor = "transparent"; 
+
+    // Tie at the bottom of the balloon
+    ctx.drawImage(tie, 447, st.x, 300, 200);
+}
 
 function closeSplash() {
     splashSc = false;
@@ -129,6 +160,9 @@ function closeGame() {
     pinIn = true;
     inBall.bWidth = 70;
     inBall.bHeight = 100;
+    st.x = 501;
+    shine.x = 580;
+    shine.y = 350;
     splashSc = false;
     gameSc = false;
     instructionsSc = true;
@@ -203,6 +237,9 @@ function draw() {
         if (keys[32]) {
             inBall.bWidth += 0.2;
             inBall.bHeight += 0.2;
+            st.x += 0.2;
+            shine.x -= 0.1;
+            shine.y -= 0.1;
             air.play();
         }
        
@@ -244,7 +281,10 @@ function draw() {
                 gameSc = false;
                 gameSc = false;
                 inBall.bWidth = 70;
-                inBall.bHeight = 100;       
+                inBall.bHeight = 100;
+                st.x = 501;
+                shine.x = 580;
+                shine.y = 350;
             }
 
         } else {
