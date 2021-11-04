@@ -5,6 +5,8 @@ canvas.height = 735;
 
 var pinIn = true;
 
+
+
 //center text
 var w = canvas.width / 2;
 
@@ -166,30 +168,86 @@ function closeGame() {
     splashSc = false;
     gameSc = false;
     instructionsSc = true;
-    window.removeEventListener("click", closeGame);
 }
 
-function splash() {
-    ctx.drawImage(bnSplash, 0, 0, canvas.width, canvas.height);
+
+/***********For Menu************/
+var togSet=true;
+var togMenu=false;
+/************end****************/
+
+function settings() {
     ctx.fillStyle = "white";
-    ctx.globalAlpha = 0.6;  
-    ctx.fillRect(95, 380, 1010, 300);
+    ctx.globalAlpha = 0.6;
+    ctx.fillRect(95, 20, 1010, 50);
+    ctx.globalAlpha = 1.0;
+    ctx.font = "25px Comic Sans MS";
+    ctx.fillStyle = "blue";
+    ctx.fillText("Settings Menu - press S button", w, 55);
+    ctx.globalAlpha = 0.6;
+    ctx.fillStyle = "white";
+    ctx.fillRect(95, 400, 1010, 300);
     ctx.globalAlpha = 1.0;
     ctx.textAlign = "center"; 
     ctx.font = "45px Comic Sans MS";
     ctx.fillStyle = "blue";
-    ctx.fillText("Click the left mouse button", w, 450);
+    ctx.fillText("Click the left mouse button", w, 470);
     ctx.fillStyle = "red";
-    ctx.fillText("OR", w, 520);
+    ctx.fillText("OR", w, 530);
     ctx.fillStyle = "blue";
-    ctx.fillText("Press the Enter Key", w, 580);
+    ctx.fillText("Press the Enter Key", w, 590);
     ctx.fillStyle = "red";
-    ctx.fillText("for the instuctions!", w, 650);
+    ctx.fillText("for the instuctions!", w, 660);
     if (keys[13]) {
         splashSc = false;
         instructionsSc = true;
     }
     window.addEventListener("click", closeSplash);
+
+    if (keys[83]) { //s
+        togSet=false;
+        togMenu=true;
+        showMenu();
+    }
+}
+
+function showMenu() {
+    togMenu=true;
+    togSet=false;
+    ctx.fillStyle = "black";
+    ctx.globalAlpha = 0.9; 
+    ctx.fillRect(120, 40, 950, 600);
+    ctx.globalAlpha = 1.0; 
+    ctx.fillStyle = "white";
+    ctx.textAlign = "center"; 
+    ctx.font = "45px Arial";
+    ctx.fillText("Settings", w, 100);
+    ctx.font = "35px Arial";
+
+    ctx.fillText("Speech: On - press O to change", w, 210);
+
+    ctx.font = "30px Arial";
+    ctx.fillText("Return to Game", w, 560);
+    ctx.fillText("Press A", w, 610);
+
+    if (keys[65]) { //a
+        togSet=true;
+        togMenu=false;
+    }
+}
+
+function splash() {
+    ctx.drawImage(bnSplash, 0, 0, canvas.width, canvas.height);
+
+    if (togSet) {
+        settings();
+    }
+
+    if (togMenu) {
+        showMenu();
+    }
+
+    
 }
 
 function instructions() {
@@ -273,7 +331,7 @@ function draw() {
                 console.log("Miaw");
                 closeGame();
             });
-
+            
             if (keys[13]) {
                 pinIn = true;
                 splashSc = true;
