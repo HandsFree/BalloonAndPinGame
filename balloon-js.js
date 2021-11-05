@@ -3,15 +3,17 @@ const ctx = canvas.getContext('2d');
 canvas.width = 1200;
 canvas.height = 735;
 
+
 var pinIn = true;
 
-
-
-//center text
+// center text
 var w = canvas.width / 2;
 
+// initial screen
 var splashSc = true;
+// explaining screen
 var instructionsSc = false;
+// main screen
 var gameSc = false;
 
 const inBall = {
@@ -174,16 +176,126 @@ function closeGame() {
 /***********For Menu************/
 var togSet=true;
 var togMenu=false;
+var speechOn=true;
+var musicOn=true;
+var picOn=true;
 /************end****************/
 
 function settings() {
     ctx.fillStyle = "white";
     ctx.globalAlpha = 0.6;
-    ctx.fillRect(95, 20, 1010, 50);
+    ctx.fillRect(105, 20, 990, 50);
     ctx.globalAlpha = 1.0;
-    ctx.font = "25px Comic Sans MS";
-    ctx.fillStyle = "blue";
-    ctx.fillText("Settings Menu - press S button", w, 55);
+    ctx.font = "bold 25px Comic Sans MS";
+    ctx.fillStyle = "purple";
+    ctx.fillText("Settings Menu - press S key", w, 55);
+    
+    if (keys[83]) { //s
+        togSet=false;
+        togMenu=true;
+        showMenu();
+    }
+
+    ctx.fillStyle = "white";
+    ctx.globalAlpha = 0.8;  
+    ctx.fillRect(100, 150, 1000, 500);
+    ctx.globalAlpha = 1.0;
+    ctx.textAlign = "center";
+    ctx.font='300 60px Comic Sans MS';
+    ctx.fillStyle = "purple";
+    ctx.fillText("Click on the left mouse button", w, 250);
+    ctx.fillStyle = "red";
+    ctx.font='200 60px Comic Sans MS';
+    ctx.fillText("Or", w, 340);
+    ctx.font='300 60px Comic Sans MS';
+    ctx.fillStyle = "purple";
+    ctx.fillText("Press the Spacebar", w, 425);
+    ctx.fillText("to inflate the balloon!", w, 520);
+    ctx.fillStyle = "red";
+    ctx.font='200 50px Comic Sans MS';
+    ctx.fillText("Spacebar or Left Mouse Button to Play!", w, 610);
+    window.addEventListener("click", closeInstructions);
+
+    if (keys[32]) {
+        splashSc = false;
+        instructionsSc = false;
+        gameSc = true;
+    }
+}
+
+function showMenu() {
+    togMenu=true;
+    togSet=false;
+    ctx.fillStyle = "black";
+    ctx.globalAlpha = 0.9; 
+    ctx.fillRect(120, 40, 950, 600);
+    ctx.globalAlpha = 1.0; 
+    ctx.fillStyle = "white";
+    ctx.textAlign = "center"; 
+    ctx.font = "45px Arial";
+    ctx.fillText("Settings", w, 100);
+    ctx.font = "35px Arial";
+
+    if (speechOn) {
+        ctx.fillText("Speech: On - press O to change", w, 210);
+        if (keys[79]) { //o
+            speechOn=false;
+        }
+    }
+
+    if (!speechOn) {
+        ctx.fillText("Speech: Off - press B to change", w, 210);
+        if (keys[66]) { //b
+            speechOn=true;
+        }
+    }
+
+    /*------------------------------------------------------ */
+
+    
+    if (musicOn) {
+        ctx.fillText("Music: On - press M to change", w, 310);
+        if (keys[77]) { //m
+            musicOn=false;
+        }
+    }
+
+    if (!musicOn) {
+        ctx.fillText("Music: Off - press U to change", w, 310);
+        if (keys[85]) { //u
+            musicOn=true;
+        }
+    }
+
+    /*------------------------------------------------------ */
+
+    if (picOn) {
+        ctx.fillText("Picture: On - press C to change", w, 410);
+        if (keys[67]) { //o
+            picOn=false;
+        }
+    }
+
+    if (!picOn) {
+        ctx.fillText("Colour: On - press I to change", w, 410);
+        if (keys[73]) { //f
+            picOn=true;
+        }
+    }
+
+    ctx.font = "30px Arial";
+    ctx.fillText("Return to Game", w, 560);
+    ctx.fillText("Press A", w, 610);
+
+    if (keys[65]) { //a
+        togSet=true;
+        togMenu=false;
+    }
+}
+
+function splash() {
+    ctx.drawImage(bnSplash, 0, 0, canvas.width, canvas.height);
+
     ctx.globalAlpha = 0.6;
     ctx.fillStyle = "white";
     ctx.fillRect(95, 400, 1010, 300);
@@ -204,40 +316,20 @@ function settings() {
     }
     window.addEventListener("click", closeSplash);
 
-    if (keys[83]) { //s
-        togSet=false;
-        togMenu=true;
+    /*if (togSet) {
+        settings();
+    }
+
+    if (togMenu) {
         showMenu();
-    }
+    }*/
+
+    
 }
 
-function showMenu() {
-    togMenu=true;
-    togSet=false;
-    ctx.fillStyle = "black";
-    ctx.globalAlpha = 0.9; 
-    ctx.fillRect(120, 40, 950, 600);
-    ctx.globalAlpha = 1.0; 
-    ctx.fillStyle = "white";
-    ctx.textAlign = "center"; 
-    ctx.font = "45px Arial";
-    ctx.fillText("Settings", w, 100);
-    ctx.font = "35px Arial";
+function instructions() {
 
-    ctx.fillText("Speech: On - press O to change", w, 210);
-
-    ctx.font = "30px Arial";
-    ctx.fillText("Return to Game", w, 560);
-    ctx.fillText("Press A", w, 610);
-
-    if (keys[65]) { //a
-        togSet=true;
-        togMenu=false;
-    }
-}
-
-function splash() {
-    ctx.drawImage(bnSplash, 0, 0, canvas.width, canvas.height);
+    ctx.drawImage(balGame, 0, 0, canvas.width, canvas.height);
 
     if (togSet) {
         settings();
@@ -248,35 +340,6 @@ function splash() {
     }
 
     
-}
-
-function instructions() {
-    ctx.drawImage(balGame, 0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "white";
-    ctx.globalAlpha = 0.8;  
-    ctx.fillRect(100, 50, 1000, 600);
-    ctx.globalAlpha = 1.0;
-    ctx.textAlign = "center";
-    ctx.font='300 60px Comic Sans MS';
-    ctx.fillStyle = "purple";
-    ctx.fillText("Click on the left mouse button", w, 150);
-    ctx.fillStyle = "red";
-    ctx.font='200 60px Comic Sans MS';
-    ctx.fillText("Or", w, 240);
-    ctx.font='300 60px Comic Sans MS';
-    ctx.fillStyle = "purple";
-    ctx.fillText("Press the Spacebar", w, 325);
-    ctx.fillText("to inflate the balloon!", w, 420);
-    ctx.fillStyle = "red";
-    ctx.font='200 50px Comic Sans MS';
-    ctx.fillText("Spacebar or Left Mouse Button to Play!", w, 600);
-    window.addEventListener("click", closeInstructions);
-
-    if (keys[32]) {
-        splashSc = false;
-        instructionsSc = false;
-        gameSc = true;
-    }
 }
 
 function draw() {
