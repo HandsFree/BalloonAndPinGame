@@ -3,7 +3,6 @@ const ctx = canvas.getContext('2d');
 canvas.width = 1200;
 canvas.height = 735;
 
-
 var pinIn = true;
 
 // center text
@@ -16,7 +15,7 @@ var instructionsSc = false;
 // main screen
 var gameSc = false;
 
-const inBall = {
+var inBall = {
     bWidth: 70,
     bHeight: 100,
     x: 610,
@@ -47,11 +46,23 @@ bnSplash.src = "images/bnSplashScn.png";
 const balGame = new Image();
 balGame.src = "images/balGame.png";
 
-//Tie
+//Purple Tie
 const tie = new Image();
 tie.src = "images/tie.png";
 
-//Nail
+//Purple Tie2
+const tie2 = new Image();
+tie2.src = "images/tie2.png";
+
+//Red Tie
+const tieR = new Image();
+tieR.src = "images/tieR.png";
+
+//Red Tie2
+const tieR2 = new Image();
+tieR2.src = "images/tieR2.png";
+
+//Pin
 const pinImg = new Image();
 pinImg.src = "images/pin.png";
 
@@ -117,14 +128,25 @@ animate();
 
 function drawBalloon() {
 
+    if (musicOn) {
     duck.play();
     duck.volume = 0.4;
+    }
+
+    if (!musicOn) {
+    duck.pause();
+    }
 
     // Balloon
     ctx.beginPath();
-    ctx.strokeStyle = "purple";
+    ctx.strokeStyle = 'purple';
     ctx.lineWidth = 1;
-    ctx.fillStyle = 'purple';
+    if (!col) {
+       ctx.fillStyle = 'red';
+    }
+    if (col) {
+       ctx.fillStyle = 'purple';
+    }
     ctx.shadowColor = 'purple';
     ctx.shadowBlur = 15;
     ctx.ellipse(inBall.x, inBall.y, inBall.bWidth, inBall.bHeight, 0, 0, (Math.PI*2), false);   
@@ -141,10 +163,17 @@ function drawBalloon() {
     ctx.ellipse(shine.x, shine.y, 10, 10, Math.PI / 20, 0, 2 * Math.PI);
     ctx.fill();
     ctx.stroke();
-    ctx.shadowColor = "transparent"; 
+    ctx.shadowColor = "transparent";
 
-    // Tie at the bottom of the balloon
-    ctx.drawImage(tie, 447, st.x, 300, 200);
+    // Ties
+    if (col) { // Purple
+        ctx.drawImage(tie, 447, st.x, 300, 200);
+        ctx.drawImage(tie2, 475, st.x, 300, 200);
+    }
+    if (!col) { // Red
+        ctx.drawImage(tieR, 447, st.x, 300, 200);
+        ctx.drawImage(tieR2, 475, st.x, 300, 200); 
+    }  
 }
 
 function closeSplash() {
@@ -172,13 +201,13 @@ function closeGame() {
     instructionsSc = true;
 }
 
-
 /***********For Menu************/
 var togSet=true;
 var togMenu=false;
 var speechOn=true;
 var musicOn=true;
 var picOn=true;
+var col=true;
 /************end****************/
 
 function settings() {
@@ -189,6 +218,10 @@ function settings() {
     ctx.font = "bold 25px Comic Sans MS";
     ctx.fillStyle = "purple";
     ctx.fillText("Settings Menu - press S key", w, 55);
+
+    if (!musicOn) {
+        duck.pause();
+        }
     
     if (keys[83]) { //s
         togSet=false;
@@ -228,7 +261,7 @@ function showMenu() {
     togSet=false;
     ctx.fillStyle = "black";
     ctx.globalAlpha = 0.9; 
-    ctx.fillRect(120, 40, 950, 600);
+    ctx.fillRect(120, 40, 950, 650);
     ctx.globalAlpha = 1.0; 
     ctx.fillStyle = "white";
     ctx.textAlign = "center"; 
@@ -236,15 +269,36 @@ function showMenu() {
     ctx.fillText("Settings", w, 100);
     ctx.font = "35px Arial";
 
+    if (!musicOn) {
+        duck.pause();
+        }
+
+
+    if (col) {
+        ctx.fillText("Balloon Colour: Purple - press R to change to Red", w, 200);
+        if (keys[82]) { //r
+            col=false;
+        }
+    }
+
+    if (!col) {
+        ctx.fillText("Balloon Colour: Red - press P to change to Purple", w, 200);
+        if (keys[80]) { //q
+            col=true;
+        }
+    }
+
+    /*------------------------------------------------------ */
+
     if (speechOn) {
-        ctx.fillText("Speech: On - press O to change", w, 210);
+        ctx.fillText("Speech: On - press O to change", w, 300);
         if (keys[79]) { //o
             speechOn=false;
         }
     }
 
     if (!speechOn) {
-        ctx.fillText("Speech: Off - press B to change", w, 210);
+        ctx.fillText("Speech: Off - press B to change", w, 300);
         if (keys[66]) { //b
             speechOn=true;
         }
@@ -254,14 +308,14 @@ function showMenu() {
 
     
     if (musicOn) {
-        ctx.fillText("Music: On - press M to change", w, 310);
+        ctx.fillText("Music: On - press M to change", w, 400);
         if (keys[77]) { //m
             musicOn=false;
         }
     }
 
     if (!musicOn) {
-        ctx.fillText("Music: Off - press U to change", w, 310);
+        ctx.fillText("Music: Off - press U to change", w, 400);
         if (keys[85]) { //u
             musicOn=true;
         }
@@ -270,22 +324,22 @@ function showMenu() {
     /*------------------------------------------------------ */
 
     if (picOn) {
-        ctx.fillText("Picture: On - press C to change", w, 410);
+        ctx.fillText("Picture: On - press C to change", w, 500);
         if (keys[67]) { //o
             picOn=false;
         }
     }
 
     if (!picOn) {
-        ctx.fillText("Colour: On - press I to change", w, 410);
+        ctx.fillText("Colour: On - press I to change", w, 500);
         if (keys[73]) { //f
             picOn=true;
         }
     }
 
     ctx.font = "30px Arial";
-    ctx.fillText("Return to Game", w, 560);
-    ctx.fillText("Press A", w, 610);
+    ctx.fillText("Return to Game", w, 600);
+    ctx.fillText("Press A", w, 640);
 
     if (keys[65]) { //a
         togSet=true;
@@ -315,15 +369,6 @@ function splash() {
         instructionsSc = true;
     }
     window.addEventListener("click", closeSplash);
-
-    /*if (togSet) {
-        settings();
-    }
-
-    if (togMenu) {
-        showMenu();
-    }*/
-
     
 }
 
@@ -337,9 +382,7 @@ function instructions() {
 
     if (togMenu) {
         showMenu();
-    }
-
-    
+    }   
 }
 
 function draw() {
@@ -366,8 +409,12 @@ function draw() {
        
         if (inBall.bWidth > (pinPop.y+276)) {
             air.pause();
+
+            if (musicOn) {
             duck.pause();
             duck.currentTime = 0;
+            }
+
             pop.play();
             def.play();         
             ctx.fillStyle = "white";
