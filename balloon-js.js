@@ -15,7 +15,7 @@ var instructionsSc = false;
 // main screen
 var gameSc = false;
 
-var inBall = {
+const inBall = {
     bWidth: 70,
     bHeight: 100,
     x: 610,
@@ -37,6 +37,10 @@ const shine = {
 };
 
 const keys = []; // keyboard operations
+
+//start speech
+const speech = new Image();
+speech.src = "images/speech.png";
 
 //start splash screen
 const bnSplash = new Image();
@@ -66,10 +70,17 @@ tieR2.src = "images/tieR2.png";
 const pinImg = new Image();
 pinImg.src = "images/pin.png";
 
+// sound effects
 var air = new Audio("sounds/air.mp3");
 var pop = new Audio("sounds/pop1.mp3");
 var def = new Audio("sounds/deflated.mp3");
+
+// music
 var duck = new Audio("sounds/duck.mp3");
+
+// speech
+var splashAud = new Audio("sounds/splash.mp3");
+var introAud = new Audio("sounds/intro.mp3");
 
 window.addEventListener("keydown", function(e){
     keys[e.keyCode] = true;
@@ -119,7 +130,11 @@ function animate() {
         st.x += 0.2;
         shine.x -= 0.1;
         shine.y -= 0.1;
-        air.play();
+
+        if (musicOn) {
+            air.play();
+        }
+        
         counter++;
       }
     }
@@ -139,15 +154,17 @@ function drawBalloon() {
 
     // Balloon
     ctx.beginPath();
-    ctx.strokeStyle = 'purple';
     ctx.lineWidth = 1;
     if (!col) {
+       ctx.strokeStyle = 'red';
        ctx.fillStyle = 'red';
+       ctx.shadowColor = 'red';
     }
     if (col) {
+       ctx.strokeStyle = 'purple';
        ctx.fillStyle = 'purple';
-    }
-    ctx.shadowColor = 'purple';
+       ctx.shadowColor = 'purple';
+    } 
     ctx.shadowBlur = 15;
     ctx.ellipse(inBall.x, inBall.y, inBall.bWidth, inBall.bHeight, 0, 0, (Math.PI*2), false);   
     ctx.fill();
@@ -179,6 +196,8 @@ function drawBalloon() {
 function closeSplash() {
     splashSc = false;
     instructionsSc = true;
+    splashAud.pause();
+    splashAud.currentTime = 0;
     window.removeEventListener("click", closeSplash);
 }
 
@@ -186,6 +205,8 @@ function closeInstructions() {
     instructionsSc = false;
     gameSc = true;
     pinIn = true;
+    intro.pause();
+    intro.currentTime = 0;
     window.removeEventListener("click", closeInstructions);
 }
 
@@ -211,6 +232,7 @@ var col=true;
 /************end****************/
 
 function settings() {
+    introAud.play();
     ctx.fillStyle = "white";
     ctx.globalAlpha = 0.6;
     ctx.fillRect(105, 20, 990, 50);
@@ -253,6 +275,8 @@ function settings() {
         splashSc = false;
         instructionsSc = false;
         gameSc = true;
+        introAud.pause();
+        introAud.currentTime = 0;
     }
 }
 
@@ -308,14 +332,14 @@ function showMenu() {
 
     
     if (musicOn) {
-        ctx.fillText("Music: On - press M to change", w, 400);
+        ctx.fillText("Music and Effects: On - press M to change", w, 400);
         if (keys[77]) { //m
             musicOn=false;
         }
     }
 
     if (!musicOn) {
-        ctx.fillText("Music: Off - press U to change", w, 400);
+        ctx.fillText("Music and Effects: Off - press U to change", w, 400);
         if (keys[85]) { //u
             musicOn=true;
         }
@@ -339,19 +363,20 @@ function showMenu() {
 
     ctx.font = "30px Arial";
     ctx.fillText("Return to Game", w, 600);
-    ctx.fillText("Press A", w, 640);
+    ctx.fillText("Press G", w, 640);
 
-    if (keys[65]) { //a
+    if (keys[71]) { //g
         togSet=true;
         togMenu=false;
     }
 }
 
 function splash() {
+    if (picOn) {
     ctx.drawImage(bnSplash, 0, 0, canvas.width, canvas.height);
-
-    ctx.globalAlpha = 0.6;
+    }
     ctx.fillStyle = "white";
+    ctx.globalAlpha = 0.6;
     ctx.fillRect(95, 400, 1010, 300);
     ctx.globalAlpha = 1.0;
     ctx.textAlign = "center"; 
@@ -363,10 +388,27 @@ function splash() {
     ctx.fillStyle = "blue";
     ctx.fillText("Press the Enter Key", w, 590);
     ctx.fillStyle = "red";
-    ctx.fillText("for the instuctions!", w, 660);
-    if (keys[13]) {
+    ctx.fillText("for the instructions!", w, 660);
+
+    if (keys[65]) { // audio
+        splashAud.play();
+    }
+
+    ctx.fillStyle = "white";
+    ctx.fillRect(105, 410, 150, 140);
+    ctx.drawImage(speech, 155, 420, 50, 50);
+    ctx.font = "bold 15px arial";
+    ctx.fillStyle = "black";
+    ctx.fillText("Press A", 175, 490);
+    ctx.fillText("on your Keyboard", 180, 512);
+    ctx.fillText("for Speech", 175, 535);
+
+
+    if (keys[13]) { // next page
         splashSc = false;
         instructionsSc = true;
+        splashAud.pause();
+        splashAud.currentTime = 0;
     }
     window.addEventListener("click", closeSplash);
     
@@ -374,7 +416,9 @@ function splash() {
 
 function instructions() {
 
-    ctx.drawImage(balGame, 0, 0, canvas.width, canvas.height);
+    if (picOn) {
+        ctx.drawImage(balGame, 0, 0, canvas.width, canvas.height);
+    }
 
     if (togSet) {
         settings();
@@ -397,7 +441,11 @@ function draw() {
         }
 
     if (gameSc) {
+
+        if (picOn) {
         ctx.drawImage(balGame, 0, 0, canvas.width, canvas.height);
+        }
+
         if (keys[32]) {
             inBall.bWidth += 0.2;
             inBall.bHeight += 0.2;
@@ -408,15 +456,15 @@ function draw() {
         }
        
         if (inBall.bWidth > (pinPop.y+276)) {
-            air.pause();
 
             if (musicOn) {
+            air.pause();
             duck.pause();
             duck.currentTime = 0;
-            }
-
             pop.play();
-            def.play();         
+            def.play();
+            }
+            
             ctx.fillStyle = "white";
             ctx.globalAlpha = 0.9; 
             ctx.fillRect(120, 40, 950, 650);
@@ -435,7 +483,7 @@ function draw() {
             ctx.fillText("OR", w, 600);
             ctx.fillText("Enter Key to play again!", w, 660);
             pinIn = false;
-            console.log("Bang!");
+
             window.addEventListener('contextmenu', (e) => {
                 e.preventDefault();
                 console.log("Miaw");
