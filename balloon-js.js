@@ -81,6 +81,7 @@ var duck = new Audio("sounds/duck.mp3");
 // speech
 var splashAud = new Audio("sounds/splash.mp3");
 var introAud = new Audio("sounds/intro.mp3");
+var welldoneAud = new Audio("sounds/well-done.mp3");
 
 window.addEventListener("keydown", function(e){
     keys[e.keyCode] = true;
@@ -205,8 +206,8 @@ function closeInstructions() {
     instructionsSc = false;
     gameSc = true;
     pinIn = true;
-    intro.pause();
-    intro.currentTime = 0;
+    introAud.pause();
+    introAud.currentTime = 0;
     window.removeEventListener("click", closeInstructions);
 }
 
@@ -232,7 +233,11 @@ var col=true;
 /************end****************/
 
 function settings() {
-    introAud.play();
+
+    if (speechOn) {
+        introAud.play();
+    }
+
     ctx.fillStyle = "white";
     ctx.globalAlpha = 0.6;
     ctx.fillRect(105, 20, 990, 50);
@@ -463,6 +468,11 @@ function draw() {
             duck.currentTime = 0;
             pop.play();
             def.play();
+            def.volume = 0.4;
+            }
+
+            if (speechOn) {
+            welldoneAud.play();
             }
             
             ctx.fillStyle = "white";
@@ -486,11 +496,15 @@ function draw() {
 
             window.addEventListener('contextmenu', (e) => {
                 e.preventDefault();
+                welldoneAud.pause();
+                welldoneAud.currentTime = 0;
                 console.log("Miaw");
                 closeGame();
             });
             
             if (keys[13]) {
+                welldoneAud.pause();
+                welldoneAud.currentTime = 0;
                 pinIn = true;
                 splashSc = true;
                 instructionsSc = false;
