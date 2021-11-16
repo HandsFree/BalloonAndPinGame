@@ -457,7 +457,9 @@ function draw() {
             st.x += 0.2;
             shine.x -= 0.1;
             shine.y -= 0.1;
+            if (musicOn) {
             air.play();
+            }
         }
        
         if (inBall.bWidth > (pinPop.y+276)) {
@@ -498,7 +500,6 @@ function draw() {
                 e.preventDefault();
                 welldoneAud.pause();
                 welldoneAud.currentTime = 0;
-                console.log("Miaw");
                 closeGame();
             });
             
