@@ -79,9 +79,9 @@ var def = new Audio("sounds/deflated.mp3");
 var duck = new Audio("sounds/duck.mp3");
 
 // speech
-var splashAud = new Audio("sounds/splash.mp3");
-var introAud = new Audio("sounds/intro.mp3");
-var welldoneAud = new Audio("sounds/well-done.mp3");
+var splashAud = new Audio("sounds/splashN.mp3");
+var introAud = new Audio("sounds/introN.mp3");
+var welldoneAud = new Audio("sounds/well-doneN.mp3");
 
 window.addEventListener("keydown", function(e){
     keys[e.keyCode] = true;
@@ -240,7 +240,7 @@ function settings() {
 
     ctx.fillStyle = "white";
     ctx.globalAlpha = 0.6;
-    ctx.fillRect(105, 20, 990, 50);
+    ctx.fillRect(80, 25, 1050, 700);
     ctx.globalAlpha = 1.0;
     ctx.font = "bold 25px Comic Sans MS";
     ctx.fillStyle = "purple";
@@ -258,22 +258,24 @@ function settings() {
 
     ctx.fillStyle = "white";
     ctx.globalAlpha = 0.8;  
-    ctx.fillRect(100, 150, 1000, 500);
     ctx.globalAlpha = 1.0;
     ctx.textAlign = "center";
     ctx.font='300 60px Comic Sans MS';
-    ctx.fillStyle = "purple";
-    ctx.fillText("Click on the left mouse button", w, 250);
     ctx.fillStyle = "red";
-    ctx.font='200 60px Comic Sans MS';
-    ctx.fillText("Or", w, 340);
-    ctx.font='300 60px Comic Sans MS';
+    ctx.fillText("How close can you get to the pin", w, 150);
+    ctx.fillText("without bursting the balloon?", w, 215);
     ctx.fillStyle = "purple";
-    ctx.fillText("Press the Spacebar", w, 425);
-    ctx.fillText("to inflate the balloon!", w, 520);
+    ctx.fillText("Click on the left mouse button", w, 320);
     ctx.fillStyle = "red";
+    ctx.fillText("Or Press the Spacebar or Enter Key", w, 391); 
+    ctx.fillStyle = "purple";
+    ctx.fillText("Or use your switch", w, 460);
+    ctx.fillStyle = "blue";
+    ctx.font='900 70px Comic Sans MS';
+    ctx.fillText("to inflate the balloon!", w, 570);
+    ctx.fillStyle = "green";
     ctx.font='200 50px Comic Sans MS';
-    ctx.fillText("Spacebar or Left Mouse Button to Play!", w, 610);
+    ctx.fillText("Spacebar or Left Mouse Button to Play!", w, 680);
     window.addEventListener("click", closeInstructions);
 
     if (keys[32]) {
@@ -385,14 +387,15 @@ function splash() {
     ctx.fillRect(95, 400, 1010, 300);
     ctx.globalAlpha = 1.0;
     ctx.textAlign = "center"; 
-    ctx.font = "45px Comic Sans MS";
+    ctx.font = "50px Comic Sans MS";
     ctx.fillStyle = "blue";
-    ctx.fillText("Click the left mouse button", w, 470);
+    ctx.fillText("Click the left mouse button", w, 460);
     ctx.fillStyle = "red";
-    ctx.fillText("OR", w, 530);
+    ctx.fillText("or press the Enter Key", w, 525);
     ctx.fillStyle = "blue";
-    ctx.fillText("Press the Enter Key", w, 590);
-    ctx.fillStyle = "red";
+    ctx.fillText("or use your switch", w, 590);
+    ctx.fillStyle = "purple";
+    ctx.font='900 50px Comic Sans MS';
     ctx.fillText("for the instructions!", w, 660);
 
     if (keys[65]) { // audio
@@ -451,7 +454,7 @@ function draw() {
         ctx.drawImage(balGame, 0, 0, canvas.width, canvas.height);
         }
 
-        if (keys[32]) {
+        if (keys[32] || keys[13]) {
             inBall.bWidth += 0.2;
             inBall.bHeight += 0.2;
             st.x += 0.2;
@@ -484,7 +487,7 @@ function draw() {
             ctx.fillStyle = "red";
             ctx.textAlign = "center"; 
             ctx.font = "140px Comic Sans MS";
-            ctx.fillText("Well Done!", w, 200);
+            ctx.fillText("Oops!", w, 200);
             ctx.font = "90px Comic Sans MS";
             ctx.fillStyle = "blue";
             ctx.fillText("You have burst", w, 330);
@@ -492,8 +495,8 @@ function draw() {
             ctx.font = "60px Comic Sans MS";
             ctx.fillStyle = "red";
             ctx.fillText("Click the right mouse button", w, 530);
-            ctx.fillText("OR", w, 600);
-            ctx.fillText("Enter Key to play again!", w, 660);
+            ctx.fillText("or the Enter Key", w, 599);
+            ctx.fillText("or use your Switch to play again!", w, 670);
             pinIn = false;
 
             window.addEventListener('contextmenu', (e) => {
