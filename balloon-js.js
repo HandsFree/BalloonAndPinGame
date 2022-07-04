@@ -3,6 +3,15 @@ const ctx = canvas.getContext('2d');
 canvas.width = 1200;
 canvas.height = 735;
 
+/////Translation Menu //////////
+var En = true;
+var Ger = false;
+var Rom = false;
+var Bul = false;
+var Grk = false;
+var Tuk = false;
+/////////////////////////////////
+
 var pinIn = true;
 
 // center text
@@ -10,7 +19,7 @@ var w = canvas.width / 2;
 
 // initial screen
 var splashSc = true;
-// explaining screen
+// instructions screen
 var instructionsSc = false;
 // main screen
 var gameSc = false;
@@ -41,6 +50,46 @@ const keys = []; // keyboard operations
 //start speech
 const speech = new Image();
 speech.src = "images/speech.png";
+
+
+
+
+//settings//////////////////////////////////
+
+const setting = new Image();
+setting.src = "images/settingsMenu/settings.png"; // Cog Image
+
+const setBack = new Image();
+setBack.src = "images/settingsMenu/setBack.png"; // Background
+
+const redBall = new Image();
+redBall.src = "images/settingsMenu/balloonRed.png"; // Circle red
+
+const purBall = new Image();
+purBall.src = "images/settingsMenu/balloonPur.png"; // Circle purple
+
+const rTick = new Image();
+rTick.src = "images/settingsMenu/rTick.png"; // red tick
+
+const speechOnCir = new Image();
+speechOnCir.src = "images/settingsMenu/speechOn.png"; // Speech On
+
+const speechOffCir = new Image();
+speechOffCir.src = "images/settingsMenu/speechOff.png"; // Speech Off
+
+const cross = new Image();
+cross.src = "images/settingsMenu/cross.png"; // cross - End Menu
+
+
+
+
+
+
+
+////////////////////////////////////////////////////
+
+
+
 
 //start splash screen
 const bnSplash = new Image();
@@ -240,7 +289,9 @@ function settings() {
 
     ctx.fillStyle = "white";
     ctx.globalAlpha = 0.6;
+
     ctx.fillRect(80, 25, 1050, 700);
+
     ctx.globalAlpha = 1.0;
     ctx.font = "bold 25px Comic Sans MS";
     ctx.fillStyle = "purple";
@@ -260,7 +311,7 @@ function settings() {
     ctx.globalAlpha = 0.8;  
     ctx.globalAlpha = 1.0;
     ctx.textAlign = "center";
-    ctx.font='300 60px Comic Sans MS';
+    ctx.font='300 55px Comic Sans MS';
     ctx.fillStyle = "red";
     ctx.fillText("How close can you get to the pin", w, 150);
     ctx.fillText("without bursting the balloon?", w, 215);
@@ -271,7 +322,7 @@ function settings() {
     ctx.fillStyle = "purple";
     ctx.fillText("Or use your switch", w, 460);
     ctx.fillStyle = "blue";
-    ctx.font='900 70px Comic Sans MS';
+    ctx.font='900 50px Comic Sans MS';
     ctx.fillText("to inflate the balloon!", w, 570);
     ctx.fillStyle = "green";
     ctx.font='200 50px Comic Sans MS';
@@ -287,41 +338,247 @@ function settings() {
     }
 }
 
+function balloonT(e) {
+    if (togMenu) {
+        if (ctx.isPointInPath(purBall.path, e.offsetX, e.offsetY)) {
+            col=true;
+            canvas.removeEventListener("click", MustickT);
+        }
+    } // togMenu
+}
+
+function balloonF(e) {
+    if (togMenu) {
+        if (ctx.isPointInPath(redBall.path, e.offsetX, e.offsetY)) {
+            col=false;
+            canvas.removeEventListener("click", MustickF);
+        }
+    } // togMenu
+}
+
+function endMenu(e) {
+    if (togMenu) {
+        if (ctx.isPointInPath(cross.path, e.offsetX, e.offsetY)) {
+            togSet=true;
+            togMenu=false;
+            canvas.removeEventListener("click", endMenu);
+        }
+    } // togMenu
+}
+
 function showMenu() {
     togMenu=true;
     togSet=false;
-    ctx.fillStyle = "black";
-    ctx.globalAlpha = 0.9; 
-    ctx.fillRect(120, 40, 950, 650);
+    ctx.fillStyle = "purple";
+    ctx.drawImage(setBack, 0, 0, canvas.width, canvas.height);
     ctx.globalAlpha = 1.0; 
-    ctx.fillStyle = "white";
     ctx.textAlign = "center"; 
-    ctx.font = "45px Arial";
-    ctx.fillText("Settings", w, 100);
-    ctx.font = "35px Arial";
+    ctx.font = "900 100px Comic Sans MS";
+    ctx.fillText("Settings", w, 110);
 
     if (!musicOn) {
         duck.pause();
         }
 
+    ctx.fillStyle = "purple";
+    ctx.font = "800 50px Comic Sans MS";
+    
+    if (En) {
+        ctx.fillText("Balloon Colour", 332, 195);
+    }
+
+    /*if (Ger) {
+        ctx.fillText("", 149, 162);
+    }
+
+    if (Rom) {
+        ctx.fillText("", 149, 162);
+    }
+
+    if (Bul) {
+        ctx.fillText("", 149, 162);
+    }
+
+    if (Grk) {
+        ctx.fillText("", 149, 162);
+    }
+
+    if (Tuk) {
+        ctx.fillText("", 149, 162);
+    }*/
+    
+    ctx.fillStyle = "black";
+    ctx.font = "700 30px Comic Sans MS";
+
+    ctx.drawImage(purBall, 165, 215, 50, 50);
+    purBall.path = new Path2D();
+    purBall.path.rect(165, 215, 50, 50);
+
+    ctx.fillStyle = "black";
+    ctx.textAlign = "left"; 
+    ctx.globalAlpha = 1.0;
 
     if (col) {
-        ctx.fillText("Balloon Colour: Purple - press R to change to Red", w, 200);
-        if (keys[82]) { //r
-            col=false;
-        }
+        ctx.drawImage(rTick, 168, 210, 50, 50);
     }
+
+    
+    if (En) {
+        ctx.fillText("Purple", 220, 250);
+    }
+    /*if (Ger) {
+        ctx.fillText("", 120, 230);
+    }
+    if (Rom) {
+        ctx.fillText("", 120, 230);
+    }
+    if (Bul) {
+        ctx.fillText("", 120, 230);
+    }
+    if (Grk) {
+        ctx.fillText("", 120, 230);
+    }
+    if (Tuk) {
+        ctx.fillText("", 120, 230);
+    }*/
+
+    ctx.drawImage(redBall, 165, 270, 50, 50);
+    redBall.path = new Path2D();
+    redBall.path.rect(165, 270, 50, 50);
 
     if (!col) {
-        ctx.fillText("Balloon Colour: Red - press P to change to Purple", w, 200);
-        if (keys[80]) { //q
-            col=true;
-        }
+    ctx.drawImage(rTick, 168, 266, 50, 50);
+    } 
+
+    if (En) {
+        ctx.fillText("Red", 220, 305);
     }
 
+    /*if (Ger) {
+        ctx.fillText("Aus", 120, 282);
+    }
+    if (Rom) {
+        ctx.fillText("Oprit", 120, 282);
+    }
+    if (Bul) {
+        ctx.fillText("Изключено", 120, 282);
+    }
+    if (Grk) {
+        ctx.fillText("Μακριά από", 120, 282);
+    }
+    if (Tuk) {
+        ctx.fillText("Kapalı", 120, 282);
+    }*/
+
+    canvas.addEventListener("click", balloonT);
+    canvas.addEventListener("click", balloonF);
+
     /*------------------------------------------------------ */
+    // End of Balloon Colour //
+
+
+
+    // Speech //
+
+    ctx.fillStyle = "purple";
+    ctx.font = "800 50px Comic Sans MS";
+
+    if (En) {
+        ctx.fillText("Speech", 800, 195);
+    }
+
+    /*if (Ger) {
+        ctx.fillText("", 149, 162);
+    }
+
+    if (Rom) {
+        ctx.fillText("", 149, 162);
+    }
+
+    if (Bul) {
+        ctx.fillText("", 149, 162);
+    }
+
+    if (Grk) {
+        ctx.fillText("", 149, 162);
+    }
+
+    if (Tuk) {
+        ctx.fillText("", 149, 162);
+    }*/
+    
+    ctx.fillStyle = "black";
+    ctx.font = "700 30px Comic Sans MS";
+
+    ctx.drawImage(speechOnCir, 800, 215, 50, 50);
+    speechOnCir.path = new Path2D();
+    speechOnCir.path.rect(800, 215, 50, 50);
+
+    ctx.fillStyle = "black";
+    ctx.textAlign = "left"; 
+    ctx.globalAlpha = 1.0;
 
     if (speechOn) {
+        ctx.drawImage(rTick, 803, 210, 50, 50);
+    }
+
+    
+    if (En) {
+        ctx.fillText("On", 855, 250);
+    }
+    /*if (Ger) {
+        ctx.fillText("", 120, 230);
+    }
+    if (Rom) {
+        ctx.fillText("", 120, 230);
+    }
+    if (Bul) {
+        ctx.fillText("", 120, 230);
+    }
+    if (Grk) {
+        ctx.fillText("", 120, 230);
+    }
+    if (Tuk) {
+        ctx.fillText("", 120, 230);
+    }*/
+
+    ctx.drawImage(speechOffCir, 800, 270, 50, 50);
+    redBall.path = new Path2D();
+    redBall.path.rect(165, 270, 50, 50);
+
+    if (!speechOn) {
+    ctx.drawImage(rTick, 167, 266, 50, 50);
+    } 
+
+    if (En) {
+        ctx.fillText("Off", 855, 305);
+    }
+
+    /*if (Ger) {
+        ctx.fillText("Aus", 120, 282);
+    }
+    if (Rom) {
+        ctx.fillText("Oprit", 120, 282);
+    }
+    if (Bul) {
+        ctx.fillText("Изключено", 120, 282);
+    }
+    if (Grk) {
+        ctx.fillText("Μακριά από", 120, 282);
+    }
+    if (Tuk) {
+        ctx.fillText("Kapalı", 120, 282);
+    }*/
+
+    //canvas.addEventListener("click", speechT);
+    //canvas.addEventListener("click", speechF);
+
+    /*------------------------------------------------------ */
+    // End of Balloon Colour //
+
+
+
+    /*if (speechOn) {
         ctx.fillText("Speech: On - press O to change", w, 300);
         if (keys[79]) { //o
             speechOn=false;
@@ -333,12 +590,12 @@ function showMenu() {
         if (keys[66]) { //b
             speechOn=true;
         }
-    }
+    }*/
 
     /*------------------------------------------------------ */
 
     
-    if (musicOn) {
+    /*if (musicOn) {
         ctx.fillText("Music and Effects: On - press M to change", w, 400);
         if (keys[77]) { //m
             musicOn=false;
@@ -350,11 +607,11 @@ function showMenu() {
         if (keys[85]) { //u
             musicOn=true;
         }
-    }
+    }*/
 
     /*------------------------------------------------------ */
 
-    if (picOn) {
+    /*if (picOn) {
         ctx.fillText("Picture: On - press C to change", w, 500);
         if (keys[67]) { //o
             picOn=false;
@@ -366,16 +623,23 @@ function showMenu() {
         if (keys[73]) { //f
             picOn=true;
         }
-    }
+    }*/
 
-    ctx.font = "30px Arial";
-    ctx.fillText("Return to Game", w, 600);
-    ctx.fillText("Press G", w, 640);
+    ctx.drawImage(cross, w-20, 650, 50, 50);
+    cross.path = new Path2D();
+    cross.path.rect(w-20, 650, 50, 50);
 
-    if (keys[71]) { //g
-        togSet=true;
-        togMenu=false;
-    }
+    canvas.addEventListener("click", endMenu);
+}
+
+function setMenu(e) {
+        if (ctx.isPointInPath(setting.path, e.offsetX, e.offsetY)) {
+            //alert("moooooooooooo");
+            togSet=false;
+            togMenu=true;
+            showMenu();
+            canvas.removeEventListener("click", setMenu);
+        }
 }
 
 function splash() {
@@ -383,11 +647,11 @@ function splash() {
     ctx.drawImage(bnSplash, 0, 0, canvas.width, canvas.height);
     }
     ctx.fillStyle = "white";
-    ctx.globalAlpha = 0.6;
+    ctx.globalAlpha = 0.8;
     ctx.fillRect(95, 400, 1010, 300);
     ctx.globalAlpha = 1.0;
     ctx.textAlign = "center"; 
-    ctx.font = "50px Comic Sans MS";
+    ctx.font = "40px Comic Sans MS";
     ctx.fillStyle = "blue";
     ctx.fillText("Click the left mouse button", w, 460);
     ctx.fillStyle = "red";
@@ -395,7 +659,7 @@ function splash() {
     ctx.fillStyle = "blue";
     ctx.fillText("or use your switch", w, 590);
     ctx.fillStyle = "purple";
-    ctx.font='900 50px Comic Sans MS';
+    ctx.font='900 40px Comic Sans MS';
     ctx.fillText("for the instructions!", w, 660);
 
     if (keys[65]) { // audio
@@ -405,9 +669,9 @@ function splash() {
     ctx.fillStyle = "white";
     ctx.fillRect(105, 410, 150, 140);
     ctx.drawImage(speech, 155, 420, 50, 50);
-    ctx.font = "bold 15px arial";
+    ctx.font = "bold 13px arial";
     ctx.fillStyle = "black";
-    ctx.fillText("Press A", 175, 490);
+    ctx.fillText("Left Click or Press A", 175, 490);
     ctx.fillText("on your Keyboard", 180, 512);
     ctx.fillText("for Speech", 175, 535);
 
@@ -418,6 +682,32 @@ function splash() {
         splashAud.pause();
         splashAud.currentTime = 0;
     }
+
+
+    ctx.fillStyle = "white";
+
+    ctx.fillRect(945, 410, 150, 140);
+
+    ctx.drawImage(setting, 978, 402, 80, 80);
+    setting.path = new Path2D();
+    setting.path.rect(945, 410, 150, 140);
+
+    canvas.addEventListener("click", setMenu);
+
+
+    ctx.font = "bold 13px arial";
+    ctx.fillStyle = "black";
+    ctx.fillText("Left Click or Press S", 1015, 490);
+    ctx.fillText("on your Keyboard", 1020, 512);
+    ctx.fillText("for Settings", 1025, 535);
+
+    if (keys[83]) { //s
+        togSet=false;
+        togMenu=true;
+        showMenu();
+    }
+
+
     window.addEventListener("click", closeSplash);
     
 }
@@ -434,14 +724,18 @@ function instructions() {
 
     if (togMenu) {
         showMenu();
-    }   
+    }
 }
 
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    if (splashSc) {
-        splash();
+        if (splashSc) {
+            splash();
+        }
+
+        if (togMenu) {
+            showMenu();
         }
 
     if (instructionsSc) {

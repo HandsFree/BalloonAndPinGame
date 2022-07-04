@@ -2,6 +2,12 @@ body {
 margin: 0;
 }
 
+.canvas-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 #canvas1 {
   padding-left: 0;
   padding-right: 0;
@@ -14,7 +20,7 @@ margin: 0;
   background: rgb(191, 224, 220);
 }
 
-@media only screen and (max-width: 1100px) {
+/*@media only screen and (max-width: 1100px) {
   #canvas1 {
     max-width: 800px;
     max-height: 800px;
@@ -26,4 +32,4 @@ margin: 0;
     max-width: 500px;
     max-height: 500px;
   }
-}
+}*/
