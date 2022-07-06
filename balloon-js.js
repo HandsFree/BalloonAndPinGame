@@ -77,6 +77,21 @@ speechOnCir.src = "images/settingsMenu/speechOn.png"; // Speech On
 const speechOffCir = new Image();
 speechOffCir.src = "images/settingsMenu/speechOff.png"; // Speech Off
 
+const musicOnCir = new Image();
+musicOnCir.src = "images/settingsMenu/musicOn.png"; // Music On
+
+const musicOffCir = new Image();
+musicOffCir.src = "images/settingsMenu/musicOff.png"; // Music Off
+
+const backOnCir = new Image();
+backOnCir.src = "images/settingsMenu/backOn.png"; // Background On
+
+const backOffCir = new Image();
+backOffCir.src = "images/settingsMenu/backOff.png"; // Background Off
+
+const transLat = new Image();
+transLat.src = "images/settingsMenu/balloonTrans.png"; // Translations
+
 const cross = new Image();
 cross.src = "images/settingsMenu/cross.png"; // cross - End Menu
 
@@ -356,6 +371,60 @@ function balloonF(e) {
     } // togMenu
 }
 
+function speechT(e) {
+    if (togMenu) {
+        if (ctx.isPointInPath(speechOnCir.path, e.offsetX, e.offsetY)) {
+            speechOn=true;
+            canvas.removeEventListener("click", speechT);
+        }
+    } // togMenu
+}
+
+function speechF(e) {
+    if (togMenu) {
+        if (ctx.isPointInPath(speechOffCir.path, e.offsetX, e.offsetY)) {
+            speechOn=false;
+            canvas.removeEventListener("click", speechF);
+        }
+    } // togMenu
+}
+
+function musicT(e) {
+    if (togMenu) {
+        if (ctx.isPointInPath(musicOnCir.path, e.offsetX, e.offsetY)) {
+            musicOn=true;
+            canvas.removeEventListener("click", musicT);
+        }
+    } // togMenu
+}
+
+function musicF(e) {
+    if (togMenu) {
+        if (ctx.isPointInPath(musicOffCir.path, e.offsetX, e.offsetY)) {
+            musicOn=false;
+            canvas.removeEventListener("click", musicF);
+        }
+    } // togMenu
+}
+
+function backT(e) {
+    if (togMenu) {
+        if (ctx.isPointInPath(backOnCir.path, e.offsetX, e.offsetY)) {
+            picOn=true;
+            canvas.removeEventListener("click", backT);
+        }
+    } // togMenu
+}
+
+function backF(e) {
+    if (togMenu) {
+        if (ctx.isPointInPath(backOffCir.path, e.offsetX, e.offsetY)) {
+            picOn=false;
+            canvas.removeEventListener("click", backF);
+        }
+    } // togMenu
+}
+
 function endMenu(e) {
     if (togMenu) {
         if (ctx.isPointInPath(cross.path, e.offsetX, e.offsetY)) {
@@ -374,17 +443,18 @@ function showMenu() {
     ctx.globalAlpha = 1.0; 
     ctx.textAlign = "center"; 
     ctx.font = "900 100px Comic Sans MS";
-    ctx.fillText("Settings", w, 110);
+    ctx.fillText("Settings", w, 100);
 
     if (!musicOn) {
         duck.pause();
         }
 
     ctx.fillStyle = "purple";
-    ctx.font = "800 50px Comic Sans MS";
+    ctx.textAlign = "left";
+    ctx.font = "900 45px Comic Sans MS";
     
     if (En) {
-        ctx.fillText("Balloon Colour", 332, 195);
+        ctx.fillText("Balloon Colour", 165, 175);
     }
 
     /*if (Ger) {
@@ -410,21 +480,21 @@ function showMenu() {
     ctx.fillStyle = "black";
     ctx.font = "700 30px Comic Sans MS";
 
-    ctx.drawImage(purBall, 165, 215, 50, 50);
+    ctx.drawImage(purBall, 165, 195, 50, 50);
     purBall.path = new Path2D();
-    purBall.path.rect(165, 215, 50, 50);
+    purBall.path.rect(165, 195, 50, 50);
 
     ctx.fillStyle = "black";
     ctx.textAlign = "left"; 
     ctx.globalAlpha = 1.0;
 
     if (col) {
-        ctx.drawImage(rTick, 168, 210, 50, 50);
+        ctx.drawImage(rTick, 168, 190, 50, 50);
     }
 
     
     if (En) {
-        ctx.fillText("Purple", 220, 250);
+        ctx.fillText("Purple", 220, 230);
     }
     /*if (Ger) {
         ctx.fillText("", 120, 230);
@@ -442,16 +512,16 @@ function showMenu() {
         ctx.fillText("", 120, 230);
     }*/
 
-    ctx.drawImage(redBall, 165, 270, 50, 50);
+    ctx.drawImage(redBall, 165, 250, 50, 50);
     redBall.path = new Path2D();
-    redBall.path.rect(165, 270, 50, 50);
+    redBall.path.rect(165, 250, 50, 50);
 
     if (!col) {
-    ctx.drawImage(rTick, 168, 266, 50, 50);
+    ctx.drawImage(rTick, 168, 246, 50, 50);
     } 
 
     if (En) {
-        ctx.fillText("Red", 220, 305);
+        ctx.fillText("Red", 220, 285);
     }
 
     /*if (Ger) {
@@ -481,10 +551,11 @@ function showMenu() {
     // Speech //
 
     ctx.fillStyle = "purple";
-    ctx.font = "800 50px Comic Sans MS";
+    ctx.textAlign = "left"; 
+    ctx.font = "900 45px Comic Sans MS";
 
     if (En) {
-        ctx.fillText("Speech", 800, 195);
+        ctx.fillText("Speech", 800, 175);
     }
 
     /*if (Ger) {
@@ -510,21 +581,21 @@ function showMenu() {
     ctx.fillStyle = "black";
     ctx.font = "700 30px Comic Sans MS";
 
-    ctx.drawImage(speechOnCir, 800, 215, 50, 50);
+    ctx.drawImage(speechOnCir, 800, 195, 50, 50);
     speechOnCir.path = new Path2D();
-    speechOnCir.path.rect(800, 215, 50, 50);
+    speechOnCir.path.rect(800, 195, 50, 50);
 
     ctx.fillStyle = "black";
     ctx.textAlign = "left"; 
     ctx.globalAlpha = 1.0;
 
     if (speechOn) {
-        ctx.drawImage(rTick, 803, 210, 50, 50);
+        ctx.drawImage(rTick, 803, 190, 50, 50);
     }
 
     
     if (En) {
-        ctx.fillText("On", 855, 250);
+        ctx.fillText("On", 855, 230);
     }
     /*if (Ger) {
         ctx.fillText("", 120, 230);
@@ -542,16 +613,16 @@ function showMenu() {
         ctx.fillText("", 120, 230);
     }*/
 
-    ctx.drawImage(speechOffCir, 800, 270, 50, 50);
-    redBall.path = new Path2D();
-    redBall.path.rect(165, 270, 50, 50);
+    ctx.drawImage(speechOffCir, 800, 250, 50, 50);
+    speechOffCir.path = new Path2D();
+    speechOffCir.path.rect(800, 250, 50, 50);
 
     if (!speechOn) {
-    ctx.drawImage(rTick, 167, 266, 50, 50);
+    ctx.drawImage(rTick, 803, 245, 50, 50);
     } 
 
     if (En) {
-        ctx.fillText("Off", 855, 305);
+        ctx.fillText("Off", 855, 285);
     }
 
     /*if (Ger) {
@@ -570,46 +641,208 @@ function showMenu() {
         ctx.fillText("Kapalı", 120, 282);
     }*/
 
-    //canvas.addEventListener("click", speechT);
-    //canvas.addEventListener("click", speechF);
+    canvas.addEventListener("click", speechT);
+    canvas.addEventListener("click", speechF);
 
     /*------------------------------------------------------ */
-    // End of Balloon Colour //
+    // End of Speech Colour //
 
+        // Music & Sound Effcts //
 
-
-    /*if (speechOn) {
-        ctx.fillText("Speech: On - press O to change", w, 300);
-        if (keys[79]) { //o
-            speechOn=false;
+        ctx.fillStyle = "purple";
+        ctx.font = "900 45px Comic Sans MS";
+        ctx.textAlign = "left"; 
+    
+        if (En) {
+            ctx.fillText("Music and Effects", 165, 350);
         }
+    
+        /*if (Ger) {
+            ctx.fillText("", 149, 162);
+        }
+    
+        if (Rom) {
+            ctx.fillText("", 149, 162);
+        }
+    
+        if (Bul) {
+            ctx.fillText("", 149, 162);
+        }
+    
+        if (Grk) {
+            ctx.fillText("", 149, 162);
+        }
+    
+        if (Tuk) {
+            ctx.fillText("", 149, 162);
+        }*/
+        
+        ctx.fillStyle = "black";
+        ctx.font = "700 30px Comic Sans MS";
+    
+        ctx.drawImage(musicOnCir, 165, 368, 50, 50);
+        musicOnCir.path = new Path2D();
+        musicOnCir.path.rect(165, 363, 50, 50);
+    
+        ctx.fillStyle = "black";
+        ctx.textAlign = "left"; 
+        ctx.globalAlpha = 1.0;
+    
+        if (musicOn) {
+            ctx.drawImage(rTick, 168, 363, 50, 50);
+        }
+    
+        
+        if (En) {
+            ctx.fillText("On", 220, 410);
+        }
+        /*if (Ger) {
+            ctx.fillText("", 120, 230);
+        }
+        if (Rom) {
+            ctx.fillText("", 120, 230);
+        }
+        if (Bul) {
+            ctx.fillText("", 120, 230);
+        }
+        if (Grk) {
+            ctx.fillText("", 120, 230);
+        }
+        if (Tuk) {
+            ctx.fillText("", 120, 230);
+        }*/
+    
+        ctx.drawImage(musicOffCir, 165, 422, 50, 50);
+        musicOffCir.path = new Path2D();
+        musicOffCir.path.rect(165, 422, 50, 50);
+    
+        if (!musicOn) {
+        ctx.drawImage(rTick, 168, 416, 50, 50);
+        } 
+    
+        if (En) {
+            ctx.fillText("Off", 220, 460);
+        }
+    
+        /*if (Ger) {
+            ctx.fillText("Aus", 120, 282);
+        }
+        if (Rom) {
+            ctx.fillText("Oprit", 120, 282);
+        }
+        if (Bul) {
+            ctx.fillText("Изключено", 120, 282);
+        }
+        if (Grk) {
+            ctx.fillText("Μακριά από", 120, 282);
+        }
+        if (Tuk) {
+            ctx.fillText("Kapalı", 120, 282);
+        }*/
+    
+        canvas.addEventListener("click", musicT);
+        canvas.addEventListener("click", musicF);
+
+    /*------------------------------------------------------ */
+
+    // Background //
+
+    ctx.fillStyle = "purple";
+    ctx.font = "900 45px Comic Sans MS";
+    ctx.textAlign = "left"; 
+
+    if (En) {
+        ctx.fillText("Background", 800, 350);
     }
 
-    if (!speechOn) {
-        ctx.fillText("Speech: Off - press B to change", w, 300);
-        if (keys[66]) { //b
-            speechOn=true;
-        }
-    }*/
+    /*if (Ger) {
+        ctx.fillText("", 149, 162);
+    }
 
-    /*------------------------------------------------------ */
+    if (Rom) {
+        ctx.fillText("", 149, 162);
+    }
+
+    if (Bul) {
+        ctx.fillText("", 149, 162);
+    }
+
+    if (Grk) {
+        ctx.fillText("", 149, 162);
+    }
+
+    if (Tuk) {
+        ctx.fillText("", 149, 162);
+    }*/
+    
+    ctx.fillStyle = "black";
+    ctx.font = "700 30px Comic Sans MS";
+
+    ctx.drawImage(backOnCir, 800, 368, 50, 50);
+    backOnCir.path = new Path2D();
+    backOnCir.path.rect(800, 368, 50, 50);
+
+    ctx.fillStyle = "black";
+    ctx.textAlign = "left"; 
+    ctx.globalAlpha = 1.0;
+
+    if (picOn) {
+        ctx.drawImage(rTick, 803, 363, 50, 50);
+    }
 
     
-    /*if (musicOn) {
-        ctx.fillText("Music and Effects: On - press M to change", w, 400);
-        if (keys[77]) { //m
-            musicOn=false;
-        }
+    if (En) {
+        ctx.fillText("On", 855, 410);
     }
-
-    if (!musicOn) {
-        ctx.fillText("Music and Effects: Off - press U to change", w, 400);
-        if (keys[85]) { //u
-            musicOn=true;
-        }
+    /*if (Ger) {
+        ctx.fillText("", 120, 230);
+    }
+    if (Rom) {
+        ctx.fillText("", 120, 230);
+    }
+    if (Bul) {
+        ctx.fillText("", 120, 230);
+    }
+    if (Grk) {
+        ctx.fillText("", 120, 230);
+    }
+    if (Tuk) {
+        ctx.fillText("", 120, 230);
     }*/
 
+    ctx.drawImage(backOffCir, 800, 422, 50, 50);
+    backOffCir.path = new Path2D();
+    backOffCir.path.rect(800, 422, 50, 50);
+
+    if (!picOn) {
+    ctx.drawImage(rTick, 803, 416, 50, 50);
+    } 
+
+    if (En) {
+        ctx.fillText("Off", 855, 460);
+    }
+
+    /*if (Ger) {
+        ctx.fillText("Aus", 120, 282);
+    }
+    if (Rom) {
+        ctx.fillText("Oprit", 120, 282);
+    }
+    if (Bul) {
+        ctx.fillText("Изключено", 120, 282);
+    }
+    if (Grk) {
+        ctx.fillText("Μακριά από", 120, 282);
+    }
+    if (Tuk) {
+        ctx.fillText("Kapalı", 120, 282);
+    }*/
+
+    canvas.addEventListener("click", backT);
+    canvas.addEventListener("click", backF);
+
     /*------------------------------------------------------ */
+    // End of Background //
 
     /*if (picOn) {
         ctx.fillText("Picture: On - press C to change", w, 500);
@@ -625,6 +858,59 @@ function showMenu() {
         }
     }*/
 
+    /*------------------------------------------------------ */
+
+    // Translations //
+
+    ctx.textAlign = "center"; 
+    ctx.drawImage(transLat, w-110, 485, 240, 130);
+
+    ctx.fillStyle = "black";
+
+    if (En) {
+        ctx.font = "900 30px Arial";
+        ctx.fillText("Language", 610, 540);
+        ctx.font = "500 30px Arial";
+        ctx.fillText("English", 610, 575);
+    }
+
+    if (Ger) {
+        ctx.font = "900 30px Arial";
+        ctx.fillText("Sprache", 567, 530);
+        ctx.font = "500 30px Arial";
+        ctx.fillText("Deutsch", 567, 555);
+    }
+
+    if (Rom) {
+        ctx.font = "900 30px Arial";
+        ctx.fillText("Limba", 567, 530);
+        ctx.font = "500 30px Arial";
+        ctx.fillText("rumänisch", 567, 555);
+    }
+
+    if (Bul) {
+        ctx.font = "900 30px Arial";
+        ctx.fillText("език", 567, 530);
+        ctx.font = "500 30px Arial";
+        ctx.fillText("български", 567, 555);
+    }
+
+    if (Grk) {
+        ctx.font = "900 30px Arial";
+        ctx.fillText("Γλώσσα", 567, 530);
+        ctx.font = "500 30px Arial";
+        ctx.fillText("Ελληνικά", 567, 555);
+    }
+
+    if (Tuk) {
+        ctx.font = "900 30px Arial";
+        ctx.fillText("Dil", 567, 530);
+        ctx.font = "500 30px Arial";
+        ctx.fillText("Türk", 567, 555);
+    }
+
+    //------------------------------------------------------------------------------//
+
     ctx.drawImage(cross, w-20, 650, 50, 50);
     cross.path = new Path2D();
     cross.path.rect(w-20, 650, 50, 50);
@@ -634,7 +920,6 @@ function showMenu() {
 
 function setMenu(e) {
         if (ctx.isPointInPath(setting.path, e.offsetX, e.offsetY)) {
-            //alert("moooooooooooo");
             togSet=false;
             togMenu=true;
             showMenu();
