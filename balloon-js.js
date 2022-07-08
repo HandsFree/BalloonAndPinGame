@@ -10,6 +10,8 @@ var Rom = false;
 var Bul = false;
 var Grk = false;
 var Tuk = false;
+
+var langaugeMenuSettings = false;
 /////////////////////////////////
 
 var pinIn = true;
@@ -91,6 +93,20 @@ backOffCir.src = "images/settingsMenu/backOff.png"; // Background Off
 
 const transLat = new Image();
 transLat.src = "images/settingsMenu/balloonTrans.png"; // Translations
+
+///////////////////////////////////////////////////////////////////////
+
+const balloonTransMenu = new Image();
+balloonTransMenu.src = "images/settingsMenu/balloonTransMenu.png"; // Translation Menu
+
+const crossLang = new Image();
+crossLang.src = "images/settingsMenu/cross.png"; // langauge cross - End Langauge Menu
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////
 
 const cross = new Image();
 cross.src = "images/settingsMenu/cross.png"; // cross - End Menu
@@ -425,9 +441,120 @@ function backF(e) {
     } // togMenu
 }
 
+/////////////////////////////////////////////////////////////////////////////////////////////////
+// Langauge Translator
+function engLang(e) {
+    if (setMenu) {
+       if (ctx.isPointInPath(langE.path, e.offsetX, e.offsetY)) {
+           En = true;
+           Ger = false;
+           Rom = false;
+           Bul = false;
+           Grk = false;
+           Tuk = false;
+           canvas.removeEventListener("click", engLang);
+        }
+    } 
+}
+
+function gerLang(e) {
+    if (setMenu) {
+       if (ctx.isPointInPath(langG.path, e.offsetX, e.offsetY)) {
+           En = false;
+           Ger = true;
+           Rom = false;
+           Bul = false;
+           Grk = false;
+           Tuk = false;
+           canvas.removeEventListener("click", gerLang);
+        }
+    } 
+}
+
+function romLang(e) {
+    if (setMenu) {
+       if (ctx.isPointInPath(langR.path, e.offsetX, e.offsetY)) {
+           En = false;
+           Ger = false;
+           Rom = true;
+           Bul = false;
+           Grk = false;
+           Tuk = false;
+           canvas.removeEventListener("click", romLang);
+        }
+    } 
+}
+
+function bulLang(e) {
+    if (setMenu) {
+       if (ctx.isPointInPath(langBul.path, e.offsetX, e.offsetY)) {
+           En = false;
+           Ger = false;
+           Rom = false;
+           Bul = true;
+           Grk = false;
+           Tuk = false;
+           canvas.removeEventListener("click", bulLang);
+        }
+    } 
+}
+
+function grkLang(e) {
+    if (setMenu) {
+       if (ctx.isPointInPath(langGrk.path, e.offsetX, e.offsetY)) {
+           En = false;
+           Ger = false;
+           Rom = false;
+           Bul = false;
+           Grk = true;
+           Tuk = false;
+           canvas.removeEventListener("click", grkLang);
+        }
+    } 
+}
+
+function trkLang(e) {
+    if (setMenu) {
+       if (ctx.isPointInPath(langTurk.path, e.offsetX, e.offsetY)) {
+           En = false;
+           Ger = false;
+           Rom = false;
+           Bul = false;
+           Grk = false;
+           Tuk = true;
+           canvas.removeEventListener("click", trkLang);
+        }
+    } 
+}
+
+// Langauge Mode //
+function langaugeMenu(e) {
+    if (togMenu) {
+       if (!langaugeMenuSettings && ctx.isPointInPath(transLat.path, e.offsetX, e.offsetY)) {
+           langaugeMenuSettings = true;
+           canvas.removeEventListener("click", langaugeMenu);
+        }
+    } 
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// End Sub-Menu Langauge Mode //
+function endMenuLang(e) {
+    if (togMenu) {
+       if (langaugeMenuSettings && ctx.isPointInPath(crossLang.path, e.offsetX, e.offsetY)) {      
+           langaugeMenuSettings = false;
+           canvas.removeEventListener("click", endMenuLang);
+        }
+    } 
+}
+
+
+
 function endMenu(e) {
     if (togMenu) {
-        if (ctx.isPointInPath(cross.path, e.offsetX, e.offsetY)) {
+        if (!langaugeMenuSettings && ctx.isPointInPath(cross.path, e.offsetX, e.offsetY)) {
             togSet=true;
             togMenu=false;
             canvas.removeEventListener("click", endMenu);
@@ -457,25 +584,25 @@ function showMenu() {
         ctx.fillText("Balloon Colour", 165, 175);
     }
 
-    /*if (Ger) {
-        ctx.fillText("", 149, 162);
+    if (Ger) {
+        ctx.fillText("Ballonfarbe", 149, 162);
     }
 
     if (Rom) {
-        ctx.fillText("", 149, 162);
+        ctx.fillText("Culoarea balonului", 149, 162);
     }
 
     if (Bul) {
-        ctx.fillText("", 149, 162);
+        ctx.fillText("Цвят на балон", 149, 162);
     }
 
     if (Grk) {
-        ctx.fillText("", 149, 162);
+        ctx.fillText("Χρώμα μπαλονιού", 149, 162);
     }
 
     if (Tuk) {
-        ctx.fillText("", 149, 162);
-    }*/
+        ctx.fillText("balon rengi", 149, 162);
+    }
     
     ctx.fillStyle = "black";
     ctx.font = "700 30px Comic Sans MS";
@@ -496,21 +623,21 @@ function showMenu() {
     if (En) {
         ctx.fillText("Purple", 220, 230);
     }
-    /*if (Ger) {
-        ctx.fillText("", 120, 230);
+    if (Ger) {
+        ctx.fillText("Violett", 120, 230);
     }
     if (Rom) {
-        ctx.fillText("", 120, 230);
+        ctx.fillText("Violet", 120, 230);
     }
     if (Bul) {
-        ctx.fillText("", 120, 230);
+        ctx.fillText("Лилаво", 120, 230);
     }
     if (Grk) {
-        ctx.fillText("", 120, 230);
+        ctx.fillText("Μωβ", 120, 230);
     }
     if (Tuk) {
-        ctx.fillText("", 120, 230);
-    }*/
+        ctx.fillText("Mor", 120, 230);
+    }
 
     ctx.drawImage(redBall, 165, 250, 50, 50);
     redBall.path = new Path2D();
@@ -524,21 +651,21 @@ function showMenu() {
         ctx.fillText("Red", 220, 285);
     }
 
-    /*if (Ger) {
-        ctx.fillText("Aus", 120, 282);
+    if (Ger) {
+        ctx.fillText("Rot", 120, 282);
     }
     if (Rom) {
-        ctx.fillText("Oprit", 120, 282);
+        ctx.fillText("roșu", 120, 282);
     }
     if (Bul) {
-        ctx.fillText("Изключено", 120, 282);
+        ctx.fillText("червен", 120, 282);
     }
     if (Grk) {
-        ctx.fillText("Μακριά από", 120, 282);
+        ctx.fillText("το κόκκινο", 120, 282);
     }
     if (Tuk) {
-        ctx.fillText("Kapalı", 120, 282);
-    }*/
+        ctx.fillText("Kırmızı", 120, 282);
+    }
 
     canvas.addEventListener("click", balloonT);
     canvas.addEventListener("click", balloonF);
@@ -625,11 +752,11 @@ function showMenu() {
         ctx.fillText("Off", 855, 285);
     }
 
-    /*if (Ger) {
+    if (Ger) {
         ctx.fillText("Aus", 120, 282);
     }
     if (Rom) {
-        ctx.fillText("Oprit", 120, 282);
+        ctx.fillText("Off", 120, 282);
     }
     if (Bul) {
         ctx.fillText("Изключено", 120, 282);
@@ -639,7 +766,7 @@ function showMenu() {
     }
     if (Tuk) {
         ctx.fillText("Kapalı", 120, 282);
-    }*/
+    }
 
     canvas.addEventListener("click", speechT);
     canvas.addEventListener("click", speechF);
@@ -724,11 +851,11 @@ function showMenu() {
             ctx.fillText("Off", 220, 460);
         }
     
-        /*if (Ger) {
+        if (Ger) {
             ctx.fillText("Aus", 120, 282);
         }
         if (Rom) {
-            ctx.fillText("Oprit", 120, 282);
+            ctx.fillText("Off", 120, 282);
         }
         if (Bul) {
             ctx.fillText("Изключено", 120, 282);
@@ -738,7 +865,7 @@ function showMenu() {
         }
         if (Tuk) {
             ctx.fillText("Kapalı", 120, 282);
-        }*/
+        }
     
         canvas.addEventListener("click", musicT);
         canvas.addEventListener("click", musicF);
@@ -822,11 +949,11 @@ function showMenu() {
         ctx.fillText("Off", 855, 460);
     }
 
-    /*if (Ger) {
+    if (Ger) {
         ctx.fillText("Aus", 120, 282);
     }
     if (Rom) {
-        ctx.fillText("Oprit", 120, 282);
+        ctx.fillText("Off", 120, 282);
     }
     if (Bul) {
         ctx.fillText("Изключено", 120, 282);
@@ -836,27 +963,13 @@ function showMenu() {
     }
     if (Tuk) {
         ctx.fillText("Kapalı", 120, 282);
-    }*/
+    }
 
     canvas.addEventListener("click", backT);
     canvas.addEventListener("click", backF);
 
     /*------------------------------------------------------ */
     // End of Background //
-
-    /*if (picOn) {
-        ctx.fillText("Picture: On - press C to change", w, 500);
-        if (keys[67]) { //o
-            picOn=false;
-        }
-    }
-
-    if (!picOn) {
-        ctx.fillText("Colour: On - press I to change", w, 500);
-        if (keys[73]) { //f
-            picOn=true;
-        }
-    }*/
 
     /*------------------------------------------------------ */
 
@@ -876,47 +989,139 @@ function showMenu() {
 
     if (Ger) {
         ctx.font = "900 30px Arial";
-        ctx.fillText("Sprache", 567, 530);
+        ctx.fillText("Sprache", 610, 540);
         ctx.font = "500 30px Arial";
-        ctx.fillText("Deutsch", 567, 555);
+        ctx.fillText("Deutsch", 610, 575);
     }
 
     if (Rom) {
         ctx.font = "900 30px Arial";
-        ctx.fillText("Limba", 567, 530);
+        ctx.fillText("Limba", 610, 540);
         ctx.font = "500 30px Arial";
-        ctx.fillText("rumänisch", 567, 555);
+        ctx.fillText("rumänisch", 610, 575);
     }
 
     if (Bul) {
         ctx.font = "900 30px Arial";
-        ctx.fillText("език", 567, 530);
+        ctx.fillText("език", 610, 540);
         ctx.font = "500 30px Arial";
-        ctx.fillText("български", 567, 555);
+        ctx.fillText("български", 610, 575);
     }
 
     if (Grk) {
         ctx.font = "900 30px Arial";
-        ctx.fillText("Γλώσσα", 567, 530);
+        ctx.fillText("Γλώσσα", 610, 540);
         ctx.font = "500 30px Arial";
-        ctx.fillText("Ελληνικά", 567, 555);
+        ctx.fillText("Ελληνικά", 610, 575);
     }
 
     if (Tuk) {
         ctx.font = "900 30px Arial";
-        ctx.fillText("Dil", 567, 530);
+        ctx.fillText("Dil", 610, 540);
         ctx.font = "500 30px Arial";
-        ctx.fillText("Türk", 567, 555);
+        ctx.fillText("Türk", 610, 575);
     }
+
+    ctx.fillStyle = "black";
+    ctx.globalAlpha = 1.0;
+
+    transLat.path = new Path2D();
+    transLat.path.rect(w-110, 485, 240, 130);
+
+    if (langaugeMenuSettings) {
+
+
+        ctx.drawImage(balloonTransMenu, w/2, 480, 560, 230);
+
+
+
+        /*ctx.textAlign = "center";
+        ctx.fillStyle = "black";
+        ctx.font = "900 24px Comic Sans MS";
+
+        ctx.fillText("English", 200, 525);
+        ctx.drawImage(langE, 180, 535, 40, 40);
+        langE.path = new Path2D();
+        langE.path.rect(180, 535, 40, 40);
+        if (En) {
+            ctx.drawImage(rTick1, 180, 535, 40, 40);
+        }
+
+        ctx.fillText("German", 344, 525);
+        ctx.drawImage(langG, 330, 535, 40, 40);
+        langG.path = new Path2D();
+        langG.path.rect(330, 535, 40, 40);
+        if (Ger) {
+            ctx.drawImage(rTick1, 330, 535, 40, 40);
+        }
+
+        ctx.fillText("Romanian", 500, 525);
+        ctx.drawImage(langR, 480, 535, 40, 40);
+        langR.path = new Path2D();
+        langR.path.rect(480, 535, 40, 40);
+        if (Rom) {
+            ctx.drawImage(rTick1, 480, 535, 40, 40);
+        }
+
+        ctx.fillText("Bulgarian", 200, 600);
+        ctx.drawImage(langBul, 180, 607, 40, 40);
+        langBul.path = new Path2D();
+        langBul.path.rect(180, 607, 40, 40);
+        if (Bul) {
+            ctx.drawImage(rTick1, 180, 607, 40, 40);
+        }
+
+        ctx.fillText("Greek", 346, 600);
+        ctx.drawImage(langGrk, 330, 607, 40, 40);
+        langGrk.path = new Path2D();
+        langGrk.path.rect(330, 607, 40, 40);
+        if (Grk) {
+            ctx.drawImage(rTick1, 330, 607, 40, 40);
+        }
+
+        ctx.fillText("Turkish", 500, 600);
+        ctx.drawImage(langTurk, 480, 607, 40, 40);
+        langTurk.path = new Path2D();
+        langTurk.path.rect(480, 607, 40, 40);
+        if (Tuk) {
+            ctx.drawImage(rTick1, 480, 607, 40, 40);
+        }
+
+
+
+        canvas.addEventListener("click", engLang);
+        canvas.addEventListener("click", gerLang);
+        canvas.addEventListener("click", romLang);
+        canvas.addEventListener("click", bulLang);
+        canvas.addEventListener("click", grkLang);
+        canvas.addEventListener("click", trkLang);*/
+
+        ctx.drawImage(crossLang, w-27, 658, 40, 40);
+        crossLang.path = new Path2D();
+        crossLang.path.rect(w-27, 658, 40, 40);
+
+        canvas.addEventListener("click", endMenuLang);
+    }
+
+    canvas.addEventListener("click", langaugeMenu);
+
+    /////////////////////////////////////////////
+
 
     //------------------------------------------------------------------------------//
 
+    if (!langaugeMenuSettings) {
     ctx.drawImage(cross, w-20, 650, 50, 50);
     cross.path = new Path2D();
     cross.path.rect(w-20, 650, 50, 50);
 
     canvas.addEventListener("click", endMenu);
-}
+    } // langaugeMenuSettings = false
+
+
+} // End of showMenu
+
+
 
 function setMenu(e) {
         if (ctx.isPointInPath(setting.path, e.offsetX, e.offsetY)) {
