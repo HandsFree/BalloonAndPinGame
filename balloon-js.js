@@ -96,8 +96,30 @@ transLat.src = "images/settingsMenu/balloonTrans.png"; // Translations
 
 ///////////////////////////////////////////////////////////////////////
 
+// Translations
+
 const balloonTransMenu = new Image();
 balloonTransMenu.src = "images/settingsMenu/balloonTransMenu.png"; // Translation Menu
+
+// Langauge Settings
+
+const langE = new Image();
+langE.src = "images/settingsMenu/langE.png";
+
+const langG = new Image();
+langG.src = "images/settingsMenu/langG.png";
+
+const langR = new Image();
+langR.src = "images/settingsMenu/langR.png";
+
+const langBul = new Image();
+langBul.src = "images/settingsMenu/langBul.png";
+
+const langGrk = new Image();
+langGrk.src = "images/settingsMenu/langGrk.png";
+
+const langTurk = new Image();
+langTurk.src = "images/settingsMenu/langTrk.png";
 
 const crossLang = new Image();
 crossLang.src = "images/settingsMenu/cross.png"; // langauge cross - End Langauge Menu
@@ -585,23 +607,23 @@ function showMenu() {
     }
 
     if (Ger) {
-        ctx.fillText("Ballonfarbe", 149, 162);
+        ctx.fillText("Ballonfarbe", 165, 175);
     }
 
     if (Rom) {
-        ctx.fillText("Culoarea balonului", 149, 162);
+        ctx.fillText("Culoarea balonului", 165, 175);
     }
 
     if (Bul) {
-        ctx.fillText("Цвят на балон", 149, 162);
+        ctx.fillText("Цвят на балон", 165, 175);
     }
 
     if (Grk) {
-        ctx.fillText("Χρώμα μπαλονιού", 149, 162);
+        ctx.fillText("Χρώμα μπαλονιού", 165, 175);
     }
 
     if (Tuk) {
-        ctx.fillText("balon rengi", 149, 162);
+        ctx.fillText("balon rengi", 165, 175);
     }
     
     ctx.fillStyle = "black";
@@ -1031,60 +1053,60 @@ function showMenu() {
     if (langaugeMenuSettings) {
 
 
-        ctx.drawImage(balloonTransMenu, w/2, 480, 560, 230);
+        ctx.drawImage(balloonTransMenu, w/2, 480, 600, 230);
 
 
-
-        /*ctx.textAlign = "center";
+////////////////////////////////////////////////////////
+        ctx.textAlign = "center";
         ctx.fillStyle = "black";
         ctx.font = "900 24px Comic Sans MS";
 
-        ctx.fillText("English", 200, 525);
-        ctx.drawImage(langE, 180, 535, 40, 40);
+        ctx.fillText("English", 415, 525);
+        ctx.drawImage(langE, 390, 535, 40, 40);
         langE.path = new Path2D();
-        langE.path.rect(180, 535, 40, 40);
+        langE.path.rect(390, 535, 40, 40);
         if (En) {
-            ctx.drawImage(rTick1, 180, 535, 40, 40);
+            ctx.drawImage(rTick, 390, 535, 40, 40);
         }
 
-        ctx.fillText("German", 344, 525);
-        ctx.drawImage(langG, 330, 535, 40, 40);
+        ctx.fillText("German", w-5, 525);
+        ctx.drawImage(langG, w-27, 535, 40, 40);
         langG.path = new Path2D();
-        langG.path.rect(330, 535, 40, 40);
+        langG.path.rect(w-27, 535, 40, 40);
         if (Ger) {
-            ctx.drawImage(rTick1, 330, 535, 40, 40);
+            ctx.drawImage(rTick, w-27, 535, 40, 40);
         }
 
-        ctx.fillText("Romanian", 500, 525);
-        ctx.drawImage(langR, 480, 535, 40, 40);
+        ctx.fillText("Romanian", 800, 525);
+        ctx.drawImage(langR, 780, 535, 40, 40);
         langR.path = new Path2D();
-        langR.path.rect(480, 535, 40, 40);
+        langR.path.rect(780, 535, 40, 40);
         if (Rom) {
-            ctx.drawImage(rTick1, 480, 535, 40, 40);
+            ctx.drawImage(rTick, 780, 535, 40, 40);
         }
 
-        ctx.fillText("Bulgarian", 200, 600);
-        ctx.drawImage(langBul, 180, 607, 40, 40);
+        ctx.fillText("Bulgarian", 415, 600);
+        ctx.drawImage(langBul, 390, 609, 40, 40);
         langBul.path = new Path2D();
-        langBul.path.rect(180, 607, 40, 40);
+        langBul.path.rect(390, 609, 40, 40);
         if (Bul) {
-            ctx.drawImage(rTick1, 180, 607, 40, 40);
+            ctx.drawImage(rTick, 390, 609, 40, 40);
         }
 
-        ctx.fillText("Greek", 346, 600);
-        ctx.drawImage(langGrk, 330, 607, 40, 40);
+        ctx.fillText("Greek", w-5, 600);
+        ctx.drawImage(langGrk, w-27, 607, 40, 40);
         langGrk.path = new Path2D();
-        langGrk.path.rect(330, 607, 40, 40);
+        langGrk.path.rect(w-27, 607, 40, 40);
         if (Grk) {
-            ctx.drawImage(rTick1, 330, 607, 40, 40);
+            ctx.drawImage(rTick, w-27, 607, 40, 40);
         }
 
-        ctx.fillText("Turkish", 500, 600);
-        ctx.drawImage(langTurk, 480, 607, 40, 40);
+        ctx.fillText("Turkish", 800, 600);
+        ctx.drawImage(langTurk, 780, 607, 40, 40);
         langTurk.path = new Path2D();
-        langTurk.path.rect(480, 607, 40, 40);
+        langTurk.path.rect(780, 607, 40, 40);
         if (Tuk) {
-            ctx.drawImage(rTick1, 480, 607, 40, 40);
+            ctx.drawImage(rTick, 780, 607, 40, 40);
         }
 
 
@@ -1094,7 +1116,7 @@ function showMenu() {
         canvas.addEventListener("click", romLang);
         canvas.addEventListener("click", bulLang);
         canvas.addEventListener("click", grkLang);
-        canvas.addEventListener("click", trkLang);*/
+        canvas.addEventListener("click", trkLang);
 
         ctx.drawImage(crossLang, w-27, 658, 40, 40);
         crossLang.path = new Path2D();
