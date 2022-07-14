@@ -61,6 +61,9 @@ speech.src = "images/speech.png";
 const setting = new Image();
 setting.src = "images/settingsMenu/settings.png"; // Cog Image
 
+const settingIns = new Image();
+settingIns.src = "images/settingsMenu/settings.png"; // Ins Cog Image
+
 const setBack = new Image();
 setBack.src = "images/settingsMenu/setBack.png"; // Background
 
@@ -336,19 +339,45 @@ var col=true;
 
 function settings() {
 
-    if (speechOn) {
-        introAud.play();
-    }
+    
 
     ctx.fillStyle = "white";
-    ctx.globalAlpha = 0.6;
+    ctx.globalAlpha = 0.9;
 
-    ctx.fillRect(80, 25, 1050, 700);
+    ctx.fillRect(80, 5, 1050, 720);
 
     ctx.globalAlpha = 1.0;
     ctx.font = "bold 25px Comic Sans MS";
-    ctx.fillStyle = "purple";
-    ctx.fillText("Settings Menu - press S key", w, 55);
+
+    ctx.drawImage(settingIns, 1040, 0, 65, 65);
+    settingIns.path = new Path2D();
+    settingIns.path.rect(1040, 0, 80, 80);
+    ctx.font='900 15px Comic Sans MS';
+    ctx.fillStyle = "black";
+
+
+
+
+    if (En) {
+        ctx.fillText("Left Click", 1070, 70);
+        ctx.fillText("Or Enter Key", 1070, 85);
+    }
+
+    if (Ger) {
+        ctx.fillText("Left Click", 1070, 70);
+        ctx.fillText("Or Enter Key", 1070, 85);
+    }
+
+    if (Bul) {
+        ctx.fillText("Left Click", 1070, 70);
+        ctx.fillText("Or Enter Key", 1070, 85);
+    }
+
+
+
+
+
+    canvas.addEventListener("click", setMenu);
 
     if (!musicOn) {
         duck.pause();
@@ -360,26 +389,88 @@ function settings() {
         showMenu();
     }
 
-    ctx.fillStyle = "white";
-    ctx.globalAlpha = 0.8;  
+    
+    ctx.fillStyle = "white"; 
     ctx.globalAlpha = 1.0;
     ctx.textAlign = "center";
-    ctx.font='300 55px Comic Sans MS';
-    ctx.fillStyle = "red";
-    ctx.fillText("How close can you get to the pin", w, 150);
-    ctx.fillText("without bursting the balloon?", w, 215);
-    ctx.fillStyle = "purple";
-    ctx.fillText("Click on the left mouse button", w, 320);
-    ctx.fillStyle = "red";
-    ctx.fillText("Or Press the Spacebar or Enter Key", w, 391); 
-    ctx.fillStyle = "purple";
-    ctx.fillText("Or use your switch", w, 460);
-    ctx.fillStyle = "blue";
-    ctx.font='900 50px Comic Sans MS';
-    ctx.fillText("to inflate the balloon!", w, 570);
-    ctx.fillStyle = "green";
-    ctx.font='200 50px Comic Sans MS';
-    ctx.fillText("Spacebar or Left Mouse Button to Play!", w, 680);
+    
+/*En
+Ger
+Rom
+Bul
+Grk
+Tuk*/
+
+    if (En) {
+
+        if (speechOn) {
+            introAud.play();
+        }
+
+        ctx.font='900 60px Comic Sans MS';
+        ctx.fillStyle = "red";
+        ctx.fillText("How close can you get to the pin", w, 160);
+        ctx.fillText("without bursting the balloon?", w, 225);
+        ctx.font='600 40px Comic Sans MS';
+        ctx.fillStyle = "purple";
+        ctx.fillText("Click on the left mouse button", w, 320);
+        ctx.fillStyle = "red";
+        ctx.fillText("Or Press the Spacebar or Enter Key", w, 391); 
+        ctx.fillStyle = "purple";
+        ctx.fillText("Or use your switch", w, 460);
+        ctx.fillStyle = "blue";
+        ctx.fillText("to inflate the balloon!", w, 570);
+        ctx.fillStyle = "green";
+        ctx.font='600 35px Comic Sans MS';
+        ctx.fillText("Spacebar or Left Mouse Button to Play!", w, 680);
+    }
+
+    if (Ger) {
+
+        if (speechOn) {
+            //introAudGer.play();
+        }
+        
+        ctx.font='800 45px Comic Sans MS';
+        ctx.fillStyle = "navy";
+        ctx.fillText("Wie nah können Sie an den Stift herankommen", w, 150);
+        ctx.fillText("ohne den Ballon zu zerplatzen?", w, 215);
+        ctx.fillStyle = "purple";
+        ctx.font='600 35px Comic Sans MS';
+        ctx.fillText("Klicken Sie mit der linken Maustaste", w, 320);
+        ctx.fillStyle = "red";
+        ctx.fillText("Oder Drücken Sie die Leertaste oder die Eingabetaste", w, 391); 
+        ctx.fillStyle = "purple";
+        ctx.fillText("Oder verwenden Sie Ihren Schalter", w, 460);
+        ctx.fillStyle = "blue";
+        ctx.fillText("um den Ballon aufzublasen!", w, 570);
+        ctx.fillStyle = "green";
+        ctx.fillText("Leertaste oder linke Maustaste zum Spielen!", w, 680);
+    }
+
+    if (Rom) {
+
+        if (speechOn) {
+            //introAudGer.play();
+        }
+        
+        ctx.font='800 45px Comic Sans MS';
+        ctx.fillStyle = "navy";
+        ctx.fillText("", w, 150);
+        ctx.fillText("", w, 215);
+        ctx.fillStyle = "purple";
+        ctx.font='600 35px Comic Sans MS';
+        ctx.fillText("", w, 320);
+        ctx.fillStyle = "red";
+        ctx.fillText("", w, 391); 
+        ctx.fillStyle = "purple";
+        ctx.fillText("", w, 460);
+        ctx.fillStyle = "blue";
+        ctx.fillText("", w, 570);
+        ctx.fillStyle = "green";
+        ctx.fillText("", w, 680);
+    }
+
     window.addEventListener("click", closeInstructions);
 
     if (keys[32]) {
@@ -466,7 +557,7 @@ function backF(e) {
 /////////////////////////////////////////////////////////////////////////////////////////////////
 // Langauge Translator
 function engLang(e) {
-    if (setMenu) {
+    if (setMenu && langaugeMenuSettings) {
        if (ctx.isPointInPath(langE.path, e.offsetX, e.offsetY)) {
            En = true;
            Ger = false;
@@ -480,7 +571,7 @@ function engLang(e) {
 }
 
 function gerLang(e) {
-    if (setMenu) {
+    if (setMenu && langaugeMenuSettings) {
        if (ctx.isPointInPath(langG.path, e.offsetX, e.offsetY)) {
            En = false;
            Ger = true;
@@ -494,7 +585,7 @@ function gerLang(e) {
 }
 
 function romLang(e) {
-    if (setMenu) {
+    if (setMenu && langaugeMenuSettings) {
        if (ctx.isPointInPath(langR.path, e.offsetX, e.offsetY)) {
            En = false;
            Ger = false;
@@ -508,7 +599,7 @@ function romLang(e) {
 }
 
 function bulLang(e) {
-    if (setMenu) {
+    if (setMenu && langaugeMenuSettings) {
        if (ctx.isPointInPath(langBul.path, e.offsetX, e.offsetY)) {
            En = false;
            Ger = false;
@@ -522,7 +613,7 @@ function bulLang(e) {
 }
 
 function grkLang(e) {
-    if (setMenu) {
+    if (setMenu && langaugeMenuSettings) {
        if (ctx.isPointInPath(langGrk.path, e.offsetX, e.offsetY)) {
            En = false;
            Ger = false;
@@ -536,7 +627,7 @@ function grkLang(e) {
 }
 
 function trkLang(e) {
-    if (setMenu) {
+    if (setMenu && langaugeMenuSettings) {
        if (ctx.isPointInPath(langTurk.path, e.offsetX, e.offsetY)) {
            En = false;
            Ger = false;
@@ -592,7 +683,31 @@ function showMenu() {
     ctx.globalAlpha = 1.0; 
     ctx.textAlign = "center"; 
     ctx.font = "900 100px Comic Sans MS";
-    ctx.fillText("Settings", w, 100);
+
+    if (En) {
+        ctx.fillText("Settings", w, 100);
+    }
+
+    if (Ger) {
+        ctx.fillText("Einstellungen", w, 100);
+    }
+
+    if (Rom) {
+        ctx.fillText("Setări", w, 100);
+    }
+
+    if (Bul) {
+        ctx.fillText("Настройки", w, 100);
+    }
+
+    if (Grk) {
+        ctx.fillText("Ρυθμίσεις", w, 100);
+    }
+
+    if (Tuk) {
+        ctx.fillText("Ayarlar", w, 100);
+    }
+    
 
     if (!musicOn) {
         duck.pause();
@@ -646,19 +761,19 @@ function showMenu() {
         ctx.fillText("Purple", 220, 230);
     }
     if (Ger) {
-        ctx.fillText("Violett", 120, 230);
+        ctx.fillText("Violett", 220, 230);
     }
     if (Rom) {
-        ctx.fillText("Violet", 120, 230);
+        ctx.fillText("Violet", 220, 230);
     }
     if (Bul) {
-        ctx.fillText("Лилаво", 120, 230);
+        ctx.fillText("Лилаво", 220, 230);
     }
     if (Grk) {
-        ctx.fillText("Μωβ", 120, 230);
+        ctx.fillText("Μωβ", 220, 230);
     }
     if (Tuk) {
-        ctx.fillText("Mor", 120, 230);
+        ctx.fillText("Mor", 220, 230);
     }
 
     ctx.drawImage(redBall, 165, 250, 50, 50);
@@ -674,19 +789,19 @@ function showMenu() {
     }
 
     if (Ger) {
-        ctx.fillText("Rot", 120, 282);
+        ctx.fillText("Rot", 220, 282);
     }
     if (Rom) {
-        ctx.fillText("roșu", 120, 282);
+        ctx.fillText("roșu", 220, 282);
     }
     if (Bul) {
-        ctx.fillText("червен", 120, 282);
+        ctx.fillText("червен", 220, 282);
     }
     if (Grk) {
-        ctx.fillText("το κόκκινο", 120, 282);
+        ctx.fillText("το κόκκινο", 220, 282);
     }
     if (Tuk) {
-        ctx.fillText("Kırmızı", 120, 282);
+        ctx.fillText("Kırmızı", 220, 282);
     }
 
     canvas.addEventListener("click", balloonT);
@@ -707,25 +822,25 @@ function showMenu() {
         ctx.fillText("Speech", 800, 175);
     }
 
-    /*if (Ger) {
-        ctx.fillText("", 149, 162);
+    if (Ger) {
+        ctx.fillText("Rede", 800, 175);
     }
 
     if (Rom) {
-        ctx.fillText("", 149, 162);
+        ctx.fillText("Vorbire", 800, 175);
     }
 
     if (Bul) {
-        ctx.fillText("", 149, 162);
+        ctx.fillText("реч", 800, 175);
     }
 
     if (Grk) {
-        ctx.fillText("", 149, 162);
+        ctx.fillText("Ομιλία", 800, 175);
     }
 
     if (Tuk) {
-        ctx.fillText("", 149, 162);
-    }*/
+        ctx.fillText("Konuşma", 800, 175);
+    }
     
     ctx.fillStyle = "black";
     ctx.font = "700 30px Comic Sans MS";
@@ -775,19 +890,19 @@ function showMenu() {
     }
 
     if (Ger) {
-        ctx.fillText("Aus", 120, 282);
+        ctx.fillText("Aus", 855, 285);
     }
     if (Rom) {
-        ctx.fillText("Off", 120, 282);
+        ctx.fillText("Off", 855, 285);
     }
     if (Bul) {
-        ctx.fillText("Изключено", 120, 282);
+        ctx.fillText("Изключено", 855, 285);
     }
     if (Grk) {
-        ctx.fillText("Μακριά από", 120, 282);
+        ctx.fillText("Μακριά από", 855, 285);
     }
     if (Tuk) {
-        ctx.fillText("Kapalı", 120, 282);
+        ctx.fillText("Kapalı", 855, 285);
     }
 
     canvas.addEventListener("click", speechT);
@@ -874,19 +989,19 @@ function showMenu() {
         }
     
         if (Ger) {
-            ctx.fillText("Aus", 120, 282);
+            ctx.fillText("Aus", 220, 460);
         }
         if (Rom) {
-            ctx.fillText("Off", 120, 282);
+            ctx.fillText("Off", 220, 460);
         }
         if (Bul) {
-            ctx.fillText("Изключено", 120, 282);
+            ctx.fillText("Изключено", 220, 460);
         }
         if (Grk) {
-            ctx.fillText("Μακριά από", 120, 282);
+            ctx.fillText("Μακριά από", 220, 460);
         }
         if (Tuk) {
-            ctx.fillText("Kapalı", 120, 282);
+            ctx.fillText("Kapalı", 220, 460);
         }
     
         canvas.addEventListener("click", musicT);
@@ -972,19 +1087,19 @@ function showMenu() {
     }
 
     if (Ger) {
-        ctx.fillText("Aus", 120, 282);
+        ctx.fillText("Aus", 855, 460);
     }
     if (Rom) {
-        ctx.fillText("Off", 120, 282);
+        ctx.fillText("Off", 855, 460);
     }
     if (Bul) {
-        ctx.fillText("Изключено", 120, 282);
+        ctx.fillText("Изключено", 855, 460);
     }
     if (Grk) {
-        ctx.fillText("Μακριά από", 120, 282);
+        ctx.fillText("Μακριά από", 855, 460);
     }
     if (Tuk) {
-        ctx.fillText("Kapalı", 120, 282);
+        ctx.fillText("Kapalı", 855, 460);
     }
 
     canvas.addEventListener("click", backT);
@@ -1158,6 +1273,9 @@ function splash() {
     if (picOn) {
     ctx.drawImage(bnSplash, 0, 0, canvas.width, canvas.height);
     }
+
+
+
     ctx.fillStyle = "white";
     ctx.globalAlpha = 0.8;
     ctx.fillRect(95, 400, 1010, 300);
@@ -1165,14 +1283,29 @@ function splash() {
     ctx.textAlign = "center"; 
     ctx.font = "40px Comic Sans MS";
     ctx.fillStyle = "blue";
-    ctx.fillText("Click the left mouse button", w, 460);
-    ctx.fillStyle = "red";
-    ctx.fillText("or press the Enter Key", w, 525);
-    ctx.fillStyle = "blue";
-    ctx.fillText("or use your switch", w, 590);
-    ctx.fillStyle = "purple";
-    ctx.font='900 40px Comic Sans MS';
-    ctx.fillText("for the instructions!", w, 660);
+
+    if (En) {
+        ctx.fillText("Click the left mouse button", w, 460);
+        ctx.fillStyle = "red"; 
+        ctx.fillText("or press the Enter Key", w, 525);
+        ctx.fillStyle = "blue";
+        ctx.fillText("or use your switch", w, 590);
+        ctx.fillStyle = "purple";
+        ctx.font='900 40px Comic Sans MS';
+        ctx.fillText("for the instructions!", w, 660);    
+    }
+
+    if (Ger) {
+        ctx.fillText("", w, 460);
+        ctx.fillStyle = "red"; 
+        ctx.fillText("", w, 525);
+        ctx.fillStyle = "blue";
+        ctx.fillText("", w, 590);
+        ctx.fillStyle = "purple";
+        ctx.font='900 40px Comic Sans MS';
+        ctx.fillText("", w, 660);    
+    }
+    
 
     if (keys[65]) { // audio
         splashAud.play();
@@ -1282,9 +1415,8 @@ function draw() {
             def.volume = 0.4;
             }
 
-            if (speechOn) {
-            welldoneAud.play();
-            }
+
+            
             
             ctx.fillStyle = "white";
             ctx.globalAlpha = 0.9; 
@@ -1293,16 +1425,64 @@ function draw() {
             ctx.fillStyle = "red";
             ctx.textAlign = "center"; 
             ctx.font = "140px Comic Sans MS";
-            ctx.fillText("Oops!", w, 200);
-            ctx.font = "90px Comic Sans MS";
-            ctx.fillStyle = "blue";
-            ctx.fillText("You have burst", w, 330);
-            ctx.fillText("the balloon!", w, 430);
-            ctx.font = "60px Comic Sans MS";
-            ctx.fillStyle = "red";
-            ctx.fillText("Click the right mouse button", w, 530);
-            ctx.fillText("or the Enter Key", w, 599);
-            ctx.fillText("or use your Switch to play again!", w, 670);
+
+            if (En) {
+
+                if (speechOn) {
+                    welldoneAud.play();
+                }
+
+                ctx.fillText("Oops!", w, 200);
+                ctx.font = "90px Comic Sans MS";
+                ctx.fillStyle = "blue";
+                ctx.fillText("You have burst", w, 330);
+                ctx.fillText("the balloon!", w, 430);
+                ctx.font = "60px Comic Sans MS";
+                ctx.fillStyle = "red";
+                ctx.fillText("Click the right mouse button", w, 530);
+                ctx.fillText("or the Enter Key", w, 599);
+                ctx.fillText("or use your Switch to play again!", w, 670);
+
+            }
+
+            if (Ger) {
+
+                if (speechOn) {
+                    //welldoneAudGer.play();
+                }
+
+                ctx.fillText("Hoppla!", w, 200);
+                ctx.font = "90px Comic Sans MS";
+                ctx.fillStyle = "blue";
+                ctx.fillText("Du bist geplatzt", w, 330);
+                ctx.fillText("der Ballon!", w, 430);
+                ctx.font = "34px Comic Sans MS";
+                ctx.fillStyle = "red";
+                ctx.fillText("Klicken Sie mit der rechten Maustaste", w, 530);
+                ctx.fillText("oder die Eingabetaste", w, 599);
+                ctx.fillText("oder verwenden Sie Ihren Switch, um erneut zu spielen!", w, 670);
+                
+            }
+
+            if (Rom) {
+
+                if (speechOn) {
+                    //welldoneAudRom.play();
+                }
+
+                ctx.fillText("", w, 200);
+                ctx.font = "90px Comic Sans MS";
+                ctx.fillStyle = "blue";
+                ctx.fillText("", w, 330);
+                ctx.fillText("", w, 430);
+                ctx.font = "34px Comic Sans MS";
+                ctx.fillStyle = "red";
+                ctx.fillText("", w, 530);
+                ctx.fillText("", w, 599);
+                ctx.fillText("", w, 670);
+                
+            }
+
             pinIn = false;
 
             window.addEventListener('contextmenu', (e) => {
