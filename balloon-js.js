@@ -54,6 +54,10 @@ const speech = new Image();
 speech.src = "images/speech.png";
 
 
+//start
+const start = new Image();
+start.src = "images/start.png";
+
 
 
 //settings//////////////////////////////////
@@ -307,14 +311,22 @@ function closeSplash() {
     window.removeEventListener("click", closeSplash);
 }
 
-function closeInstructions() {
+
+
+
+function startImg(e) {
+    if (!togMenu && ctx.isPointInPath(start.path, e.offsetX, e.offsetY)) {
     instructionsSc = false;
     gameSc = true;
     pinIn = true;
     introAud.pause();
     introAud.currentTime = 0;
-    window.removeEventListener("click", closeInstructions);
+    window.removeEventListener("click", start);
+    }
 }
+
+
+
 
 function closeGame() {
     pinIn = true;
@@ -337,6 +349,15 @@ var picOn=true;
 var col=true;
 /************end****************/
 
+function setMenuIns(e) {
+    if (ctx.isPointInPath(settingIns.path, e.offsetX, e.offsetY)) {
+        togSet=false;
+        togMenu=true;
+        showMenu();
+        canvas.removeEventListener("click", setMenuIns);
+    }
+}
+
 function settings() {
 
     
@@ -349,35 +370,61 @@ function settings() {
     ctx.globalAlpha = 1.0;
     ctx.font = "bold 25px Comic Sans MS";
 
-    ctx.drawImage(settingIns, 1040, 0, 65, 65);
+    ctx.beginPath();
+    ctx.lineWidth = "3";
+    ctx.strokeStyle = "blue";
+    ctx.rect(980, 14, 140, 100);
+    ctx.stroke();
+
+    ctx.drawImage(settingIns, 1018, 15, 65, 65);
     settingIns.path = new Path2D();
-    settingIns.path.rect(1040, 0, 80, 80);
-    ctx.font='900 15px Comic Sans MS';
+    settingIns.path.rect(1017, 8, 110, 84);
     ctx.fillStyle = "black";
 
-
+    canvas.addEventListener("click", setMenuIns);
 
 
     if (En) {
-        ctx.fillText("Left Click", 1070, 70);
-        ctx.fillText("Or Enter Key", 1070, 85);
+        ctx.font='900 15px Comic Sans MS';
+        ctx.fillText("Left Click", 1050, 85);
+        ctx.fillText("Or Enter Key", 1050, 100);
     }
 
     if (Ger) {
-        ctx.fillText("Left Click", 1070, 70);
-        ctx.fillText("Or Enter Key", 1070, 85);
+        ctx.font='900 13px Comic Sans MS';
+        ctx.fillText("Links Klick", 1050, 85);
+        ctx.fillText("Oder Eingabetaste", 1050, 100);
+    }
+
+    if (Rom) {
+        ctx.font='900 13px Comic Sans MS';
+        ctx.fillText("Click stânga", 1070, 70);
+        ctx.fillText("Sau Introduceți cheia", 1070, 85);
     }
 
     if (Bul) {
-        ctx.fillText("Left Click", 1070, 70);
-        ctx.fillText("Or Enter Key", 1070, 85);
+        ctx.font='900 13px Comic Sans MS';
+        ctx.fillText("Ляв клик", 1070, 70);
+        ctx.fillText("Или въведете ключ", 1070, 85);
+    }
+
+    if (Grk) {
+        ctx.font='900 13px Comic Sans MS';
+        ctx.fillText("Αριστερό κλικ", 1070, 70);
+        ctx.fillText("Ή Enter Key", 1070, 85);
+    }
+
+    if (Tuk) {
+        ctx.font='900 13px Comic Sans MS';
+        ctx.fillText("Sol tık", 1070, 70);
+        ctx.fillText("Veya Anahtar Girin", 1070, 85);
     }
 
 
 
 
 
-    canvas.addEventListener("click", setMenu);
+    
 
     if (!musicOn) {
         duck.pause();
@@ -401,28 +448,35 @@ Bul
 Grk
 Tuk*/
 
+//////////////////////////////////////
+// Button Image
+ctx.drawImage(start, (canvas.width/2 - 600/2), 350, 600, 300);
+start.path = new Path2D();
+start.path.rect((canvas.width/2 - 600/2), 350, 600, 300);
+/////////////////////////////////////////
+
     if (En) {
 
         if (speechOn) {
             introAud.play();
         }
 
-        ctx.font='900 60px Comic Sans MS';
+        ctx.font='900 70px Comic Sans MS';
         ctx.fillStyle = "red";
-        ctx.fillText("How close can you get to the pin", w, 160);
-        ctx.fillText("without bursting the balloon?", w, 225);
-        ctx.font='600 40px Comic Sans MS';
-        ctx.fillStyle = "purple";
-        ctx.fillText("Click on the left mouse button", w, 320);
-        ctx.fillStyle = "red";
-        ctx.fillText("Or Press the Spacebar or Enter Key", w, 391); 
-        ctx.fillStyle = "purple";
-        ctx.fillText("Or use your switch", w, 460);
-        ctx.fillStyle = "blue";
-        ctx.fillText("to inflate the balloon!", w, 570);
-        ctx.fillStyle = "green";
-        ctx.font='600 35px Comic Sans MS';
-        ctx.fillText("Spacebar or Left Mouse Button to Play!", w, 680);
+        ctx.fillText("How close can you get", w, 180);
+        ctx.fillText("to the pin without", w, 250);
+        ctx.fillText("bursting the balloon?", w, 320);
+
+        // Button
+        ctx.fillStyle = "white";
+        ctx.font='900 40px Comic Sans MS';
+        ctx.fillText("Left Click to Start", w, 440);
+        ctx.fillText("and Inflate the Balloon!", w, 490);
+        ctx.font='600 25px Comic Sans MS';
+        ctx.fillText("Or Spacebar", w, 530);
+        ctx.fillText("Or Enter Key", w, 565);
+        ctx.fillText("Or use your switch", w, 600);
+
     }
 
     if (Ger) {
@@ -430,22 +484,23 @@ Tuk*/
         if (speechOn) {
             //introAudGer.play();
         }
-        
-        ctx.font='800 45px Comic Sans MS';
-        ctx.fillStyle = "navy";
-        ctx.fillText("Wie nah können Sie an den Stift herankommen", w, 150);
-        ctx.fillText("ohne den Ballon zu zerplatzen?", w, 215);
-        ctx.fillStyle = "purple";
-        ctx.font='600 35px Comic Sans MS';
-        ctx.fillText("Klicken Sie mit der linken Maustaste", w, 320);
+
+        ctx.font='900 70px Comic Sans MS';
         ctx.fillStyle = "red";
-        ctx.fillText("Oder Drücken Sie die Leertaste oder die Eingabetaste", w, 391); 
-        ctx.fillStyle = "purple";
-        ctx.fillText("Oder verwenden Sie Ihren Schalter", w, 460);
-        ctx.fillStyle = "blue";
-        ctx.fillText("um den Ballon aufzublasen!", w, 570);
-        ctx.fillStyle = "green";
-        ctx.fillText("Leertaste oder linke Maustaste zum Spielen!", w, 680);
+        ctx.fillText("Wie nah kann man kommen", w, 180);
+        ctx.fillText("zum Stift ohne", w, 250);
+        ctx.fillText("den Ballon platzen lassen?", w, 320);
+
+        // Button
+        ctx.fillStyle = "white";
+        ctx.font='900 40px Comic Sans MS';
+        ctx.fillText("Linksklick zum Starten", w, 440);
+        ctx.fillText("und den Ballon aufblasen!", w, 490);
+        ctx.font='600 25px Comic Sans MS';
+        ctx.fillText("Goldene Leertaste", w, 530);
+        ctx.fillText("Oder Eingabetaste", w, 565);
+        ctx.fillText("Oder verwenden Sie Ihren Schalter", w, 600);
+        
     }
 
     if (Rom) {
@@ -454,24 +509,47 @@ Tuk*/
             //introAudGer.play();
         }
         
-        ctx.font='800 45px Comic Sans MS';
-        ctx.fillStyle = "navy";
-        ctx.fillText("", w, 150);
-        ctx.fillText("", w, 215);
-        ctx.fillStyle = "purple";
-        ctx.font='600 35px Comic Sans MS';
-        ctx.fillText("", w, 320);
-        ctx.fillStyle = "red";
-        ctx.fillText("", w, 391); 
-        ctx.fillStyle = "purple";
-        ctx.fillText("", w, 460);
-        ctx.fillStyle = "blue";
-        ctx.fillText("", w, 570);
-        ctx.fillStyle = "green";
-        ctx.fillText("", w, 680);
+        
     }
 
-    window.addEventListener("click", closeInstructions);
+    if (Bul) {
+
+        if (speechOn) {
+            //introAudGer.play();
+        }
+        
+        
+    }
+
+    if (Grk) {
+
+        if (speechOn) {
+            //introAudGer.play();
+        }
+        
+        
+    }
+
+    if (Tuk) {
+
+        if (speechOn) {
+            //introAudGer.play();
+        }
+        
+        
+    }
+
+
+
+    canvas.addEventListener("click", startImg);
+
+    
+    
+
+
+
+
+
 
     if (keys[32]) {
         splashSc = false;
@@ -557,7 +635,7 @@ function backF(e) {
 /////////////////////////////////////////////////////////////////////////////////////////////////
 // Langauge Translator
 function engLang(e) {
-    if (setMenu && langaugeMenuSettings) {
+    if (togMenu && langaugeMenuSettings) {
        if (ctx.isPointInPath(langE.path, e.offsetX, e.offsetY)) {
            En = true;
            Ger = false;
@@ -571,7 +649,7 @@ function engLang(e) {
 }
 
 function gerLang(e) {
-    if (setMenu && langaugeMenuSettings) {
+    if (togMenu && langaugeMenuSettings) {
        if (ctx.isPointInPath(langG.path, e.offsetX, e.offsetY)) {
            En = false;
            Ger = true;
@@ -585,7 +663,7 @@ function gerLang(e) {
 }
 
 function romLang(e) {
-    if (setMenu && langaugeMenuSettings) {
+    if (togMenu && langaugeMenuSettings) {
        if (ctx.isPointInPath(langR.path, e.offsetX, e.offsetY)) {
            En = false;
            Ger = false;
@@ -599,7 +677,7 @@ function romLang(e) {
 }
 
 function bulLang(e) {
-    if (setMenu && langaugeMenuSettings) {
+    if (togMenu && langaugeMenuSettings) {
        if (ctx.isPointInPath(langBul.path, e.offsetX, e.offsetY)) {
            En = false;
            Ger = false;
@@ -613,7 +691,7 @@ function bulLang(e) {
 }
 
 function grkLang(e) {
-    if (setMenu && langaugeMenuSettings) {
+    if (togMenu && langaugeMenuSettings) {
        if (ctx.isPointInPath(langGrk.path, e.offsetX, e.offsetY)) {
            En = false;
            Ger = false;
@@ -627,7 +705,7 @@ function grkLang(e) {
 }
 
 function trkLang(e) {
-    if (setMenu && langaugeMenuSettings) {
+    if (togMenu && langaugeMenuSettings) {
        if (ctx.isPointInPath(langTurk.path, e.offsetX, e.offsetY)) {
            En = false;
            Ger = false;
@@ -1260,12 +1338,12 @@ function showMenu() {
 
 
 
-function setMenu(e) {
+function setMenuSplash(e) {
         if (ctx.isPointInPath(setting.path, e.offsetX, e.offsetY)) {
             togSet=false;
             togMenu=true;
             showMenu();
-            canvas.removeEventListener("click", setMenu);
+            canvas.removeEventListener("click", setMenuSplash);
         }
 }
 
@@ -1337,7 +1415,7 @@ function splash() {
     setting.path = new Path2D();
     setting.path.rect(945, 410, 150, 140);
 
-    canvas.addEventListener("click", setMenu);
+    canvas.addEventListener("click", setMenuSplash);
 
 
     ctx.font = "bold 13px arial";
