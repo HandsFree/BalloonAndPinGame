@@ -397,27 +397,27 @@ function settings() {
     }
 
     if (Rom) {
-        ctx.font='900 13px Comic Sans MS';
-        ctx.fillText("Click stânga", 1070, 70);
-        ctx.fillText("Sau Introduceți cheia", 1070, 85);
+        ctx.font='900 11px Comic Sans MS';
+        ctx.fillText("Click stânga", 1050, 85);
+        ctx.fillText("Sau Introduceți cheia", 1050, 100);
     }
 
     if (Bul) {
         ctx.font='900 13px Comic Sans MS';
-        ctx.fillText("Ляв клик", 1070, 70);
-        ctx.fillText("Или въведете ключ", 1070, 85);
+        ctx.fillText("Ляв клик", 1050, 85);
+        ctx.fillText("Или въведете ключ", 1050, 100);
     }
 
     if (Grk) {
         ctx.font='900 13px Comic Sans MS';
-        ctx.fillText("Αριστερό κλικ", 1070, 70);
-        ctx.fillText("Ή Enter Key", 1070, 85);
+        ctx.fillText("Αριστερό κλικ", 1050, 85);
+        ctx.fillText("Ή Enter Key", 1050, 100);
     }
 
     if (Tuk) {
-        ctx.font='900 13px Comic Sans MS';
-        ctx.fillText("Sol tık", 1070, 70);
-        ctx.fillText("Veya Anahtar Girin", 1070, 85);
+        ctx.font='900 11px Comic Sans MS';
+        ctx.fillText("Sol tık", 1050, 85);
+        ctx.fillText("Veya Anahtar Girin", 1050, 100);
     }
 
 
@@ -508,6 +508,22 @@ start.path.rect((canvas.width/2 - 600/2), 350, 600, 300);
         if (speechOn) {
             //introAudGer.play();
         }
+
+        ctx.font='900 65px Comic Sans MS';
+        ctx.fillStyle = "red";
+        ctx.fillText("Cât de aproape te poți apropia", w, 180);
+        ctx.fillText("la ac fără", w, 250);
+        ctx.fillText("spargerea balonului?", w, 320);
+
+        // Button
+        ctx.fillStyle = "white";
+        ctx.font='900 30px Comic Sans MS';
+        ctx.fillText("Faceți clic stânga pentru a începe", w, 440);
+        ctx.fillText("și umflați balonul!", w, 490);
+        ctx.font='600 25px Comic Sans MS';
+        ctx.fillText("Sau bara de spațiu", w, 530);
+        ctx.fillText("Sau Introduceți cheia", w, 565);
+        ctx.fillText("Sau folosiți comutatorul", w, 600);
         
         
     }
@@ -518,7 +534,21 @@ start.path.rect((canvas.width/2 - 600/2), 350, 600, 300);
             //introAudGer.play();
         }
         
-        
+        ctx.font='900 55px Comic Sans MS';
+        ctx.fillStyle = "red";
+        ctx.fillText("Колко близо можете да стигнете", w, 180);
+        ctx.fillText("към щифта без", w, 250);
+        ctx.fillText("", w, 320);
+
+        // Button
+        ctx.fillStyle = "white";
+        ctx.font='900 30px Comic Sans MS';
+        ctx.fillText("", w, 440);
+        ctx.fillText("", w, 490);
+        ctx.font='600 25px Comic Sans MS';
+        ctx.fillText("", w, 530);
+        ctx.fillText("", w, 565);
+        ctx.fillText("", w, 600);
     }
 
     if (Grk) {
@@ -527,6 +557,21 @@ start.path.rect((canvas.width/2 - 600/2), 350, 600, 300);
             //introAudGer.play();
         }
         
+        ctx.font='900 55px Comic Sans MS';
+        ctx.fillStyle = "red";
+        ctx.fillText("Πόσο κοντά μπορείς να φτάσεις", w, 180);
+        ctx.fillText("στην καρφίτσα χωρίς", w, 250);
+        ctx.fillText("", w, 320);
+
+        // Button
+        ctx.fillStyle = "white";
+        ctx.font='900 30px Comic Sans MS';
+        ctx.fillText("", w, 440);
+        ctx.fillText("", w, 490);
+        ctx.font='600 25px Comic Sans MS';
+        ctx.fillText("", w, 530);
+        ctx.fillText("", w, 565);
+        ctx.fillText("", w, 600);
         
     }
 
@@ -536,6 +581,21 @@ start.path.rect((canvas.width/2 - 600/2), 350, 600, 300);
             //introAudGer.play();
         }
         
+        ctx.font='900 55px Comic Sans MS';
+        ctx.fillStyle = "red";
+        ctx.fillText("ne kadar yaklaşabilirsin", w, 180);
+        ctx.fillText("pin olmadan", w, 250);
+        ctx.fillText("balon patlatmak mı?", w, 320);
+
+        // Button
+        ctx.fillStyle = "white";
+        ctx.font='900 30px Comic Sans MS';
+        ctx.fillText("Başlatmak için Sol Tıklayın", w, 440);
+        ctx.fillText("", w, 490);
+        ctx.font='600 25px Comic Sans MS';
+        ctx.fillText("", w, 530);
+        ctx.fillText("", w, 565);
+        ctx.fillText("", w, 600);
         
     }
 
@@ -939,21 +999,21 @@ function showMenu() {
     if (En) {
         ctx.fillText("On", 855, 230);
     }
-    /*if (Ger) {
-        ctx.fillText("", 120, 230);
+    if (Ger) {
+        ctx.fillText("An", 855, 230);
     }
     if (Rom) {
-        ctx.fillText("", 120, 230);
+        ctx.fillText("Pe", 855, 230);
     }
     if (Bul) {
-        ctx.fillText("", 120, 230);
+        ctx.fillText("Ha", 855, 230);
     }
     if (Grk) {
-        ctx.fillText("", 120, 230);
+        ctx.fillText("Επί", 855, 230);
     }
     if (Tuk) {
-        ctx.fillText("", 120, 230);
-    }*/
+        ctx.fillText("Üzerinde", 855, 230);
+    }
 
     ctx.drawImage(speechOffCir, 800, 250, 50, 50);
     speechOffCir.path = new Path2D();
@@ -999,25 +1059,28 @@ function showMenu() {
             ctx.fillText("Music and Effects", 165, 350);
         }
     
-        /*if (Ger) {
-            ctx.fillText("", 149, 162);
+        if (Ger) {
+            ctx.fillText("Musik und Effekte", 165, 350);
         }
     
         if (Rom) {
-            ctx.fillText("", 149, 162);
+            ctx.fillText("Muzică și efecte", 165, 350);
         }
     
         if (Bul) {
-            ctx.fillText("", 149, 162);
+            ctx.fillText("Музика и ефекти", 165, 350);
         }
     
         if (Grk) {
-            ctx.fillText("", 149, 162);
+            ctx.fillText("Μουσική και εφέ", 165, 350);
         }
     
         if (Tuk) {
-            ctx.fillText("", 149, 162);
-        }*/
+            ctx.fillText("Müzik ve Efektler", 165, 350);
+        }
+
+
+        
         
         ctx.fillStyle = "black";
         ctx.font = "700 30px Comic Sans MS";
@@ -1035,24 +1098,26 @@ function showMenu() {
         }
     
         
+        
         if (En) {
             ctx.fillText("On", 220, 410);
         }
-        /*if (Ger) {
-            ctx.fillText("", 120, 230);
+       
+        if (Ger) {
+            ctx.fillText("An", 220, 410);
         }
         if (Rom) {
-            ctx.fillText("", 120, 230);
+            ctx.fillText("Pe", 220, 410);
         }
         if (Bul) {
-            ctx.fillText("", 120, 230);
+            ctx.fillText("Ha", 220, 410);
         }
         if (Grk) {
-            ctx.fillText("", 120, 230);
+            ctx.fillText("Επί", 220, 410);
         }
         if (Tuk) {
-            ctx.fillText("", 120, 230);
-        }*/
+            ctx.fillText("Üzerinde", 220, 410);
+        }
     
         ctx.drawImage(musicOffCir, 165, 422, 50, 50);
         musicOffCir.path = new Path2D();
@@ -1097,25 +1162,25 @@ function showMenu() {
         ctx.fillText("Background", 800, 350);
     }
 
-    /*if (Ger) {
-        ctx.fillText("", 149, 162);
+    if (Ger) {
+        ctx.fillText("Hintergrund", 800, 350);
     }
 
     if (Rom) {
-        ctx.fillText("", 149, 162);
+        ctx.fillText("fundal", 800, 350);
     }
 
     if (Bul) {
-        ctx.fillText("", 149, 162);
+        ctx.fillText("Заден план", 800, 350);
     }
 
     if (Grk) {
-        ctx.fillText("", 149, 162);
+        ctx.fillText("Ιστορικό", 800, 350);
     }
 
     if (Tuk) {
-        ctx.fillText("", 149, 162);
-    }*/
+        ctx.fillText("Arka fon", 800, 350);
+    }
     
     ctx.fillStyle = "black";
     ctx.font = "700 30px Comic Sans MS";
@@ -1136,21 +1201,22 @@ function showMenu() {
     if (En) {
         ctx.fillText("On", 855, 410);
     }
-    /*if (Ger) {
-        ctx.fillText("", 120, 230);
+    
+    if (Ger) {
+        ctx.fillText("An", 855, 410);
     }
     if (Rom) {
-        ctx.fillText("", 120, 230);
+        ctx.fillText("Pe", 855, 410);
     }
     if (Bul) {
-        ctx.fillText("", 120, 230);
+        ctx.fillText("Ha", 855, 410);
     }
     if (Grk) {
-        ctx.fillText("", 120, 230);
+        ctx.fillText("Επί", 855, 410);
     }
     if (Tuk) {
-        ctx.fillText("", 120, 230);
-    }*/
+        ctx.fillText("Üzerinde", 855, 410);
+    }
 
     ctx.drawImage(backOffCir, 800, 422, 50, 50);
     backOffCir.path = new Path2D();
