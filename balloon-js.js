@@ -538,17 +538,17 @@ start.path.rect((canvas.width/2 - 600/2), 350, 600, 300);
         ctx.fillStyle = "red";
         ctx.fillText("Колко близо можете да стигнете", w, 180);
         ctx.fillText("към щифта без", w, 250);
-        ctx.fillText("", w, 320);
+        ctx.fillText("спукване на балона?", w, 320);
 
         // Button
         ctx.fillStyle = "white";
-        ctx.font='900 30px Comic Sans MS';
-        ctx.fillText("", w, 440);
-        ctx.fillText("", w, 490);
+        ctx.font='900 24px Comic Sans MS';
+        ctx.fillText("Щракнете с левия бутон, за да започнете", w, 440);
+        ctx.fillText("и надуйте балона!", w, 490);
         ctx.font='600 25px Comic Sans MS';
-        ctx.fillText("", w, 530);
-        ctx.fillText("", w, 565);
-        ctx.fillText("", w, 600);
+        ctx.fillText("Или интервал", w, 530);
+        ctx.fillText("Или въведете ключ", w, 565);
+        ctx.fillText("Или използвайте превключвателя си", w, 600);
     }
 
     if (Grk) {
@@ -561,17 +561,17 @@ start.path.rect((canvas.width/2 - 600/2), 350, 600, 300);
         ctx.fillStyle = "red";
         ctx.fillText("Πόσο κοντά μπορείς να φτάσεις", w, 180);
         ctx.fillText("στην καρφίτσα χωρίς", w, 250);
-        ctx.fillText("", w, 320);
+        ctx.fillText("σκάσει το μπαλόνι;", w, 320);
 
         // Button
         ctx.fillStyle = "white";
         ctx.font='900 30px Comic Sans MS';
-        ctx.fillText("", w, 440);
-        ctx.fillText("", w, 490);
+        ctx.fillText("Αριστερό κλικ για Έναρξη", w, 440);
+        ctx.fillText("και φουσκώστε το μπαλόνι!", w, 490);
         ctx.font='600 25px Comic Sans MS';
-        ctx.fillText("", w, 530);
-        ctx.fillText("", w, 565);
-        ctx.fillText("", w, 600);
+        ctx.fillText("Ή Spacebar", w, 530);
+        ctx.fillText("Ή Enter Key", w, 565);
+        ctx.fillText("Ή χρησιμοποιήστε το διακόπτη σας", w, 600);
         
     }
 
@@ -591,11 +591,11 @@ start.path.rect((canvas.width/2 - 600/2), 350, 600, 300);
         ctx.fillStyle = "white";
         ctx.font='900 30px Comic Sans MS';
         ctx.fillText("Başlatmak için Sol Tıklayın", w, 440);
-        ctx.fillText("", w, 490);
+        ctx.fillText("ve Balonu Şişirin!", w, 490);
         ctx.font='600 25px Comic Sans MS';
-        ctx.fillText("", w, 530);
-        ctx.fillText("", w, 565);
-        ctx.fillText("", w, 600);
+        ctx.fillText("Veya Ara Çubuğu", w, 530);
+        ctx.fillText("Veya Anahtar Girin", w, 565);
+        ctx.fillText("Veya anahtarınızı kullanın", w, 600);
         
     }
 
@@ -1614,16 +1614,73 @@ function draw() {
                     //welldoneAudRom.play();
                 }
 
-                ctx.fillText("", w, 200);
+                ctx.fillText("Hopa!", w, 200);
                 ctx.font = "90px Comic Sans MS";
                 ctx.fillStyle = "blue";
-                ctx.fillText("", w, 330);
-                ctx.fillText("", w, 430);
+                ctx.fillText("Ai izbucnit", w, 330);
+                ctx.fillText("balonul!", w, 430);
                 ctx.font = "34px Comic Sans MS";
                 ctx.fillStyle = "red";
-                ctx.fillText("", w, 530);
-                ctx.fillText("", w, 599);
-                ctx.fillText("", w, 670);
+                ctx.fillText("Faceți clic pe butonul din dreapta al mouse-ului", w, 530);
+                ctx.fillText("sau tasta Enter", w, 599);
+                ctx.fillText("sau folosește Switch-ul pentru a juca din nou!", w, 670);
+                
+            }
+
+            if (Bul) {
+
+                if (speechOn) {
+                    //welldoneAudRom.play();
+                }
+
+                ctx.fillText("Опа!", w, 200);
+                ctx.font = "90px Comic Sans MS";
+                ctx.fillStyle = "blue";
+                ctx.fillText("Вие сте се спукали", w, 330);
+                ctx.fillText("балона!", w, 430);
+                ctx.font = "34px Comic Sans MS";
+                ctx.fillStyle = "red";
+                ctx.fillText("Кликнете с десния бутон на мишката", w, 530);
+                ctx.fillText("или клавиша Enter", w, 599);
+                ctx.fillText("или използвайте вашия Switch, за да играете отново!", w, 670);
+                
+            }
+
+            if (Grk) {
+
+                if (speechOn) {
+                    //welldoneAudRom.play();
+                }
+
+                ctx.fillText("Ωχ!", w, 200);
+                ctx.font = "90px Comic Sans MS";
+                ctx.fillStyle = "blue";
+                ctx.fillText("Έχετε σκάσει", w, 330);
+                ctx.fillText("το μπαλόνι!", w, 430);
+                ctx.font = "34px Comic Sans MS";
+                ctx.fillStyle = "red";
+                ctx.fillText("Κάντε κλικ στο δεξί κουμπί του ποντικιού", w, 530);
+                ctx.fillText("ή το κλειδί Enter", w, 599);
+                ctx.fillText("ή χρησιμοποιήστε το διακόπτη σας για να παίξετε ξανά!", w, 670);
+                
+            }
+
+            if (Tuk) {
+
+                if (speechOn) {
+                    //welldoneAudRom.play();
+                }
+
+                ctx.fillText("Hata!", w, 200);
+                ctx.font = "90px Comic Sans MS";
+                ctx.fillStyle = "blue";
+                ctx.fillText("patladın", w, 330);
+                ctx.fillText("Balon!", w, 430);
+                ctx.font = "34px Comic Sans MS";
+                ctx.fillStyle = "red";
+                ctx.fillText("Sağ fare düğmesini tıklayın", w, 530);
+                ctx.fillText("veya Enter Tuşu", w, 599);
+                ctx.fillText("veya tekrar oynamak için Switch'inizi kullanın!", w, 670);
                 
             }
 
