@@ -189,9 +189,14 @@ var duck = new Audio("sounds/duck.mp3");
 
 // speech
 var splashAud = new Audio("sounds/splashN.mp3");
+
 var introAud = new Audio("sounds/uk-ins.mp3"); // uk
 var introAudger = new Audio("sounds/ger-ins.mp3"); // ger
 var introAudrom = new Audio("sounds/rom-ins.mp3"); // rom
+
+var introAudBul = new Audio("sounds/bul-ins.mp3"); // bul
+var introAudGrk = new Audio("sounds/grk-ins.mp3"); // grk
+var introAudTuk = new Audio("sounds/tuk-ins.mp3"); // tuk
 
 var welldoneAud = new Audio("sounds/well-doneN.mp3");
 
@@ -534,7 +539,7 @@ start.path.rect((canvas.width/2 - 600/2), 350, 600, 300);
     if (Bul) {
 
         if (speechOn) {
-            //introAudGer.play();
+            introAudBul.play();
         }
         
         ctx.font='900 55px Comic Sans MS';
@@ -557,7 +562,7 @@ start.path.rect((canvas.width/2 - 600/2), 350, 600, 300);
     if (Grk) {
 
         if (speechOn) {
-            //introAudGer.play();
+            introAudGrk.play();
         }
         
         ctx.font='900 55px Comic Sans MS';
@@ -581,7 +586,7 @@ start.path.rect((canvas.width/2 - 600/2), 350, 600, 300);
     if (Tuk) {
 
         if (speechOn) {
-            //introAudGer.play();
+            introAudTuk.play();
         }
         
         ctx.font='900 55px Comic Sans MS';
@@ -820,6 +825,18 @@ function showMenu() {
 
     introAud.pause();
     introAud.currentTime = 0;
+    introAudger.pause();
+    introAudger.currentTime = 0;
+    introAudrom.pause();
+    introAudrom.currentTime = 0;
+    introAudBul.pause();
+    introAudBul.currentTime = 0;
+    introAudGrk.pause();
+    introAudGrk.currentTime = 0;
+    introAudTuk.pause();
+    introAudTuk.currentTime = 0;
+    
+
 
     togMenu=true;
     togSet=false;
@@ -1599,7 +1616,7 @@ function draw() {
             if (Ger) {
 
                 if (speechOn) {
-                    //welldoneAudGer.play();
+                    welldoneAudGer.play();
                 }
 
                 ctx.fillText("Hoppla!", w, 200);
@@ -1618,7 +1635,7 @@ function draw() {
             if (Rom) {
 
                 if (speechOn) {
-                    //welldoneAudRom.play();
+                    welldoneAudRom.play();
                 }
 
                 ctx.fillText("Hopa!", w, 200);
@@ -1637,7 +1654,7 @@ function draw() {
             if (Bul) {
 
                 if (speechOn) {
-                    //welldoneAudRom.play();
+                    welldoneAudBul.play();
                 }
 
                 ctx.fillText("Опа!", w, 200);
@@ -1656,7 +1673,7 @@ function draw() {
             if (Grk) {
 
                 if (speechOn) {
-                    //welldoneAudRom.play();
+                    welldoneAudGrk.play();
                 }
 
                 ctx.fillText("Ωχ!", w, 200);
@@ -1675,7 +1692,7 @@ function draw() {
             if (Tuk) {
 
                 if (speechOn) {
-                    //welldoneAudRom.play();
+                    welldoneAudTuk.play();
                 }
 
                 ctx.fillText("Hata!", w, 200);
