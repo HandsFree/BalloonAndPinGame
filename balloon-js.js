@@ -189,7 +189,10 @@ var duck = new Audio("sounds/duck.mp3");
 
 // speech
 var splashAud = new Audio("sounds/splashN.mp3");
-var introAud = new Audio("sounds/introN.mp3");
+var introAud = new Audio("sounds/uk-ins.mp3"); // uk
+var introAudger = new Audio("sounds/ger-ins.mp3"); // ger
+var introAudrom = new Audio("sounds/rom-ins.mp3"); // rom
+
 var welldoneAud = new Audio("sounds/well-doneN.mp3");
 
 window.addEventListener("keydown", function(e){
@@ -482,7 +485,7 @@ start.path.rect((canvas.width/2 - 600/2), 350, 600, 300);
     if (Ger) {
 
         if (speechOn) {
-            //introAudGer.play();
+            introAudger.play();
         }
 
         ctx.font='900 70px Comic Sans MS';
@@ -506,7 +509,7 @@ start.path.rect((canvas.width/2 - 600/2), 350, 600, 300);
     if (Rom) {
 
         if (speechOn) {
-            //introAudGer.play();
+            introAudrom.play();
         }
 
         ctx.font='900 65px Comic Sans MS';
@@ -814,6 +817,10 @@ function endMenu(e) {
 }
 
 function showMenu() {
+
+    introAud.pause();
+    introAud.currentTime = 0;
+
     togMenu=true;
     togSet=false;
     ctx.fillStyle = "purple";
