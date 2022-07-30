@@ -193,12 +193,16 @@ var splashAud = new Audio("sounds/splashN.mp3");
 var introAud = new Audio("sounds/uk-ins.mp3"); // uk
 var introAudger = new Audio("sounds/ger-ins.mp3"); // ger
 var introAudrom = new Audio("sounds/rom-ins.mp3"); // rom
-
 var introAudBul = new Audio("sounds/bul-ins.mp3"); // bul
 var introAudGrk = new Audio("sounds/grk-ins.mp3"); // grk
 var introAudTuk = new Audio("sounds/tuk-ins.mp3"); // tuk
 
-var welldoneAud = new Audio("sounds/well-doneN.mp3");
+var welldoneAud = new Audio("sounds/well-doneN.mp3"); //uk
+var welldoneAudger = new Audio("sounds/well-done-ger.mp3"); // ger
+var welldoneAudrom = new Audio("sounds/well-done-rom.mp3"); // rom
+var welldoneAudbul = new Audio("sounds/well-done-bul.mp3"); // bul
+var welldoneAudgrk = new Audio("sounds/well-done-grk.mp3"); // grk
+var welldoneAudTuk = new Audio("sounds/well-done-tuk.mp3"); // tuk
 
 window.addEventListener("keydown", function(e){
     keys[e.keyCode] = true;
@@ -324,12 +328,26 @@ function closeSplash() {
 
 function startImg(e) {
     if (!togMenu && ctx.isPointInPath(start.path, e.offsetX, e.offsetY)) {
+
     instructionsSc = false;
     gameSc = true;
     pinIn = true;
+
     introAud.pause();
     introAud.currentTime = 0;
-    window.removeEventListener("click", start);
+    introAudger.pause();
+    introAudger.currentTime = 0;
+    introAudrom.pause();
+    introAudrom.currentTime = 0;
+    introAudBul.pause();
+    introAudBul.currentTime = 0;
+    introAudGrk.pause();
+    introAudGrk.currentTime = 0;
+    introAudTuk.pause();
+    introAudTuk.currentTime = 0;
+
+
+    window.removeEventListener("click", startImg);
     }
 }
 
@@ -386,7 +404,7 @@ function settings() {
 
     ctx.drawImage(settingIns, 1018, 15, 65, 65);
     settingIns.path = new Path2D();
-    settingIns.path.rect(1017, 8, 110, 84);
+    settingIns.path.rect(980, 14, 140, 100);
     ctx.fillStyle = "black";
 
     canvas.addEventListener("click", setMenuIns);
@@ -632,7 +650,7 @@ function balloonT(e) {
     if (togMenu) {
         if (ctx.isPointInPath(purBall.path, e.offsetX, e.offsetY)) {
             col=true;
-            canvas.removeEventListener("click", MustickT);
+            canvas.removeEventListener("click", balloonT);
         }
     } // togMenu
 }
@@ -641,7 +659,7 @@ function balloonF(e) {
     if (togMenu) {
         if (ctx.isPointInPath(redBall.path, e.offsetX, e.offsetY)) {
             col=false;
-            canvas.removeEventListener("click", MustickF);
+            canvas.removeEventListener("click", balloonF);
         }
     } // togMenu
 }
@@ -1616,7 +1634,7 @@ function draw() {
             if (Ger) {
 
                 if (speechOn) {
-                    welldoneAudGer.play();
+                    welldoneAudger.play();
                 }
 
                 ctx.fillText("Hoppla!", w, 200);
@@ -1635,7 +1653,7 @@ function draw() {
             if (Rom) {
 
                 if (speechOn) {
-                    welldoneAudRom.play();
+                    welldoneAudrom.play();
                 }
 
                 ctx.fillText("Hopa!", w, 200);
@@ -1654,7 +1672,7 @@ function draw() {
             if (Bul) {
 
                 if (speechOn) {
-                    welldoneAudBul.play();
+                    welldoneAudbul.play();
                 }
 
                 ctx.fillText("Опа!", w, 200);
@@ -1673,7 +1691,7 @@ function draw() {
             if (Grk) {
 
                 if (speechOn) {
-                    welldoneAudGrk.play();
+                    welldoneAudgrk.play();
                 }
 
                 ctx.fillText("Ωχ!", w, 200);
@@ -1712,18 +1730,45 @@ function draw() {
 
             window.addEventListener('contextmenu', (e) => {
                 e.preventDefault();
+
                 welldoneAud.pause();
                 welldoneAud.currentTime = 0;
+                welldoneAudger.pause();
+                welldoneAudger.currentTime = 0;
+
+                welldoneAudrom.pause();
+                welldoneAudrom.currentTime = 0;
+                welldoneAudbul.pause();
+                welldoneAudbul.currentTime = 0;
+
+                welldoneAudgrk.pause();
+                welldoneAudgrk.currentTime = 0;
+                welldoneAudTuk.pause();
+                welldoneAudTuk.currentTime = 0;      
+  
                 closeGame();
             });
             
             if (keys[13]) {
+                
                 welldoneAud.pause();
                 welldoneAud.currentTime = 0;
+                welldoneAudger.pause();
+                welldoneAudger.currentTime = 0;
+
+                welldoneAudrom.pause();
+                welldoneAudrom.currentTime = 0;
+                welldoneAudbul.pause();
+                welldoneAudbul.currentTime = 0;
+
+                welldoneAudgrk.pause();
+                welldoneAudgrk.currentTime = 0;
+                welldoneAudTuk.pause();
+                welldoneAudTuk.currentTime = 0;
+
                 pinIn = true;
                 splashSc = true;
                 instructionsSc = false;
-                gameSc = false;
                 gameSc = false;
                 inBall.bWidth = 70;
                 inBall.bHeight = 100;
