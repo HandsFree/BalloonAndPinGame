@@ -3,6 +3,64 @@ const ctx = canvas.getContext('2d');
 canvas.width = 1200;
 canvas.height = 735;
 
+
+var volLock = true;
+
+var splashOff = true;
+
+var vol1 = false;
+var vol2 = false;;
+var vol3 = true;
+var vol4 = false;
+var vol5 = false;
+
+var paused = false;
+
+var closeMenuBox = false;
+
+// button
+const button1 = new Image();
+button1.src = "images/button.png";
+
+
+// vol gfx
+// 1
+const v1Gr = new Image();
+v1Gr.src = "red_vol.png";
+const v1Gb = new Image();
+v1Gb.src = "black_vol.png";
+
+// 2
+const v2Gr = new Image();
+v2Gr.src = "red_vol.png";
+const v2Gb = new Image();
+v2Gb.src = "black_vol.png";
+
+// 3
+const v3Gr = new Image();
+v3Gr.src = "red_vol.png";
+const v3Gb = new Image();
+v3Gb.src = "black_vol.png";
+
+// 4
+const v4Gr = new Image();
+v4Gr.src = "red_vol.png";
+const v4Gb = new Image();
+v4Gb.src = "black_vol.png";
+
+// 5
+const v5Gr = new Image();
+v5Gr.src = "red_vol.png";
+const v5Gb = new Image();
+v5Gb.src = "black_vol.png";
+
+
+
+const wBg = new Image();
+wBg.src = "images/white_bg.png";
+
+
+
 /////Translation Menu //////////
 var En = true;
 var Ger = false;
@@ -13,6 +71,10 @@ var Tuk = false;
 
 var langaugeMenuSettings = false;
 /////////////////////////////////
+
+var pinOff = true;
+var tapeOn = true;
+var ballnOn = true;
 
 var pinIn = true;
 
@@ -64,6 +126,12 @@ start.src = "images/start.png";
 
 const setting = new Image();
 setting.src = "images/settingsMenu/settings.png"; // Cog Image
+
+const settingGameImg = new Image();
+settingGameImg.src = "images/settingsMenu/settings.png"; // Cog Image - Game
+
+const reStartImg = new Image();
+reStartImg.src = "images/settingsMenu/reload.png"; // Cog Image - Restart Game
 
 const settingIns = new Image();
 settingIns.src = "images/settingsMenu/settings.png"; // Ins Cog Image
@@ -131,7 +199,8 @@ langTurk.src = "images/settingsMenu/langTrk.png";
 const crossLang = new Image();
 crossLang.src = "images/settingsMenu/cross.png"; // langauge cross - End Langauge Menu
 
-
+const crossVol = new Image();
+crossVol.src = "images/settingsMenu/cross.png"; // Vol cross - End Vol Menu
 
 
 
@@ -214,6 +283,175 @@ window.addEventListener("keyup", function(e){
     air.currentTime = 0;
 });
 
+
+////////////////////////////////////////////////////////////////////////// 28/7/24 ///////////////////////////////////////////
+
+
+
+// volume
+// v1
+function v1R(e) {
+        if (ctx.isPointInPath(v1Gr.path, e.offsetX, e.offsetY)) {
+            vol1=false;
+            vol2=false;
+            vol3=false;
+            vol4=false;
+            vol5=false;
+            canvas.removeEventListener("click", v1R);
+        }
+}
+
+function v1B(e) {
+        if (ctx.isPointInPath(v1Gb.path, e.offsetX, e.offsetY)) {
+            vol1=true;
+            vol2=false;
+            vol3=false;
+            vol4=false;
+            vol5=false;
+            canvas.removeEventListener("click", v1B);
+        }
+}
+
+//v2
+function v2R(e) {
+        if (ctx.isPointInPath(v2Gr.path, e.offsetX, e.offsetY)) {
+            vol1=false;
+            vol2=false;
+            vol3=false;
+            vol4=false;
+            vol5=false;
+            canvas.removeEventListener("click", v2R);
+        }
+}
+
+function v2B(e) {
+        if (ctx.isPointInPath(v2Gb.path, e.offsetX, e.offsetY)) {
+            vol1=false;
+            vol2=true;
+            vol3=false;
+            vol4=false;
+            vol5=false;
+            canvas.removeEventListener("click", v2B);
+        }
+}
+
+// v3
+function v3R(e) {
+        if (ctx.isPointInPath(v3Gr.path, e.offsetX, e.offsetY)) {
+            vol1=false;
+            vol2=false;
+            vol3=false;
+            vol4=false;
+            vol5=false;
+            canvas.removeEventListener("click", v3R);
+        }
+}
+
+function v3B(e) {
+        if (ctx.isPointInPath(v3Gb.path, e.offsetX, e.offsetY)) {
+            vol1=false;
+            vol2=false;
+            vol3=true;
+            vol4=false;
+            vol5=false;
+            canvas.removeEventListener("click", v3B);
+        }
+}
+
+// v4
+function v4R(e) {
+        if (ctx.isPointInPath(v4Gr.path, e.offsetX, e.offsetY)) {
+            vol1=false;
+            vol2=false;
+            vol3=false;
+            vol4=false;
+            vol5=false;
+            canvas.removeEventListener("click", v3R);
+        }
+}
+
+function v4B(e) {
+        if (ctx.isPointInPath(v4Gb.path, e.offsetX, e.offsetY)) {
+            vol1=false;
+            vol2=false;
+            vol3=false;
+            vol4=true;
+            vol5=false;
+            canvas.removeEventListener("click", v4B);
+        }
+}
+
+// v5
+function v5R(e) {
+        if (ctx.isPointInPath(v5Gr.path, e.offsetX, e.offsetY)) {
+            vol1=false;
+            vol2=false;
+            vol3=false;
+            vol4=false;
+            vol5=false;
+            canvas.removeEventListener("click", v5R);
+        }
+}
+
+function v5B(e) {
+        if (ctx.isPointInPath(v5Gb.path, e.offsetX, e.offsetY)) {   
+            vol1=false;
+            vol2=false;
+            vol3=false;
+            vol4=false;
+            vol5=true;
+            canvas.removeEventListener("click", v5B);
+        }
+}
+
+
+function wBgClick(e) {
+        if (ctx.isPointInPath(wBg.path, e.offsetX, e.offsetY)) {
+            /*splashOff = false;*/	
+            volLock = false;
+            canvas.removeEventListener("click", wBgClick);
+        }
+}
+
+/*function volFn2() {
+
+
+
+}*/
+
+
+function volumeSet() {
+    if (vol1) {
+        duck.volume = 0.1;
+    }
+    if (vol2) {
+        duck.volume = 0.3;
+    }
+    if (vol3) {
+        duck.volume = 0.5;
+    }
+    if (vol4) {
+        duck.volume = 0.7;
+    }
+    if (vol5) {
+        duck.volume = 1;
+    }
+}
+
+/////////////////////////////////////// end 28/7/24 ////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
 function animate() {
     draw();
     mId = requestAnimationFrame(animate);
@@ -243,6 +481,7 @@ function animate() {
     }
 
     function timer() {
+        if (ballnOn) {
       console.log("Timer tick!");
 
       if (counter < pressHoldDuration) {
@@ -259,6 +498,7 @@ function animate() {
         
         counter++;
       }
+    }//ballOn
     }
 
 animate();
@@ -274,6 +514,20 @@ function drawBalloon() {
     duck.pause();
     }
 
+
+
+
+
+
+
+
+if (ballnOn) {
+
+
+
+
+
+
     // Balloon
     ctx.beginPath();
     ctx.lineWidth = 1;
@@ -287,6 +541,18 @@ function drawBalloon() {
        ctx.fillStyle = 'purple';
        ctx.shadowColor = 'purple';
     } 
+
+
+
+
+
+
+
+
+
+
+
+
     ctx.shadowBlur = 15;
     ctx.ellipse(inBall.x, inBall.y, inBall.bWidth, inBall.bHeight, 0, 0, (Math.PI*2), false);   
     ctx.fill();
@@ -312,15 +578,32 @@ function drawBalloon() {
     if (!col) { // Red
         ctx.drawImage(tieR, 447, st.x, 300, 200);
         ctx.drawImage(tieR2, 475, st.x, 300, 200); 
-    }  
+    }
+    
+    
+}//BallnOn
+
+
+
+
 }
 
-function closeSplash() {
+function closeSplash(e) {
+    if (volLock && ctx.isPointInPath(button1.path, e.offsetX, e.offsetY)) {
     splashSc = false;
     instructionsSc = true;
     splashAud.pause();
-    splashAud.currentTime = 0;
-    window.removeEventListener("click", closeSplash);
+    splashAud.currentTime = 0;	
+    canvas.removeEventListener("click", closeSplash);
+    }	
+}
+
+
+function endVolCont(e) {
+    if (ctx.isPointInPath(crossVol.path, e.offsetX, e.offsetY)) {
+    volLock = true;
+    canvas.removeEventListener("click", endVolCont);
+    }	
 }
 
 
@@ -332,6 +615,7 @@ function startImg(e) {
     instructionsSc = false;
     gameSc = true;
     pinIn = true;
+    ballnOn = true;
 
     introAud.pause();
     introAud.currentTime = 0;
@@ -363,6 +647,7 @@ function closeGame() {
     shine.y = 350;
     splashSc = false;
     gameSc = false;
+    ballnOn = true;
     instructionsSc = true;
 }
 
@@ -385,8 +670,6 @@ function setMenuIns(e) {
 }
 
 function settings() {
-
-    
 
     ctx.fillStyle = "white";
     ctx.globalAlpha = 0.9;
@@ -413,37 +696,37 @@ function settings() {
     if (En) {
         ctx.font='900 15px Comic Sans MS';
         ctx.fillText("Left Click", 1050, 85);
-        ctx.fillText("Or Enter Key", 1050, 100);
+        //ctx.fillText("Or Enter Key", 1050, 100);
     }
 
     if (Ger) {
         ctx.font='900 13px Comic Sans MS';
         ctx.fillText("Links Klick", 1050, 85);
-        ctx.fillText("Oder Eingabetaste", 1050, 100);
+        //ctx.fillText("Oder Eingabetaste", 1050, 100);
     }
 
     if (Rom) {
         ctx.font='900 11px Comic Sans MS';
         ctx.fillText("Click stânga", 1050, 85);
-        ctx.fillText("Sau Introduceți cheia", 1050, 100);
+        //ctx.fillText("Sau Introduceți cheia", 1050, 100);
     }
 
     if (Bul) {
         ctx.font='900 13px Comic Sans MS';
         ctx.fillText("Ляв клик", 1050, 85);
-        ctx.fillText("Или въведете ключ", 1050, 100);
+        //ctx.fillText("Или въведете ключ", 1050, 100);
     }
 
     if (Grk) {
         ctx.font='900 13px Comic Sans MS';
         ctx.fillText("Αριστερό κλικ", 1050, 85);
-        ctx.fillText("Ή Enter Key", 1050, 100);
+        //ctx.fillText("Ή Enter Key", 1050, 100);
     }
 
     if (Tuk) {
         ctx.font='900 11px Comic Sans MS';
         ctx.fillText("Sol tık", 1050, 85);
-        ctx.fillText("Veya Anahtar Girin", 1050, 100);
+        //ctx.fillText("Veya Anahtar Girin", 1050, 100);
     }
 
 
@@ -834,6 +1117,11 @@ function endMenu(e) {
         if (!langaugeMenuSettings && ctx.isPointInPath(cross.path, e.offsetX, e.offsetY)) {
             togSet=true;
             togMenu=false;
+            pinOff = true;
+            tapeOn = true;
+            picOn = true;
+            ballnOn = true;
+            pinIn = true;
             canvas.removeEventListener("click", endMenu);
         }
     } // togMenu
@@ -1455,10 +1743,57 @@ function setMenuSplash(e) {
         }
 }
 
+function settingsGame(e) {
+    if (ctx.isPointInPath(settingGameImg.path, e.offsetX, e.offsetY)) {
+        tapeOn = false;
+        pinOff = false;
+        picOn = false;
+        togSet=false;
+        togMenu=true;
+        pinIn=false;
+        ballnOn=false;
+        showMenu();
+        canvas.removeEventListener("click", settingsGame);
+    }
+}
+
+function reStart(e) {
+    if (ctx.isPointInPath(reStartImg.path, e.offsetX, e.offsetY)) {  
+        splashSc = true;
+        instructionsSc = false;
+        gameSc = false;
+        pinIn = true;
+        inBall.bWidth = 70;
+        inBall.bHeight = 100;
+        st.x = 501;
+        shine.x = 580;
+        shine.y = 350;
+        canvas.removeEventListener("click", reStart);
+    }
+}
+
 function splash() {
+	
     if (picOn) {
     ctx.drawImage(bnSplash, 0, 0, canvas.width, canvas.height);
     }
+
+
+    if (volLock) {
+        ctx.drawImage(wBg, w-160, 0, 350, 80);
+        wBg.path = new Path2D();
+        wBg.path.rect(w-160, 0, 350, 80);
+        ctx.font='900 40px Comic Sans MS';
+        ctx.fillText("Set Volume", w+10, 55);
+        //canvas.addEventListener("click", wBgClick);
+        }
+	
+        /*if (!volLock) {
+            volFn2();
+        }*/
+
+            
+
 
 
 
@@ -1466,18 +1801,23 @@ function splash() {
     ctx.globalAlpha = 0.8;
     ctx.fillRect(95, 400, 1010, 300);
     ctx.globalAlpha = 1.0;
+    /////////////////////////////////////////////////////////////////////////////////////////
+////////////// 27/8/24 /////////////////////////////
+    
+ctx.drawImage(button1, 290, 410, 620, 262);
+button1.path = new Path2D();
+button1.path.rect(290, 410, 620, 262);
+
+////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
     ctx.textAlign = "center"; 
     ctx.font = "40px Comic Sans MS";
-    ctx.fillStyle = "blue";
+    ctx.fillStyle = "white";
 
     if (En) {
-        ctx.fillText("Click the left mouse button", w, 460);
-        ctx.fillStyle = "red"; 
+        ctx.fillText("Left Click here", w, 460);
         ctx.fillText("or press the Enter Key", w, 525);
-        ctx.fillStyle = "blue";
         ctx.fillText("or use your switch", w, 590);
-        ctx.fillStyle = "purple";
-        ctx.font='900 40px Comic Sans MS';
         ctx.fillText("for the instructions!", w, 660);    
     }
 
@@ -1528,9 +1868,12 @@ function splash() {
 
     ctx.font = "bold 13px arial";
     ctx.fillStyle = "black";
-    ctx.fillText("Left Click or Press S", 1015, 490);
-    ctx.fillText("on your Keyboard", 1020, 512);
-    ctx.fillText("for Settings", 1025, 535);
+    ctx.fillText("Left Click", 1015, 490);
+    ctx.fillText("for Settings", 1017, 510);
+	
+	
+	
+	
 
     if (keys[83]) { //s
         togSet=false;
@@ -1539,45 +1882,152 @@ function splash() {
     }
 
 
-    window.addEventListener("click", closeSplash);
+    if (!volLock) {
+        ctx.fillStyle = "white";
+        ctx.globalAlpha = 0.8;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.globalAlpha = 1;
+                ctx.drawImage(wBg, w-160, 0, 350, 80); 
+                ctx.font = "700 35px Arial";
+                ctx.fillStyle = "blue";
+                ctx.fillText("Min", w-110, 47);
+                
+                // v1
+                if (vol1) {
+                    ctx.drawImage(v1Gr, w-60, 17, 10, 35);
+                    v1Gr.path = new Path2D();
+                    v1Gr.path.rect(w-60, 20, 10, 45);
+                }
+                if (!vol1) {
+                    ctx.drawImage(v1Gb, w-60, 17, 10, 35);
+                    v1Gb.path = new Path2D();
+                    v1Gb.path.rect(w-60, 20, 10, 45);
+                }
+                    canvas.addEventListener("click", v1R);
+                    canvas.addEventListener("click", v1B);
+                
+                // v2
+                if (vol2) {
+                    ctx.drawImage(v2Gr, w-30, 17, 10, 35);
+                    v2Gr.path = new Path2D();
+                    v2Gr.path.rect(w-30, 17, 10, 45);
+                }
+                if (!vol2) {
+                    ctx.drawImage(v2Gb, w-30, 17, 10, 35);
+                    v2Gb.path = new Path2D();
+                    v2Gb.path.rect(w-30, 17, 10, 45);
+                }
+                    canvas.addEventListener("click", v2R);
+                    canvas.addEventListener("click", v2B);
+                
+                //v3
+                if (vol3) {
+                    ctx.drawImage(v3Gr, w, 17, 10, 35);
+                    v3Gr.path = new Path2D();
+                    v3Gr.path.rect(w, 17, 10, 35);
+                }
+                if (!vol3) {
+                    ctx.drawImage(v3Gb, w, 17, 10, 35);
+                    v3Gb.path = new Path2D();
+                    v3Gb.path.rect(w, 17, 10, 35);
+                }
+                    canvas.addEventListener("click", v3R);
+                    canvas.addEventListener("click", v3B);
+                
+                // v4
+                if (vol4) {
+                    ctx.drawImage(v4Gr, w+30, 17, 10, 35);
+                    v4Gr.path = new Path2D();
+                    v4Gr.path.rect(w+30, 17, 10, 35);
+                }
+                if (!vol4) {
+                    ctx.drawImage(v4Gb, w+30, 17, 10, 35);
+                    v4Gb.path = new Path2D();
+                    v4Gb.path.rect(w+30, 17, 10, 35);
+                }
+                    canvas.addEventListener("click", v4R);
+                    canvas.addEventListener("click", v4B);
+                
+                
+                // v5
+                if (vol5) {
+                    ctx.drawImage(v5Gr, w+60, 17, 10, 35);
+                    v5Gr.path = new Path2D();
+                    v5Gr.path.rect(w+60, 17, 10, 45);
+                }
+                if (!vol5) {
+                    ctx.drawImage(v5Gb, w+60, 17, 10, 35);
+                    v5Gb.path = new Path2D();
+                    v5Gb.path.rect(w+60, 17, 10, 45);
+                }
+                    canvas.addEventListener("click", v5R);
+                    canvas.addEventListener("click", v5B);
+                
+                ctx.font = "700 35px Arial";
+                ctx.fillStyle = "blue";
+                ctx.fillText("Max", w+125, 47);
+                
+                
+                ctx.font = "700 15px Comic Sans MS";
+                //ctx.fillText("Volume", w+5, 70);
+                ctx.drawImage(crossVol, w-5, 55, 19, 19);
+                crossVol.path = new Path2D();
+                crossVol.path.rect(w-5, 54, 19, 19);
+                
+                }  // lockoff  
+
+
+   
+    canvas.addEventListener("click", wBgClick);
+    if (!volLock) {
+        canvas.addEventListener("click", endVolCont);
+    }
+    canvas.addEventListener("click", closeSplash);
+
+    
+
     
 }
 
-function instructions() {
+function game() {
 
-    if (picOn) {
-        ctx.drawImage(balGame, 0, 0, canvas.width, canvas.height);
+    if (ballnOn) {
+
+       if (picOn) {
+           ctx.drawImage(balGame, 0, 0, canvas.width, canvas.height);
+       }
+
+    if (tapeOn) {
+    //settings
+    ctx.fillStyle = "white";
+    ctx.globalAlpha = 0.7;
+
+    ctx.fillRect(0, 0, 1200, 70);
+    ctx.globalAlpha = 1.0;
+
+    ctx.drawImage(settingGameImg, 1100, 0, 45, 45);
+    settingGameImg.path = new Path2D();
+    settingGameImg.path.rect(1100, 0, 45, 45);
+
+    ctx.font = "bold 11px arial";
+    ctx.fillStyle = "blue";
+    ctx.fillText("Left Click", 1120, 50);
+    ctx.fillText("for Settings", 1120, 60);
+
+    ctx.drawImage(reStartImg, 47, 5, 40, 40);
+    reStartImg.path = new Path2D();
+    reStartImg.path.rect(47, 0, 45, 45);
+
+    ctx.font = "bold 11px arial";
+    ctx.fillStyle = "blue";
+    ctx.fillText("Left Click", 70, 55);
+    ctx.fillText("to restart", 70, 65);
+
+    canvas.addEventListener("click", reStart);
+    canvas.addEventListener("click", settingsGame);
     }
 
-    if (togSet) {
-        settings();
-    }
-
-    if (togMenu) {
-        showMenu();
-    }
-}
-
-function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        if (splashSc) {
-            splash();
-        }
-
-        if (togMenu) {
-            showMenu();
-        }
-
-    if (instructionsSc) {
-        instructions();
-        }
-
-    if (gameSc) {
-
-        if (picOn) {
-        ctx.drawImage(balGame, 0, 0, canvas.width, canvas.height);
-        }
+    // end of settings link
 
         if (keys[32] || keys[13]) {
             inBall.bWidth += 0.2;
@@ -1778,17 +2228,64 @@ function draw() {
             }
 
         } else {
+            if (pinOff) {
               ctx.shadowColor = 'black';
               ctx.shadowBlur = 15;
               ctx.drawImage(pinImg, pinPop.x, pinPop.y, 128, 128);
               console.log("Balloon");
               ctx.shadowColor = "transparent";
+            }
         }    
 
         if (pinIn) {
         drawBalloon();
         }
+
+    }//ballnOn
+}
+
+function instructions() {
+	
+	
+
+    if (picOn) {
+        ctx.drawImage(balGame, 0, 0, canvas.width, canvas.height);
+    }
+
+    if (togSet) {
+        settings();
+    }
+
+    if (togMenu) {
+        showMenu();
+    }
+}
+
+function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+	
+	
+
+        if (splashSc) {
+            splash();
         }
+
+        /*if (!volLock) {
+            volFn2();
+        }*/
+	
+        if (togMenu && !ballnOn) {
+            showMenu();
+        }
+
+    if (instructionsSc && volLock) {
+        instructions();
+        }
+
+    if (gameSc && ballnOn && volLock) {
+        game();
+    }
+
 }
 
 
