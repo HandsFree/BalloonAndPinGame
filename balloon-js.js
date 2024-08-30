@@ -124,8 +124,8 @@ start.src = "images/start.png";
 
 //settings//////////////////////////////////
 
-const setting = new Image();
-setting.src = "images/settingsMenu/settings.png"; // Cog Image
+const setting1 = new Image();
+setting1.src = "images/settingsMenu/settings.png"; // Cog Image
 
 const settingGameImg = new Image();
 settingGameImg.src = "images/settingsMenu/settings.png"; // Cog Image - Game
@@ -413,28 +413,49 @@ function wBgClick(e) {
         }
 }
 
-/*function volFn2() {
 
-
-
-}*/
 
 
 function volumeSet() {
     if (vol1) {
         duck.volume = 0.1;
+        air.volume = 0.1;
+        introAud.volume = 0.1;
+        pop.volume = 0.1;
+        def.volume = 0.1;
+        welldoneAud.volume = 0.1;
     }
     if (vol2) {
         duck.volume = 0.3;
+        air.volume = 0.3;
+        introAud.volume = 0.3;
+        pop.volume = 0.3;
+        def.volume = 0.3;
+        welldoneAud.volume = 0.3;
     }
     if (vol3) {
         duck.volume = 0.5;
+        air.volume = 0.5;
+        introAud.volume = 0.5;
+        pop.volume = 0.5;
+        def.volume = 0.5;
+        welldoneAud.volume = 0.5;
     }
     if (vol4) {
         duck.volume = 0.7;
+        air.volume = 0.7;
+        introAud.volume = 0.7;
+        pop.volume = 0.7;
+        def.volume = 0.7;
+        welldoneAud.volume = 0.7;
     }
     if (vol5) {
         duck.volume = 1;
+        air.volume = 1;
+        introAud.volume = 1;
+        pop.volume = 1;
+        def.volume = 1;
+        welldoneAud.volume = 1;
     }
 }
 
@@ -507,7 +528,7 @@ function drawBalloon() {
 
     if (musicOn) {
     duck.play();
-    duck.volume = 0.4;
+    //duck.volume = 0.4;
     }
 
     if (!musicOn) {
@@ -1735,10 +1756,10 @@ function showMenu() {
 
 
 function setMenuSplash(e) {
-        if (ctx.isPointInPath(setting.path, e.offsetX, e.offsetY)) {
+        if (ctx.isPointInPath(setting1.path, e.offsetX, e.offsetY)) {
             togSet=false;
             togMenu=true;
-            showMenu();
+            //showMenu();
             canvas.removeEventListener("click", setMenuSplash);
         }
 }
@@ -1783,14 +1804,13 @@ function splash() {
         ctx.drawImage(wBg, w-160, 0, 350, 80);
         wBg.path = new Path2D();
         wBg.path.rect(w-160, 0, 350, 80);
+        ctx.fillStyle = "black";
         ctx.font='900 40px Comic Sans MS';
         ctx.fillText("Set Volume", w+10, 55);
-        //canvas.addEventListener("click", wBgClick);
+        canvas.addEventListener("click", wBgClick);
         }
 	
-        /*if (!volLock) {
-            volFn2();
-        }*/
+        
 
             
 
@@ -1799,7 +1819,7 @@ function splash() {
 
     ctx.fillStyle = "white";
     ctx.globalAlpha = 0.8;
-    ctx.fillRect(95, 400, 1010, 300);
+    ctx.fillRect(95, 400, 1010, 280);
     ctx.globalAlpha = 1.0;
     /////////////////////////////////////////////////////////////////////////////////////////
 ////////////// 27/8/24 /////////////////////////////
@@ -1833,7 +1853,7 @@ button1.path.rect(290, 410, 620, 262);
     }
     
 
-    if (keys[65]) { // audio
+    /*if (keys[65]) { // audio
         splashAud.play();
     }
 
@@ -1859,9 +1879,9 @@ button1.path.rect(290, 410, 620, 262);
 
     ctx.fillRect(945, 410, 150, 140);
 
-    ctx.drawImage(setting, 978, 402, 80, 80);
-    setting.path = new Path2D();
-    setting.path.rect(945, 410, 150, 140);
+    ctx.drawImage(setting1, 978, 402, 80, 80);
+    setting1.path = new Path2D();
+    setting1.path.rect(978, 402, 80, 80);
 
     canvas.addEventListener("click", setMenuSplash);
 
@@ -1879,7 +1899,10 @@ button1.path.rect(290, 410, 620, 262);
         togSet=false;
         togMenu=true;
         showMenu();
-    }
+    }*/
+
+    
+    //volControls();
 
 
     if (!volLock) {
@@ -1977,6 +2000,7 @@ button1.path.rect(290, 410, 620, 262);
                 }  // lockoff  
 
 
+
    
     canvas.addEventListener("click", wBgClick);
     if (!volLock) {
@@ -1996,6 +2020,8 @@ function game() {
        if (picOn) {
            ctx.drawImage(balGame, 0, 0, canvas.width, canvas.height);
        }
+
+  
 
     if (tapeOn) {
     //settings
@@ -2048,7 +2074,7 @@ function game() {
             duck.currentTime = 0;
             pop.play();
             def.play();
-            def.volume = 0.4;
+            //def.volume = 0.4;
             }
 
 
@@ -2263,6 +2289,13 @@ function instructions() {
 
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+
+    /////////////////////////////////7.7.24//////////////////////////////////
+
+    volumeSet();
+
+    ////////////////////////////////////////////////////////////////////////
 	
 	
 
@@ -2270,9 +2303,7 @@ function draw() {
             splash();
         }
 
-        /*if (!volLock) {
-            volFn2();
-        }*/
+ 
 	
         if (togMenu && !ballnOn) {
             showMenu();
