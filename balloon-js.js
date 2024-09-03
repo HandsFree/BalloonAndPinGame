@@ -3,6 +3,8 @@ const ctx = canvas.getContext('2d');
 canvas.width = 1200;
 canvas.height = 735;
 
+var splashMenu = false;
+var splashMenuEnd = false;
 
 var volLock = true;
 
@@ -284,6 +286,7 @@ window.addEventListener("keyup", function(e){
 });
 
 
+
 ////////////////////////////////////////////////////////////////////////// 28/7/24 ///////////////////////////////////////////
 
 
@@ -291,175 +294,291 @@ window.addEventListener("keyup", function(e){
 // volume
 // v1
 function v1R(e) {
-        if (ctx.isPointInPath(v1Gr.path, e.offsetX, e.offsetY)) {
-            vol1=false;
-            vol2=false;
-            vol3=false;
-            vol4=false;
-            vol5=false;
-            canvas.removeEventListener("click", v1R);
-        }
+    if (ctx.isPointInPath(v1Gr.path, e.offsetX, e.offsetY)) {
+        vol1=false;
+        vol2=false;
+        vol3=false;
+        vol4=false;
+        vol5=false;
+        canvas.removeEventListener("click", v1R);
+    }
 }
 
 function v1B(e) {
-        if (ctx.isPointInPath(v1Gb.path, e.offsetX, e.offsetY)) {
-            vol1=true;
-            vol2=false;
-            vol3=false;
-            vol4=false;
-            vol5=false;
-            canvas.removeEventListener("click", v1B);
-        }
+    if (ctx.isPointInPath(v1Gb.path, e.offsetX, e.offsetY)) {
+        vol1=true;
+        vol2=false;
+        vol3=false;
+        vol4=false;
+        vol5=false;
+        canvas.removeEventListener("click", v1B);
+    }
 }
 
 //v2
 function v2R(e) {
-        if (ctx.isPointInPath(v2Gr.path, e.offsetX, e.offsetY)) {
-            vol1=false;
-            vol2=false;
-            vol3=false;
-            vol4=false;
-            vol5=false;
-            canvas.removeEventListener("click", v2R);
-        }
+    if (ctx.isPointInPath(v2Gr.path, e.offsetX, e.offsetY)) {
+        vol1=false;
+        vol2=false;
+        vol3=false;
+        vol4=false;
+        vol5=false;
+        canvas.removeEventListener("click", v2R);
+    }
 }
 
 function v2B(e) {
-        if (ctx.isPointInPath(v2Gb.path, e.offsetX, e.offsetY)) {
-            vol1=false;
-            vol2=true;
-            vol3=false;
-            vol4=false;
-            vol5=false;
-            canvas.removeEventListener("click", v2B);
-        }
+    if (ctx.isPointInPath(v2Gb.path, e.offsetX, e.offsetY)) {
+        vol1=false;
+        vol2=true;
+        vol3=false;
+        vol4=false;
+        vol5=false;
+        canvas.removeEventListener("click", v2B);
+    }
 }
 
 // v3
 function v3R(e) {
-        if (ctx.isPointInPath(v3Gr.path, e.offsetX, e.offsetY)) {
-            vol1=false;
-            vol2=false;
-            vol3=false;
-            vol4=false;
-            vol5=false;
-            canvas.removeEventListener("click", v3R);
-        }
+    if (ctx.isPointInPath(v3Gr.path, e.offsetX, e.offsetY)) {
+        vol1=false;
+        vol2=false;
+        vol3=false;
+        vol4=false;
+        vol5=false;
+        canvas.removeEventListener("click", v3R);
+    }
 }
 
 function v3B(e) {
-        if (ctx.isPointInPath(v3Gb.path, e.offsetX, e.offsetY)) {
-            vol1=false;
-            vol2=false;
-            vol3=true;
-            vol4=false;
-            vol5=false;
-            canvas.removeEventListener("click", v3B);
-        }
+    if (ctx.isPointInPath(v3Gb.path, e.offsetX, e.offsetY)) {
+        vol1=false;
+        vol2=false;
+        vol3=true;
+        vol4=false;
+        vol5=false;
+        canvas.removeEventListener("click", v3B);
+    }
 }
 
 // v4
 function v4R(e) {
-        if (ctx.isPointInPath(v4Gr.path, e.offsetX, e.offsetY)) {
-            vol1=false;
-            vol2=false;
-            vol3=false;
-            vol4=false;
-            vol5=false;
-            canvas.removeEventListener("click", v3R);
-        }
+    if (ctx.isPointInPath(v4Gr.path, e.offsetX, e.offsetY)) {
+        vol1=false;
+        vol2=false;
+        vol3=false;
+        vol4=false;
+        vol5=false;
+        canvas.removeEventListener("click", v3R);
+    }
 }
 
 function v4B(e) {
-        if (ctx.isPointInPath(v4Gb.path, e.offsetX, e.offsetY)) {
-            vol1=false;
-            vol2=false;
-            vol3=false;
-            vol4=true;
-            vol5=false;
-            canvas.removeEventListener("click", v4B);
-        }
+    if (ctx.isPointInPath(v4Gb.path, e.offsetX, e.offsetY)) {
+        vol1=false;
+        vol2=false;
+        vol3=false;
+        vol4=true;
+        vol5=false;
+        canvas.removeEventListener("click", v4B);
+    }
 }
 
 // v5
 function v5R(e) {
-        if (ctx.isPointInPath(v5Gr.path, e.offsetX, e.offsetY)) {
-            vol1=false;
-            vol2=false;
-            vol3=false;
-            vol4=false;
-            vol5=false;
-            canvas.removeEventListener("click", v5R);
-        }
+    if (ctx.isPointInPath(v5Gr.path, e.offsetX, e.offsetY)) {
+        vol1=false;
+        vol2=false;
+        vol3=false;
+        vol4=false;
+        vol5=false;
+        canvas.removeEventListener("click", v5R);
+    }
 }
 
 function v5B(e) {
-        if (ctx.isPointInPath(v5Gb.path, e.offsetX, e.offsetY)) {   
-            vol1=false;
-            vol2=false;
-            vol3=false;
-            vol4=false;
-            vol5=true;
-            canvas.removeEventListener("click", v5B);
-        }
+    if (ctx.isPointInPath(v5Gb.path, e.offsetX, e.offsetY)) {   
+        vol1=false;
+        vol2=false;
+        vol3=false;
+        vol4=false;
+        vol5=true;
+        canvas.removeEventListener("click", v5B);
+    }
 }
 
 
 function wBgClick(e) {
-        if (ctx.isPointInPath(wBg.path, e.offsetX, e.offsetY)) {
-            /*splashOff = false;*/	
-            volLock = false;
-            canvas.removeEventListener("click", wBgClick);
-        }
+    if (ctx.isPointInPath(wBg.path, e.offsetX, e.offsetY)) {
+        /*splashOff = false;*/	
+        volLock = false;
+        canvas.removeEventListener("click", wBgClick);
+    }
 }
 
 
 
 
 function volumeSet() {
-    if (vol1) {
-        duck.volume = 0.1;
-        air.volume = 0.1;
-        introAud.volume = 0.1;
-        pop.volume = 0.1;
-        def.volume = 0.1;
-        welldoneAud.volume = 0.1;
-    }
-    if (vol2) {
-        duck.volume = 0.3;
-        air.volume = 0.3;
-        introAud.volume = 0.3;
-        pop.volume = 0.3;
-        def.volume = 0.3;
-        welldoneAud.volume = 0.3;
-    }
-    if (vol3) {
-        duck.volume = 0.5;
-        air.volume = 0.5;
-        introAud.volume = 0.5;
-        pop.volume = 0.5;
-        def.volume = 0.5;
-        welldoneAud.volume = 0.5;
-    }
-    if (vol4) {
-        duck.volume = 0.7;
-        air.volume = 0.7;
-        introAud.volume = 0.7;
-        pop.volume = 0.7;
-        def.volume = 0.7;
-        welldoneAud.volume = 0.7;
-    }
-    if (vol5) {
-        duck.volume = 1;
-        air.volume = 1;
-        introAud.volume = 1;
-        pop.volume = 1;
-        def.volume = 1;
-        welldoneAud.volume = 1;
-    }
+if (vol1) {
+    duck.volume = 0.1;
+    air.volume = 0.1;
+    introAud.volume = 0.1;
+    pop.volume = 0.1;
+    def.volume = 0.1;
+    welldoneAud.volume = 0.1;
+}
+if (vol2) {
+    duck.volume = 0.3;
+    air.volume = 0.3;
+    introAud.volume = 0.3;
+    pop.volume = 0.3;
+    def.volume = 0.3;
+    welldoneAud.volume = 0.3;
+}
+if (vol3) {
+    duck.volume = 0.5;
+    air.volume = 0.5;
+    introAud.volume = 0.5;
+    pop.volume = 0.5;
+    def.volume = 0.5;
+    welldoneAud.volume = 0.5;
+}
+if (vol4) {
+    duck.volume = 0.7;
+    air.volume = 0.7;
+    introAud.volume = 0.7;
+    pop.volume = 0.7;
+    def.volume = 0.7;
+    welldoneAud.volume = 0.7;
+}
+if (vol5) {
+    duck.volume = 1;
+    air.volume = 1;
+    introAud.volume = 1;
+    pop.volume = 1;
+    def.volume = 1;
+    welldoneAud.volume = 1;
+}
 }
 
 /////////////////////////////////////// end 28/7/24 ////////////////////////////////////
+
+// vol controls finished 2.9.24 /////////////////////////////////////////////////////////
+
+function volControls(e) {
+    if (volLock) {
+        ctx.drawImage(wBg, w-160, 0, 350, 80);
+        wBg.path = new Path2D();
+        wBg.path.rect(w-160, 0, 350, 80);
+        ctx.fillStyle = "black";
+        ctx.font='900 40px Comic Sans MS';
+        ctx.fillText("Set Volume", w+10, 55);
+        canvas.addEventListener("click", wBgClick);
+        }
+if (!volLock) {
+    ctx.fillStyle = "white";
+    ctx.globalAlpha = 0.8;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.globalAlpha = 1;
+            ctx.drawImage(wBg, w-160, 0, 350, 80); 
+            ctx.font = "700 35px Arial";
+            ctx.fillStyle = "blue";
+            ctx.fillText("Min", w-110, 47);
+            
+            // v1
+            if (vol1) {
+                ctx.drawImage(v1Gr, w-60, 17, 10, 35);
+                v1Gr.path = new Path2D();
+                v1Gr.path.rect(w-60, 20, 10, 45);
+            }
+            if (!vol1) {
+                ctx.drawImage(v1Gb, w-60, 17, 10, 35);
+                v1Gb.path = new Path2D();
+                v1Gb.path.rect(w-60, 20, 10, 45);
+            }
+                canvas.addEventListener("click", v1R);
+                canvas.addEventListener("click", v1B);
+            
+            // v2
+            if (vol2) {
+                ctx.drawImage(v2Gr, w-30, 17, 10, 35);
+                v2Gr.path = new Path2D();
+                v2Gr.path.rect(w-30, 17, 10, 45);
+            }
+            if (!vol2) {
+                ctx.drawImage(v2Gb, w-30, 17, 10, 35);
+                v2Gb.path = new Path2D();
+                v2Gb.path.rect(w-30, 17, 10, 45);
+            }
+                canvas.addEventListener("click", v2R);
+                canvas.addEventListener("click", v2B);
+            
+            //v3
+            if (vol3) {
+                ctx.drawImage(v3Gr, w, 17, 10, 35);
+                v3Gr.path = new Path2D();
+                v3Gr.path.rect(w, 17, 10, 35);
+            }
+            if (!vol3) {
+                ctx.drawImage(v3Gb, w, 17, 10, 35);
+                v3Gb.path = new Path2D();
+                v3Gb.path.rect(w, 17, 10, 35);
+            }
+                canvas.addEventListener("click", v3R);
+                canvas.addEventListener("click", v3B);
+            
+            // v4
+            if (vol4) {
+                ctx.drawImage(v4Gr, w+30, 17, 10, 35);
+                v4Gr.path = new Path2D();
+                v4Gr.path.rect(w+30, 17, 10, 35);
+            }
+            if (!vol4) {
+                ctx.drawImage(v4Gb, w+30, 17, 10, 35);
+                v4Gb.path = new Path2D();
+                v4Gb.path.rect(w+30, 17, 10, 35);
+            }
+                canvas.addEventListener("click", v4R);
+                canvas.addEventListener("click", v4B);
+            
+            
+            // v5
+            if (vol5) {
+                ctx.drawImage(v5Gr, w+60, 17, 10, 35);
+                v5Gr.path = new Path2D();
+                v5Gr.path.rect(w+60, 17, 10, 45);
+            }
+            if (!vol5) {
+                ctx.drawImage(v5Gb, w+60, 17, 10, 35);
+                v5Gb.path = new Path2D();
+                v5Gb.path.rect(w+60, 17, 10, 45);
+            }
+                canvas.addEventListener("click", v5R);
+                canvas.addEventListener("click", v5B);
+            
+            ctx.font = "700 35px Arial";
+            ctx.fillStyle = "blue";
+            ctx.fillText("Max", w+125, 47);
+            
+            
+            ctx.font = "700 15px Comic Sans MS";
+            //ctx.fillText("Volume", w+5, 70);
+            ctx.drawImage(crossVol, w-5, 55, 19, 19);
+            crossVol.path = new Path2D();
+            crossVol.path.rect(w-5, 54, 19, 19);
+            
+            }  // lockoff  
+
+            if (!volLock) {
+                canvas.addEventListener("click", endVolCont);
+            }
+            
+
+        }
+
+
+
 
 
 
@@ -503,7 +622,7 @@ function animate() {
 
     function timer() {
         if (ballnOn) {
-      console.log("Timer tick!");
+      //console.log("Timer tick!");
 
       if (counter < pressHoldDuration) {
         timerID = requestAnimationFrame(timer);
@@ -1136,6 +1255,7 @@ function endMenuLang(e) {
 function endMenu(e) {
     if (togMenu) {
         if (!langaugeMenuSettings && ctx.isPointInPath(cross.path, e.offsetX, e.offsetY)) {
+            splashMenu = false;
             togSet=true;
             togMenu=false;
             pinOff = true;
@@ -1149,6 +1269,8 @@ function endMenu(e) {
 }
 
 function showMenu() {
+
+    splashMenuEnd = true;
 
     introAud.pause();
     introAud.currentTime = 0;
@@ -1757,9 +1879,12 @@ function showMenu() {
 
 function setMenuSplash(e) {
         if (ctx.isPointInPath(setting1.path, e.offsetX, e.offsetY)) {
+            splashMenu = true;
             togSet=false;
             togMenu=true;
-            //showMenu();
+            ballnOn=false;
+            showMenu();
+            console.log("test");
             canvas.removeEventListener("click", setMenuSplash);
         }
 }
@@ -1794,27 +1919,13 @@ function reStart(e) {
 }
 
 function splash() {
+
+   
+if (!splashMenu) {
 	
     if (picOn) {
     ctx.drawImage(bnSplash, 0, 0, canvas.width, canvas.height);
     }
-
-
-    if (volLock) {
-        ctx.drawImage(wBg, w-160, 0, 350, 80);
-        wBg.path = new Path2D();
-        wBg.path.rect(w-160, 0, 350, 80);
-        ctx.fillStyle = "black";
-        ctx.font='900 40px Comic Sans MS';
-        ctx.fillText("Set Volume", w+10, 55);
-        canvas.addEventListener("click", wBgClick);
-        }
-	
-        
-
-            
-
-
 
 
     ctx.fillStyle = "white";
@@ -1824,6 +1935,7 @@ function splash() {
     /////////////////////////////////////////////////////////////////////////////////////////
 ////////////// 27/8/24 /////////////////////////////
     
+
 ctx.drawImage(button1, 290, 410, 620, 262);
 button1.path = new Path2D();
 button1.path.rect(290, 410, 620, 262);
@@ -1853,7 +1965,7 @@ button1.path.rect(290, 410, 620, 262);
     }
     
 
-    /*if (keys[65]) { // audio
+    if (keys[65]) { // audio
         splashAud.play();
     }
 
@@ -1881,9 +1993,9 @@ button1.path.rect(290, 410, 620, 262);
 
     ctx.drawImage(setting1, 978, 402, 80, 80);
     setting1.path = new Path2D();
-    setting1.path.rect(978, 402, 80, 80);
+    setting1.path.rect(945, 410, 150, 140);
 
-    canvas.addEventListener("click", setMenuSplash);
+    
 
 
     ctx.font = "bold 13px arial";
@@ -1899,116 +2011,24 @@ button1.path.rect(290, 410, 620, 262);
         togSet=false;
         togMenu=true;
         showMenu();
-    }*/
-
-    
-    //volControls();
-
-
-    if (!volLock) {
-        ctx.fillStyle = "white";
-        ctx.globalAlpha = 0.8;
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.globalAlpha = 1;
-                ctx.drawImage(wBg, w-160, 0, 350, 80); 
-                ctx.font = "700 35px Arial";
-                ctx.fillStyle = "blue";
-                ctx.fillText("Min", w-110, 47);
-                
-                // v1
-                if (vol1) {
-                    ctx.drawImage(v1Gr, w-60, 17, 10, 35);
-                    v1Gr.path = new Path2D();
-                    v1Gr.path.rect(w-60, 20, 10, 45);
-                }
-                if (!vol1) {
-                    ctx.drawImage(v1Gb, w-60, 17, 10, 35);
-                    v1Gb.path = new Path2D();
-                    v1Gb.path.rect(w-60, 20, 10, 45);
-                }
-                    canvas.addEventListener("click", v1R);
-                    canvas.addEventListener("click", v1B);
-                
-                // v2
-                if (vol2) {
-                    ctx.drawImage(v2Gr, w-30, 17, 10, 35);
-                    v2Gr.path = new Path2D();
-                    v2Gr.path.rect(w-30, 17, 10, 45);
-                }
-                if (!vol2) {
-                    ctx.drawImage(v2Gb, w-30, 17, 10, 35);
-                    v2Gb.path = new Path2D();
-                    v2Gb.path.rect(w-30, 17, 10, 45);
-                }
-                    canvas.addEventListener("click", v2R);
-                    canvas.addEventListener("click", v2B);
-                
-                //v3
-                if (vol3) {
-                    ctx.drawImage(v3Gr, w, 17, 10, 35);
-                    v3Gr.path = new Path2D();
-                    v3Gr.path.rect(w, 17, 10, 35);
-                }
-                if (!vol3) {
-                    ctx.drawImage(v3Gb, w, 17, 10, 35);
-                    v3Gb.path = new Path2D();
-                    v3Gb.path.rect(w, 17, 10, 35);
-                }
-                    canvas.addEventListener("click", v3R);
-                    canvas.addEventListener("click", v3B);
-                
-                // v4
-                if (vol4) {
-                    ctx.drawImage(v4Gr, w+30, 17, 10, 35);
-                    v4Gr.path = new Path2D();
-                    v4Gr.path.rect(w+30, 17, 10, 35);
-                }
-                if (!vol4) {
-                    ctx.drawImage(v4Gb, w+30, 17, 10, 35);
-                    v4Gb.path = new Path2D();
-                    v4Gb.path.rect(w+30, 17, 10, 35);
-                }
-                    canvas.addEventListener("click", v4R);
-                    canvas.addEventListener("click", v4B);
-                
-                
-                // v5
-                if (vol5) {
-                    ctx.drawImage(v5Gr, w+60, 17, 10, 35);
-                    v5Gr.path = new Path2D();
-                    v5Gr.path.rect(w+60, 17, 10, 45);
-                }
-                if (!vol5) {
-                    ctx.drawImage(v5Gb, w+60, 17, 10, 35);
-                    v5Gb.path = new Path2D();
-                    v5Gb.path.rect(w+60, 17, 10, 45);
-                }
-                    canvas.addEventListener("click", v5R);
-                    canvas.addEventListener("click", v5B);
-                
-                ctx.font = "700 35px Arial";
-                ctx.fillStyle = "blue";
-                ctx.fillText("Max", w+125, 47);
-                
-                
-                ctx.font = "700 15px Comic Sans MS";
-                //ctx.fillText("Volume", w+5, 70);
-                ctx.drawImage(crossVol, w-5, 55, 19, 19);
-                crossVol.path = new Path2D();
-                crossVol.path.rect(w-5, 54, 19, 19);
-                
-                }  // lockoff  
-
-
-
-   
-    canvas.addEventListener("click", wBgClick);
-    if (!volLock) {
-        canvas.addEventListener("click", endVolCont);
     }
-    canvas.addEventListener("click", closeSplash);
 
     
+    volControls();
+
+
+    
+
+
+
+    canvas.addEventListener("click", setMenuSplash);
+    
+    
+    if (!splashMenuEnd) {
+        canvas.addEventListener("click", closeSplash);
+    }
+
+} // splash menu off - false 
 
     
 }
@@ -2021,7 +2041,7 @@ function game() {
            ctx.drawImage(balGame, 0, 0, canvas.width, canvas.height);
        }
 
-  
+       
 
     if (tapeOn) {
     //settings
@@ -2051,6 +2071,8 @@ function game() {
 
     canvas.addEventListener("click", reStart);
     canvas.addEventListener("click", settingsGame);
+
+    //volControls();
     }
 
     // end of settings link
@@ -2293,7 +2315,9 @@ function draw() {
 
     /////////////////////////////////7.7.24//////////////////////////////////
 
+    
     volumeSet();
+    
 
     ////////////////////////////////////////////////////////////////////////
 	
