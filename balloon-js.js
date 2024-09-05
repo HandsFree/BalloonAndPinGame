@@ -3,6 +3,9 @@ const ctx = canvas.getContext('2d');
 canvas.width = 1200;
 canvas.height = 735;
 
+var balloonLock = false;
+var buttonOn = true;
+
 var splashMenu = false;
 var splashMenuEnd = false;
 
@@ -294,7 +297,8 @@ window.addEventListener("keyup", function(e){
 // volume
 // v1
 function v1R(e) {
-    if (ctx.isPointInPath(v1Gr.path, e.offsetX, e.offsetY)) {
+    
+    if (!volLock && ctx.isPointInPath(v1Gr.path, e.offsetX, e.offsetY)) {
         vol1=false;
         vol2=false;
         vol3=false;
@@ -305,7 +309,7 @@ function v1R(e) {
 }
 
 function v1B(e) {
-    if (ctx.isPointInPath(v1Gb.path, e.offsetX, e.offsetY)) {
+    if (!volLock && ctx.isPointInPath(v1Gb.path, e.offsetX, e.offsetY)) {
         vol1=true;
         vol2=false;
         vol3=false;
@@ -317,7 +321,7 @@ function v1B(e) {
 
 //v2
 function v2R(e) {
-    if (ctx.isPointInPath(v2Gr.path, e.offsetX, e.offsetY)) {
+    if (!volLock && ctx.isPointInPath(v2Gr.path, e.offsetX, e.offsetY)) {
         vol1=false;
         vol2=false;
         vol3=false;
@@ -328,7 +332,7 @@ function v2R(e) {
 }
 
 function v2B(e) {
-    if (ctx.isPointInPath(v2Gb.path, e.offsetX, e.offsetY)) {
+    if (!volLock && ctx.isPointInPath(v2Gb.path, e.offsetX, e.offsetY)) {
         vol1=false;
         vol2=true;
         vol3=false;
@@ -340,7 +344,7 @@ function v2B(e) {
 
 // v3
 function v3R(e) {
-    if (ctx.isPointInPath(v3Gr.path, e.offsetX, e.offsetY)) {
+    if (!volLock && ctx.isPointInPath(v3Gr.path, e.offsetX, e.offsetY)) {
         vol1=false;
         vol2=false;
         vol3=false;
@@ -351,7 +355,7 @@ function v3R(e) {
 }
 
 function v3B(e) {
-    if (ctx.isPointInPath(v3Gb.path, e.offsetX, e.offsetY)) {
+    if (!volLock && ctx.isPointInPath(v3Gb.path, e.offsetX, e.offsetY)) {
         vol1=false;
         vol2=false;
         vol3=true;
@@ -363,7 +367,7 @@ function v3B(e) {
 
 // v4
 function v4R(e) {
-    if (ctx.isPointInPath(v4Gr.path, e.offsetX, e.offsetY)) {
+    if (!volLock && ctx.isPointInPath(v4Gr.path, e.offsetX, e.offsetY)) {
         vol1=false;
         vol2=false;
         vol3=false;
@@ -374,7 +378,7 @@ function v4R(e) {
 }
 
 function v4B(e) {
-    if (ctx.isPointInPath(v4Gb.path, e.offsetX, e.offsetY)) {
+    if (!volLock && ctx.isPointInPath(v4Gb.path, e.offsetX, e.offsetY)) {
         vol1=false;
         vol2=false;
         vol3=false;
@@ -386,7 +390,7 @@ function v4B(e) {
 
 // v5
 function v5R(e) {
-    if (ctx.isPointInPath(v5Gr.path, e.offsetX, e.offsetY)) {
+    if (!volLock && ctx.isPointInPath(v5Gr.path, e.offsetX, e.offsetY)) {
         vol1=false;
         vol2=false;
         vol3=false;
@@ -397,7 +401,7 @@ function v5R(e) {
 }
 
 function v5B(e) {
-    if (ctx.isPointInPath(v5Gb.path, e.offsetX, e.offsetY)) {   
+    if (!volLock && ctx.isPointInPath(v5Gb.path, e.offsetX, e.offsetY)) {   
         vol1=false;
         vol2=false;
         vol3=false;
@@ -411,6 +415,7 @@ function v5B(e) {
 function wBgClick(e) {
     if (ctx.isPointInPath(wBg.path, e.offsetX, e.offsetY)) {
         /*splashOff = false;*/	
+        balloonLock = true;
         volLock = false;
         canvas.removeEventListener("click", wBgClick);
     }
@@ -468,12 +473,12 @@ if (vol5) {
 
 function volControls(e) {
     if (volLock) {
-        ctx.drawImage(wBg, w-160, 0, 350, 80);
+        ctx.drawImage(wBg, w-160, 0, 350, 70);
         wBg.path = new Path2D();
-        wBg.path.rect(w-160, 0, 350, 80);
+        wBg.path.rect(w-160, 0, 350, 70);
         ctx.fillStyle = "black";
-        ctx.font='900 40px Comic Sans MS';
-        ctx.fillText("Set Volume", w+10, 55);
+        ctx.font='900 35px Comic Sans MS';
+        ctx.fillText("Set Volume", w+10, 45);
         canvas.addEventListener("click", wBgClick);
         }
 if (!volLock) {
@@ -481,7 +486,7 @@ if (!volLock) {
     ctx.globalAlpha = 0.8;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.globalAlpha = 1;
-            ctx.drawImage(wBg, w-160, 0, 350, 80); 
+            //ctx.drawImage(wBg, w-160, 0, 350, 80); 
             ctx.font = "700 35px Arial";
             ctx.fillStyle = "blue";
             ctx.fillText("Min", w-110, 47);
@@ -564,9 +569,9 @@ if (!volLock) {
             
             ctx.font = "700 15px Comic Sans MS";
             //ctx.fillText("Volume", w+5, 70);
-            ctx.drawImage(crossVol, w-5, 55, 19, 19);
+            ctx.drawImage(crossVol, w-12, 60, 35, 35);
             crossVol.path = new Path2D();
-            crossVol.path.rect(w-5, 54, 19, 19);
+            crossVol.path.rect(w-12, 60, 35, 35);
             
             }  // lockoff  
 
@@ -626,6 +631,7 @@ function animate() {
 
       if (counter < pressHoldDuration) {
         timerID = requestAnimationFrame(timer);
+        if (!balloonLock) {
         inBall.bWidth += 0.2;
         inBall.bHeight += 0.2;
         st.x += 0.2;
@@ -637,6 +643,7 @@ function animate() {
         }
         
         counter++;
+    }// ballonLock
       }
     }//ballOn
     }
@@ -729,7 +736,7 @@ if (ballnOn) {
 }
 
 function closeSplash(e) {
-    if (volLock && ctx.isPointInPath(button1.path, e.offsetX, e.offsetY)) {
+    if (buttonOn && volLock && ctx.isPointInPath(button1.path, e.offsetX, e.offsetY)) {
     splashSc = false;
     instructionsSc = true;
     splashAud.pause();
@@ -740,8 +747,9 @@ function closeSplash(e) {
 
 
 function endVolCont(e) {
-    if (ctx.isPointInPath(crossVol.path, e.offsetX, e.offsetY)) {
+    if (ctx.isPointInPath(!volLock && crossVol.path, e.offsetX, e.offsetY)) {
     volLock = true;
+    balloonLock = false;
     canvas.removeEventListener("click", endVolCont);
     }	
 }
@@ -1252,9 +1260,26 @@ function endMenuLang(e) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function endMenu(e) {
     if (togMenu) {
-        if (!langaugeMenuSettings && ctx.isPointInPath(cross.path, e.offsetX, e.offsetY)) {
+        if (!buttonOn && !langaugeMenuSettings && ctx.isPointInPath(cross.path, e.offsetX, e.offsetY)) {
             splashMenu = false;
             togSet=true;
             togMenu=false;
@@ -1263,12 +1288,35 @@ function endMenu(e) {
             picOn = true;
             ballnOn = true;
             pinIn = true;
+            buttonOn = true;
             canvas.removeEventListener("click", endMenu);
         }
     } // togMenu
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function showMenu() {
+
+    buttonOn = false;
 
     splashMenuEnd = true;
 
@@ -1935,10 +1983,11 @@ if (!splashMenu) {
     /////////////////////////////////////////////////////////////////////////////////////////
 ////////////// 27/8/24 /////////////////////////////
     
-
+if (buttonOn) {
 ctx.drawImage(button1, 290, 410, 620, 262);
 button1.path = new Path2D();
 button1.path.rect(290, 410, 620, 262);
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
@@ -2024,7 +2073,7 @@ button1.path.rect(290, 410, 620, 262);
     canvas.addEventListener("click", setMenuSplash);
     
     
-    if (!splashMenuEnd) {
+    if (!splashMenuEnd && buttonOn) {
         canvas.addEventListener("click", closeSplash);
     }
 
@@ -2072,7 +2121,7 @@ function game() {
     canvas.addEventListener("click", reStart);
     canvas.addEventListener("click", settingsGame);
 
-    //volControls();
+    volControls();
     }
 
     // end of settings link
@@ -2333,11 +2382,11 @@ function draw() {
             showMenu();
         }
 
-    if (instructionsSc && volLock) {
+    if (instructionsSc) {
         instructions();
         }
 
-    if (gameSc && ballnOn && volLock) {
+    if (gameSc && ballnOn) {
         game();
     }
 
