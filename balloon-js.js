@@ -6,6 +6,8 @@ canvas.height = 735;
 var balloonLock = false;
 var buttonOn = true;
 
+var volOff = true;
+
 var splashMenu = false;
 var splashMenuEnd = false;
 
@@ -472,7 +474,7 @@ if (vol5) {
 // vol controls finished 2.9.24 /////////////////////////////////////////////////////////
 
 function volControls(e) {
-    if (volLock) {
+    if (volLock && volOff) {
         ctx.drawImage(wBg, w-160, 0, 350, 70);
         wBg.path = new Path2D();
         wBg.path.rect(w-160, 0, 350, 70);
@@ -481,7 +483,7 @@ function volControls(e) {
         ctx.fillText("Set Volume", w+10, 45);
         canvas.addEventListener("click", wBgClick);
         }
-if (!volLock) {
+if (!volLock && volOff) {
     ctx.fillStyle = "white";
     ctx.globalAlpha = 0.8;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -787,6 +789,7 @@ function startImg(e) {
 
 
 function closeGame() {
+    volOff = true;
     pinIn = true;
     inBall.bWidth = 70;
     inBall.bHeight = 100;
@@ -2136,6 +2139,15 @@ function game() {
             air.play();
             }
         }
+
+
+
+
+
+
+
+
+//////////////////////////////////////////////// 6.9.24 //////////////////////////////
        
         if (inBall.bWidth > (pinPop.y+276)) {
 
@@ -2147,6 +2159,22 @@ function game() {
             def.play();
             //def.volume = 0.4;
             }
+
+
+
+volOff = false;
+
+
+
+
+
+
+
+
+
+
+
+
 
 
             
@@ -2273,6 +2301,11 @@ function game() {
                 
             }
 
+
+
+
+
+
             pinIn = false;
 
             window.addEventListener('contextmenu', (e) => {
@@ -2295,9 +2328,12 @@ function game() {
   
                 closeGame();
             });
+
+            
             
             if (keys[13]) {
                 
+                volOff = true;
                 welldoneAud.pause();
                 welldoneAud.currentTime = 0;
                 welldoneAudger.pause();
@@ -2323,6 +2359,13 @@ function game() {
                 shine.x = 580;
                 shine.y = 350;
             }
+
+
+
+
+
+
+
 
         } else {
             if (pinOff) {
